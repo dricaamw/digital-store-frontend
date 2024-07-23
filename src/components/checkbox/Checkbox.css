@@ -1,0 +1,9 @@
+@import "../colors/colors.css";
+
+/* deixando a checkbox rosa depois de pressiondada */
+.checkbox{
+    transition: background-color 0.3s ease;
+    &:checked + label::before{
+        background-color: var(--primary);
+    }
+}
