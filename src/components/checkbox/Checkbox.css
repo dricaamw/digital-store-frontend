@@ -1,9 +1,38 @@
 @import "../colors/colors.css";
 
-/* deixando a checkbox rosa depois de pressiondada */
-.checkbox{
-    transition: background-color 0.3s ease;
-    &:checked + label::before{
+label {
+    cursor: pointer;
+    font-size: 17px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: flex;
+    inline-size: 22px;
+    block-size: 22px;
+    & input {
+        cursor: inherit;
+        inline-size: 22px;
+        display: none;
+    }
+    
+    & span { 
+        block-size: 22px;
+        inline-size: 22px;
+        background-color: #eee;
+        transition-duration: 300ms;
+        border-radius: 2px;
+        border: 1px solid var(--dark-gray-3) ;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    &:hover input ~ span {
+        background-color: #ccc;
+    }
+    & input:checked ~ span {
         background-color: var(--primary);
+        border-color: var(--primary);
     }
 }

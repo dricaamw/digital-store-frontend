@@ -1,15 +1,29 @@
-import { Checkbox as Cb } from "primereact/checkbox";
-import { useState } from "react";
-import "./Checkbox.css"
+import PropTypes from "prop-types";
+import "./Checkbox.css";
 
-const Checkbox = () => {
-    const [checked, setChecked] = useState(false);
+const Checkbox = (props) => {
+    const handleChange = (event) => {
+        props.onClick(event.target.checked);
+        console.log(event.target.checked);
+    };
 
     return (
-        <>
-            <Cb className="checkbox" onChange={(e) => setChecked(e.checked)} checked={checked}></Cb>
-        </>
+        <label>
+            <input
+                type="checkbox"
+                checked={props.checked}
+                onChange={handleChange}
+            />
+            <span style={{ fontFamily: "primeicons" }}>
+                {props.checked === true && "✔"}
+            </span>
+        </label>
     );
+};
+
+Checkbox.propTypes = {
+    checked: PropTypes.bool,
+    onClick: PropTypes.func.isRequired
 };
 
 export default Checkbox;
