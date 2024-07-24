@@ -26,4 +26,9 @@ Checkbox.propTypes = {
     onClick: PropTypes.func.isRequired
 };
 
+Checkbox.propTypes = {
+    checked: PropTypes.bool,
+    onClick: PropTypes.func.isRequired
+};
+
 export default Checkbox;
