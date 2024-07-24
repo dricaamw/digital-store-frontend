@@ -9,7 +9,7 @@ function App() {
 
     return (
         <div className="flex gap-3">
-            <Button label="BATATA" buttonType="primary-button" />
+            <Button label="BATATA" buttonType="primary-button" onClick={() => {}}/>
             <div className="bg-purple-900" style={{ inlineSize: "1px" }}></div>
             <Cb checked={checked} onClick={setChecked} />
             <div className="bg-purple-900" style={{ inlineSize: "1px" }}></div>
