@@ -4,7 +4,6 @@ import "./Checkbox.css";
 const Checkbox = (props) => {
     const handleChange = (event) => {
         props.onClick(event.target.checked);
-        console.log(event.target.checked);
     };
 
     return (
@@ -19,11 +18,6 @@ const Checkbox = (props) => {
             </span>
         </label>
     );
-};
-
-Checkbox.propTypes = {
-    checked: PropTypes.bool,
-    onClick: PropTypes.func.isRequired
 };
 
 Checkbox.propTypes = {
