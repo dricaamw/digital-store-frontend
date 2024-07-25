@@ -4,7 +4,7 @@ import Checkbox from "./components/checkbox/Checkbox.jsx";
 function App() {
     return (
         <>
-            <Button label="BATATAAAAA" buttonType="primary-button" />
+            <Button label="BATATA" buttonType="primary-button" />
             <Checkbox />
 
         </>
