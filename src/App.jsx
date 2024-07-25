@@ -1,14 +1,15 @@
-import Button from "./components/buttons/Buttons.jsx";
-import Checkbox from "./components/checkbox/Checkbox.jsx";
 
-function App() {
-    return (
-        <>
-            <Button label="BATATA" buttonType="primary-button" />
-            <Checkbox />
+import 'primereact/resources/themes/lara-light-blue/theme.css';
+import 'primeflex/primeflex.css';
+import 'primeicons/primeicons.css';
+import { Paths } from './routes';
 
-        </>
-    );
+const App = () => {
+  return (
+    <>
+      <Paths />
+    </>
+  );
 }
 
 export default App;

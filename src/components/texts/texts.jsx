@@ -8,4 +8,4 @@ const Texts = () => {
     );
 }
 
-export default texts;
+export default Texts;
