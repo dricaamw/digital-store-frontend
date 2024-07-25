@@ -25,19 +25,19 @@ Você pode usar o componente `Button` passando as propriedades necessárias. Vej
 
 ```javascript
 // Botão comum
-<Button label="Clique Aqui" />
+<Button buttonType="primary" label="Clique Aqui" />
 
 // Botão desabilitado
-<Button label="Clique Aqui" disabled />
+<Button buttonType="secondary" label="Clique Aqui" disabled />
 
 // Botão com ícone
 <Button buttonType="icon-button" label="Adicionar" />
 
 // Botão com evento onClick
-<Button label="Clique Aqui" onClick={() => console.log("Botão clicado")} />
+<Button buttonType="primary" label="Clique Aqui" onClick={() => console.log("Botão clicado")} />
 
 // Botão com children
-<Button>
+<Button buttonType="secondary">
     <span>Botão com children</span>
 </Button>
 ```
@@ -46,7 +46,7 @@ Você pode usar o componente `Button` passando as propriedades necessárias. Vej
 
 | Propriedade    | Tipo     | Padrão   | Descrição                                                                                   |
 |---------------|----------|----------|-----------------------------------------------------------------------------------------------|
-| buttonType    | string   | -        | Define o tipo de botão. Pode ser "icon-button" para um botão com ícone.                      |
+| buttonType    | string   | -        | **Obrigatório.** Define o tipo de botão. Pode ser "primary", "secondary", "icon-button" ou outro personalizado. |
 | children      | node     | -        | Permite que você passe elementos filhos para o botão.                                       |
 | disabled      | bool     | false    | Desabilita o botão.                                                                        |
 | label         | string   | -        | Define o texto do botão.                                                                    |

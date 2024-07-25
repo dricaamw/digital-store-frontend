@@ -18,7 +18,7 @@ const Radio = (props) => {
 };
 
 Radio.propTypes = {
-    checked: PropTypes.bool,
+    checked: PropTypes.bool.isRequired,
     inputId: PropTypes.string,
     onClick: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired
