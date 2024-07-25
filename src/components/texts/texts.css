@@ -1,11 +1,173 @@
-/* TITLES */
+/* Font Family */
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+/* Global Styles */
 html {
     background-color: antiquewhite;
 }
 
 body {
-    .inter {
-        font-family: "Inter", primeicons;
-        font-weight: 400;
-    }
+    font-family: "Inter", sans-serif, primeicons;
+}
+
+/* Title Large - H1 */
+h1 {
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 66px;
+    letter-spacing: 1px;
+    text-align: start;
+}
+
+/* Title Medium - H2 */
+h2 {
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 5px;
+    letter-spacing: 1px;
+    text-align: start;
+}
+
+/* Title Small - H3 */
+h3 {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 1px;
+    text-align: start;
+}
+
+/* Title Extra Small - H4 */
+h4 {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 2px;
+    text-align: start;
+}
+
+/* Normal Text Large - P */
+p {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 38px;
+    letter-spacing: 0.75px;
+    text-align: start;
+}
+
+/* Normal Text Medium - P */
+p.medium {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0.75px;
+    text-align: start;
+}
+
+/* Normal Text Small - P */
+p.small {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.75px;
+    text-align: start;
+}
+
+/* Normal Text Extra Small - P */
+p.extra-small {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.25px;
+    text-align: start;
+}
+
+/* Normal Text Tinny - P */
+p.tinny {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-align: start;
+}
+
+/* Bold Title Large - H1 Bold */
+h1.bold {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 66px;
+    letter-spacing: 1px;
+    text-align: start;
+}
+
+/* Bold Title Medium - H2 Bold */
+h2.bold {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 5px;
+    letter-spacing: 1px;
+    text-align: start;
+}
+
+/* Bold Title Small - H3 Bold */
+h3.bold {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 1px;
+    text-align: start;
+}
+
+/* Bold Title Extra Small - H4 Bold */
+h4.bold {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 2px;
+    text-align: start;
+}
+
+/* Bold Normal Text Large - P Bold */
+p.bold {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0.75px;
+    text-align: start;
+}
+
+/* Bold Normal Text Medium - P Bold */
+p.medium.bold {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: 0.75px;
+    text-align: start;
+}
+
+/* Bold Normal Text Small - P Bold */
+p.small.bold {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0.75px;
+    text-align: start;
+}
+
+/* Bold Normal Text Extra Small - P Bold */
+p.extra-small.bold {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0.75px;
+    text-align: start;
+}
+
+/* Bold Normal Text Tinny - P Bold */
+p.tinny.bold {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0.75px;
+    text-align: start;
 }

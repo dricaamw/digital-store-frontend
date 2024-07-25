@@ -38,8 +38,8 @@ Você pode usar o componente `Checkbox` passando as propriedades necessárias. V
 
 | Propriedade    | Tipo     | Padrão   | Descrição                                                                                   |
 |---------------|----------|----------|-----------------------------------------------------------------------------------------------|
-| checked       | bool     | false    | Define se a caixa de seleção está marcada ou desmarcada.                                    |
-| onClick       | func     | -        | Função chamada quando a caixa de seleção é clicada. Recebe um booleano como argumento indicando o estado atual da caixa de seleção. |
+| checked       | bool     | -        | **Obrigatório.** Define se a caixa de seleção está marcada ou desmarcada.                                    |
+| onClick       | func     | -        | **Obrigatório.** Função chamada quando a caixa de seleção é clicada. Recebe um booleano como argumento indicando o estado atual da caixa de seleção. |
 
 **Estilos**
 
