@@ -12,12 +12,11 @@ const Button = (props) => {
     return (
         <But
             style={{ fontFamily: "Inter, primeicons" }}
-            className={`button ${
-                props.buttonType === "icon-button"
-                    ? `pi pi-plus ${props.buttonType}`
-                    : props.buttonType
-            }`}
-            label={` ${props.label}`}
+            className={`button ${props.buttonType === "icon-button"
+                    ? `pi pi-plus ${props.buttonType} ${props.className}`
+                    : `${props.buttonType} ${props.className}`
+                }`}
+            label={`${props.label ? props.label : ""}`}
             disabled={props.disabled}
             onClick={handleClick}
         >
@@ -29,9 +28,10 @@ const Button = (props) => {
 Button.propTypes = {
     buttonType: PropTypes.string.isRequired,
     children: PropTypes.node,
+    className: PropTypes.any,
     disabled: PropTypes.bool,
     label: PropTypes.string,
-    onClick: PropTypes.func,
-};
+    onClick: PropTypes.func
+}
 
 export default Button;
