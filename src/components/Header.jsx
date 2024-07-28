@@ -11,36 +11,53 @@
 
 import styled from "styled-components";
 import { InputText } from 'primereact/inputtext';
-import Button from '../components/buttons/Buttons.jsx';
+import { default as But } from '../components/buttons/Buttons.jsx';
 import { Link } from "react-router-dom";
-import { Badge } from 'primereact/badge';
 import { NavLink } from "react-router-dom";
 
 const HeaderContainer = styled.header`
     display: flex;
-    block-size: 192px;
-    inline-size: 100%;
+    max-width: 1440px;
+    max-height: 192px;
+    width: 1440px;
+    height: 192px;
     background-color: var(--white);
-    & .bloco{
+    margin: auto;
+
+        & .bloco{
         margin: 34px 30px 29px 100px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        position: relative;
         flex-wrap: wrap;
-        inline-size: 993px;
-        block-size: 129px;
+        max-width: 993px;
+        max-height: 129px;
+        width: 100%;
+        height: 100%;
 
         .digital-logo {
         display: flex;
         align-items: center;
         justify-content: center;
         align-self: flex-start;
-        block-size: 44px;
+        width: 253px;
+        height: 44px;
         margin-top: 4px;
+
+        @media (max-width: 768px) {
+            width: 138px;
+            height: 24px;
+            margin-block-start: 4px;
+        }
 
         & img {
             margin: 5px 8px 6px 0;
+            
+            @media (max-width: 768px) {
+                width: 18px;
+                height: 18px;
+                margin: 2.73px 4.36px 3.27px 0;
+            }
         }
 
         & h1 {
@@ -48,9 +65,15 @@ const HeaderContainer = styled.header`
             font-size: 34px;
             line-height: 44px;
             font-weight: 600;
-            letter-spacing: 0.1px;
+            letter-spacing: 1px;
             color: var(--primary);
-            inline-size: 212px;
+
+            @media (max-width: 768px) {
+                width: auto;
+                font-size: 18px;
+                line-height: 24px;
+                letter-spacing: 0.7px;
+            }
         }
     }
 
@@ -59,21 +82,32 @@ const HeaderContainer = styled.header`
             align-items: center;
             gap: 48px;
             align-self: flex-start;
+            position: relative;
+
+            & > div > img {
+                position: absolute;
+                top: 18px;
+                right: 24%
+            }
+            
             & .p-inputtext {
+                display: flex;
                 inline-size: 559px;
                 block-size: 60px;
                 border-radius: 8px;
                 padding: 0 24px 0 24px;
-                background-color: rgba(71, 71, 71, 0.04);
+                background-color: rgba(71, 71, 71, 0.4);
                 color: var(--dark-gray-3);
                 border-color: transparent;
+                position: relative;
                 &::placeholder {
                     color: var(--dark-gray-3);
                 }
+                
             }
             & .cadastre {
-                width: 102px;
-                height: 28px;
+                inline-size: 102px;
+                block-size: 28px;
                 color: var(--dark-gray-3);
                 text-decoration: none;
             }
@@ -90,12 +124,11 @@ const HeaderContainer = styled.header`
             & a {
                 @keyframes fade-in {
                     0% {
-                        background-color: transparent;
-                        width: 0%;
+                        background-color: var(--primary);
+                        inline-size: 0%;
                     }
                     100% {
-                        background-color: var(--primary);
-                        width: 100%;
+                        inline-size: 100%;
                     }
                 }
                 
@@ -111,19 +144,21 @@ const HeaderContainer = styled.header`
                     content: "";
                     display: block;
                     border-radius: 2px;
-                    width: 0%;
-                    height: 2px;
+                    inline-size: 0%;
+                    block-size: 2px;
+                    margin-block-start: 5px;
                     background-color: transparent;
                     transition-duration: 500ms;
-                    animation: in 500ms 1 reverse;
                 }
                 &[aria-current="page"]::after {
                     content: "";
                     display: block;
                     border-radius: 2px;
-                    width: 100%;
-                    height: 2px;
+                    inline-size: 100%;
+                    block-size: 2px;
+                    margin-block-start: 5px;
                     background-color: var(--primary);
+                    transition-duration: 500ms;
                     animation: fade 500ms 1;
                 }
                 }
@@ -136,54 +171,103 @@ const HeaderContainer = styled.header`
     }
 
     .carrinho{
-        margin-top: 47px;
-        & .p-badge{
-            /* position: ; */
-            /* inset-inline-end: 100px; */
-            /* inset-inline-start: 27px; */
-            /* inset-block-end: 1px; */
+        margin-block-start: 47px;
+        position: relative;
+        & span.p-badge{
+            display: flex;
+            position: absolute;
+            inset-block-start: -5px;
+            inset-inline-end: -8px;
+            background-color: var(--error);
+            min-inline-size: 5px;
+            inline-size: 17px;
+            block-size: 17px;
+            color: var(--white);
+            /* font-weight: 700; */
+            border-radius: 8px;
+            justify-content: center;
+            align-items: center;
         }
     }
+    /* @media (min-inline-size: 370px){
+        .bloco{
+            inline-size: 138px;
+        }
+    } */
 `;
+
+const DigitalLogo = () => {
+    return (
+        <div className="digital-logo">
+            <img src="Group.svg" />
+            <h1>Digital Store</h1>
+        </div>
+    );
+}
+
+const Input = () => {
+    return (
+        <div className="input">
+            <InputText id="i" className="text-small" placeholder="Pesquisar..." />
+        </div>
+    )
+}
+
+
+const Cadastre = () => {
+    return (
+        <div className="cadastre">
+            <Link className="text-small" to="/" >Cadastre-se</Link>
+            {/* <Link className="text-small" to="end-point de cadastro simples" */}
+        </div>
+    )
+}
+
+const Pages = () => {
+    return (
+        <>
+            <NavLink to="/" className={whereNavLink} >Home</NavLink>
+            <NavLink to="/batata" className={whereNavLink} >Produtos</NavLink>
+            <NavLink to="/" className={whereNavLink} >Categorias</NavLink>
+            <NavLink to="/" className={whereNavLink} >Meus Pedidos</NavLink>
+            {/* <NavLink to="/POR A END-POINT AQUI" className={whereNavLink} >BATATA</NavLink> */}
+        </>
+    )
+}
 
 const whereNavLink = ({ isActive, isPending }) => {
     isPending ? "pending" : isActive ? "active" : ""
 };
 
+const Button = () => {
+    return (
+        <But
+            className="text-small bold"
+            label="Comprar"
+            buttonType="primary-button"></But>
+    )
+}
+
 const Header = () => {
     return (
         <HeaderContainer>
             <div className="bloco">
-                <div className="digital-logo">
-                    <img src="Group.svg" />
-                    <h1>Digital Store</h1>
-                </div>
+                <DigitalLogo />
                 <div className="inp-bloco">
-                    <div className="input">
-                        <InputText id="i" className="text-small" placeholder="Pesquisar..." />
+                    <div>
+                        <Input />
+                        <img src="Search.svg" />
                     </div>
-                    <div className="cadastre">
-                        <Link className="text-small" to="/" >Cadastre-se</Link>
-                        {/* <Link className="text-small" to="end-point de cadastro simples" */}
-                    </div>
+                    <Cadastre />
                 </div>
                 <nav className="pages">
-                    <NavLink to="/" className={whereNavLink} >Home</NavLink>
-                    <NavLink to="/batata" className={whereNavLink} >Produtos</NavLink>
-                    <NavLink to="/" className={whereNavLink} >Categorias</NavLink>
-                    <NavLink to="/" className={whereNavLink} >Meus Pedidos</NavLink>
-                    {/* <NavLink to="/POR A END-POINT AQUI" className={whereNavLink} >BATATA</NavLink> */}
+                    <Pages />
                 </nav>
             </div>
-            <div>
-                <Button
-                    className="text-extra-small bold"
-                    label="Login"
-                    buttonType="primary-button"></Button>
-            </div>
+            <Button />
             <div className="carrinho">
                 <img src="Buy.svg" />
-                <Badge />
+                <span className="p-badge">2</span>
             </div>
         </HeaderContainer>
     );
