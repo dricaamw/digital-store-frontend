@@ -104,11 +104,26 @@ const HeaderContainer = styled.header`
                         width: 24px;
                         height: 24px;
                     }
+
+                    & .overlay {
+                        content: "";
+                        display: block;
+                        position: fixed;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        height: 100vh;
+                        width: 100vw;
+                        background-color: rgba(0, 0, 0, 0.3);
+                        opacity: 1;
+                        transition: opacity 500ms;
+                        z-index: 4;
+                    }
                 }
 
                 &  #menu-sidebar {
-                        display: none;
-                        
+                        /* display: none; */
                 }
     
                 & .links {
@@ -161,6 +176,7 @@ const HeaderContainer = styled.header`
                             transition-duration: 500ms;
                         }
                     }
+                    
                 }
 
                 & #menu-sidebar:checked ~ .links {
@@ -235,9 +251,10 @@ const Cadastre = () => {
 const Pages = () => {
     return (
         <nav>
-                <input type="checkbox" id="menu-sidebar" />
+            <input type="checkbox" id="menu-sidebar" />
             <label htmlFor="menu-sidebar">
                 <img src="Menu.svg" />
+                <div className="overlay" />
             </label>
 
             <div className="links" >
@@ -282,8 +299,8 @@ const Header = () => {
                 <Pages />
                 <DigitalLogo />
                 <div className="search-buy">
-                    <label htmlFor="" className="out-search">
-                        <img src="Search.svg" alt="" />
+                    <label className="out-search">
+                        <img src="Search.svg" />
                     </label>
                     <Carrin />
                 </div>
