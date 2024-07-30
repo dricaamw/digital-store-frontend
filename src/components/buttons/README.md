@@ -6,24 +6,26 @@ Este componente `Button` é um wrapper para o botão do `primereact/button` com 
 
 Para usar este componente, primeiro instale as dependências necessárias:
 
-```bash
+```bash {"id":"01J3QF9NHQ153W67WJEJ4MAY0N"}
 npm install primereact prop-types
+
 ```
 
 **Importação**
 
 Em seu arquivo JavaScript, importe o componente `Button` e o `PropTypes`:
 
-```javascript
+```javascript {"id":"01J3QF9NHQ153W67WJEMGSDS4C"}
 import Button from "./Button";
 import PropTypes from "prop-types";
+
 ```
 
 **Uso**
 
 Você pode usar o componente `Button` passando as propriedades necessárias. Veja abaixo alguns exemplos:
 
-```javascript
+```jsx {"id":"01J3QF9NHQ153W67WJEQ0Q9YXH"}
 // Botão comum
 <Button buttonType="primary" label="Clique Aqui" />
 
@@ -40,13 +42,14 @@ Você pode usar o componente `Button` passando as propriedades necessárias. Vej
 <Button buttonType="secondary">
     <span>Botão com children</span>
 </Button>
+
 ```
 
 **Propriedades**
 
 | Propriedade    | Tipo     | Padrão   | Descrição                                                                                   |
 |---------------|----------|----------|-----------------------------------------------------------------------------------------------|
-| buttonType    | string   | -        | **Obrigatório.** Define o tipo de botão. Pode ser "primary", "secondary", "icon-button" ou outro personalizado. |
+| buttonType    | string   | -        | **Obrigatório.** Define o tipo de botão. Pode ser "primary-button", "secondary-button" ou "icon-button". |
 | children      | node     | -        | Permite que você passe elementos filhos para o botão.                                       |
 | disabled      | bool     | false    | Desabilita o botão.                                                                        |
 | label         | string   | -        | Define o texto do botão.                                                                    |

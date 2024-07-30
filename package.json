@@ -1,9 +1,13 @@
 {
+<<<<<<< HEAD
 <<<<<<<<< Temporary merge branch 1
   "name": "museum-project",
 =========
   "name": "digital-store-frontend",
 >>>>>>>>> Temporary merge branch 2
+=======
+  "name": "digital-store-frontend",
+>>>>>>> 5c43db9ff0792845ea754da68a7845abcdfb39af
   "private": true,
   "version": "0.0.0",
   "type": "module",

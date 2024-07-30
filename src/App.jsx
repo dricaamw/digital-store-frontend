@@ -1,14 +1,16 @@
+<<<<<<< HEAD
 
 import { useState } from "react";
 import Button from "./components/buttons/Buttons.jsx";
 import { default as Cb } from "./components/checkbox/Checkbox.jsx";
 import Radio from "./components/radio/Radio.jsx";
+=======
+>>>>>>> 5c43db9ff0792845ea754da68a7845abcdfb39af
 import { Paths } from './routes';
 
 function App() {
-    const [checked, setChecked] = useState(false);
-    const [ingredient, setIngredient] = useState("");
 
+<<<<<<< HEAD
     return (
         <div className="flex gap-3">
             <Button label="BATATA" buttonType="primary-button" onClick={() => {}}/>
@@ -32,6 +34,13 @@ function App() {
             </div>
         </div>
     );
+=======
+  return (
+    <div className="flex gap-3">
+      <Paths />
+    </div>
+  );
+>>>>>>> 5c43db9ff0792845ea754da68a7845abcdfb39af
 }
 
 export default App;
