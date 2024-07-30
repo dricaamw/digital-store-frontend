@@ -14,7 +14,7 @@ import { default as But } from '../components/buttons/Buttons.jsx';
 import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-const rem = (pixel) => `${pixel / 16}rem`;
+// const rem = (pixel) => `${pixel / 16}rem`;
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -25,11 +25,12 @@ const HeaderContainer = styled.header`
     height: 66.5px;
     background-color: var(--white);
     margin: auto;
+    z-index: 6;
     
     .organizer{
         display: flex;
         justify-content: space-between;
-        width: min(335px, 89.34vw);
+        width: max(335px, 89.34vw);
 
         & .digital-logo {
             display: flex;
@@ -92,14 +93,11 @@ const HeaderContainer = styled.header`
             }
             
             & nav{
+
                 & label{
                     display: flex;
                     width: 24px;
                     height: 24px;
-    
-                    &  .menu-sidebar {
-                        display: none;
-                    }
 
                     & img {
                         margin: 0;
@@ -107,43 +105,47 @@ const HeaderContainer = styled.header`
                         height: 24px;
                     }
                 }
+
+                &  #menu-sidebar {
+                        display: none;
+                        
+                }
     
                 & .links {
-                    display: none;
-                    gap: 32px;
-                    margin-block-end: 1px;
-                    align-items: center;
-                    justify-content: center;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                    align-items: flex-start;
+                    position: fixed;
+                    top: 66.5px;
+                    left: 0px;
+                    background-color: var(--white);
                     align-self: flex-end;
+                    height: calc(100vh - 66.5px);
+                    width: 308px;
+                    padding: 30px;
+                    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
+                    z-index: 5;
+                    transition: all 500ms;
+                    transform: translateX(-70%);
+                    opacity: 0;
         
                     & a {
-                        @keyframes fade-in {
-                            0% {
-                                background-color: var(--primary);
-                                inline-size: 0%;
-                            }
-                            100% {
-                                inline-size: 100%;
-                            }
-                        }
-                        
                         block-size: 29px;
                         color: var(--dark-gray-3);
-                        transition-duration: 500ms;
                         text-decoration: none;
         
                         &[aria-current="page"] {
                             color: var(--primary);
-                            transition-duration: 500ms;
                         }
         
                         &:not([aria-current="page"])::after {
                             content: "";
                             display: block;
                             border-radius: 2px;
-                            inline-size: 0%;
-                            block-size: 2px;
-                            margin-block-start: 5px;
+                            width: 0%;
+                            height: 2px;
+                            margin-top: 5px;
                             background-color: transparent;
                             transition-duration: 500ms;
                         }
@@ -157,9 +159,13 @@ const HeaderContainer = styled.header`
                             margin-block-start: 5px;
                             background-color: var(--primary);
                             transition-duration: 500ms;
-                            animation: fade 500ms 1;
                         }
                     }
+                }
+
+                & #menu-sidebar:checked ~ .links {
+                    transform: translateX(0);
+                    opacity: 1;
                 }
             }
     
@@ -176,6 +182,11 @@ const HeaderContainer = styled.header`
     
         .carrinho{
             position: relative;
+
+            & #carrinho {
+                display: none;
+            }
+
             & span.p-badge{
                 clip-path: circle(8.5px at center);
                 display: flex;
@@ -190,11 +201,7 @@ const HeaderContainer = styled.header`
                 align-items: center;
             }
         }
-        /* @media (min-inline-size: 370px){
-            .bloco{
-                inline-size: 138px;
-            }
-        } */
+        
     }
 `;
 
@@ -228,8 +235,8 @@ const Cadastre = () => {
 const Pages = () => {
     return (
         <nav>
-            <label>
-                <input type="checkbox" className="menu-sidebar" />
+                <input type="checkbox" id="menu-sidebar" />
+            <label htmlFor="menu-sidebar">
                 <img src="Menu.svg" />
             </label>
 
@@ -259,10 +266,11 @@ const Button = () => {
 
 const Carrin = () => {
     return (
-        <div className="carrinho">
+        <label className="carrinho">
+            <input type="checkbox" id="carrinho" />
             <img src="Buy.svg" />
             <span className="p-badge">2</span>
-        </div>
+        </label>
     )
 
 }
