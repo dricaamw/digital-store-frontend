@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 import Button from "./components/buttons/Buttons.jsx";
 import { default as Cb } from "./components/checkbox/Checkbox.jsx";
 import Radio from "./components/radio/Radio.jsx";
+import { Paths } from './routes';
 
 function App() {
     const [checked, setChecked] = useState(false);
@@ -26,6 +28,7 @@ function App() {
                     checked={ingredient === "feijão"}
                     onClick={setIngredient}
                 ></Radio>
+                <Paths />
             </div>
         </div>
     );
