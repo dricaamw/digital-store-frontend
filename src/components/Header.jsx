@@ -11,8 +11,7 @@
 
 import styled from "styled-components";
 import { default as But } from '../components/buttons/Buttons.jsx';
-import { Link, useLocation } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { Link, useLocation, NavLink } from "react-router-dom";
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -31,7 +30,7 @@ const HeaderContainer = styled.header`
         width: 100%;
         height: 100%;
         
-        nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy{
+        .carrinho, .out-search ,nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy{
             z-index: 4;
         }
 
@@ -50,7 +49,7 @@ const HeaderContainer = styled.header`
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 3;
+        z-index: 2;
         background-color: rgba(0, 0, 0, 0.5);
         opacity: 0;
         transition-duration: 500ms;
@@ -83,46 +82,6 @@ const HeaderContainer = styled.header`
             opacity: 1;
         }
 
-        & .digital-logo {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 138px;
-            height: 24px;
-            margin-left: 33px;
-    
-            & img {
-                margin: 2.73px 0 3.27px 0;
-                width: 18px;
-                height: 18px;
-    
-                @media (min-width: 768px) {
-                    margin-left: auto;
-                    width: 33px;
-                    height: 33px;
-                    margin: 5px 0 6px 0;
-                }
-            }
-    
-            & h1 {
-                margin: 0;
-                width: auto;
-                font-size: 19.85px;
-                line-height: 24px;
-                font-weight: 600;
-                letter-spacing: -0.01rem;
-                color: var(--primary);
-    
-                @media (min-width: 768px) {
-                    font-size: 36px;
-                    line-height: 44px;
-                    letter-spacing: 1px;
-                }
-            }
-            @media (min-width: 768px) {
-                height: 44px;
-            }
-        }
         /* & .inp-bloco{
             display: flex;
             align-items: center;
@@ -144,7 +103,7 @@ const HeaderContainer = styled.header`
         } */
             
         & nav.links{
-            z-index: 5;
+            z-index: 3;
 
             & {
                 display: flex;
@@ -197,16 +156,95 @@ const HeaderContainer = styled.header`
                 }
             }
         }
+
+        & .digital-logo {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 138px;
+            height: 24px;
+            margin-left: 33px;
+    
+            & img {
+                margin: 2.73px 0 3.27px 0;
+                width: 18px;
+                height: 18px;
+    
+                @media (min-width: 768px) {
+                    margin-left: auto;
+                    width: 33px;
+                    height: 33px;
+                    margin: 5px 0 6px 0;
+                }
+            }
+    
+            & h1 {
+                margin: 0;
+                width: auto;
+                font-size: 19.85px;
+                line-height: 24px;
+                font-weight: 600;
+                letter-spacing: -0.01rem;
+                color: var(--primary);
+    
+                @media (min-width: 768px) {
+                    font-size: 36px;
+                    line-height: 44px;
+                    letter-spacing: 1px;
+                }
+            }
+            @media (min-width: 768px) {
+                height: 44px;
+            }
+        }
     
         Button {
             block-size: 40px;
             margin: 44px 70px 0 0;
         }
 
-        .search-buy{
+
+
+        & .search-buy{
             display: flex;
-            width: 66px;
+            position: absolute;
+            top: -13.5px;
+            left: 0;
+            width: 100vw;
+            height: 80px;
             justify-content: space-between;
+            z-index: 3;
+            
+            & #search-buy {
+                display: none;
+            }
+
+            & .MenuTopBarSearch{
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                position: absolute;
+                background-color: var(--white);
+                justify-content: flex-end;
+                padding: 0 40px 20px 20px;
+                
+                & input{
+                    width: 315px;
+                    height: 60px;
+                    padding: 16px 20px;
+                    border: 0;
+                    border-radius: 8px;
+                    background-color: rgba(71, 71, 71, 0.4);
+
+                    &:focus{
+                        outline: none;
+                    }
+                }
+                & img{
+                    position: absolute;
+                    margin-right: 20px;
+                }
+            }
         }
     
         .carrinho{
@@ -335,12 +373,20 @@ const Header = () => {
                 <MenuSideBarButton />
                 <Pages />
                 <DigitalLogo />
+
+                <label className="out-search" htmlFor="search-buy">
+                    <img src="Search.svg" />
+                </label>
+
                 <div className="search-buy">
-                    <label className="out-search">
+                    <input type="checkbox" id="search-buy" />
+                    <div className="MenuTopBarSearch">
+                        <input type="text" className="text-small" placeholder="Pesquisar produto..." />
                         <img src="Search.svg" />
-                    </label>
-                    <Carrin />
+                    </div>
                 </div>
+
+                <Carrin />
             </div>
         </HeaderContainer>
     );

@@ -1,6 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PageLayout from "../layouts/PageLayout";
 import Home from "../pages/Home";
+import Produtos from "../pages/Produtos";
+import Categorias from "../pages/Categorias";
+import MeusPedidos from "../pages/MeusPedidos";
 
 export const Paths = () => {
     return(
