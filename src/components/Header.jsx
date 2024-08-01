@@ -264,9 +264,9 @@ const Links = () => {
     return (
         <nav className="links">
             <NavLink to="/" className={whereNavLink} >Home</NavLink>
-            <NavLink to="/batata" className={whereNavLink} >Produtos</NavLink>
-            <NavLink to="/" className={whereNavLink} >Categorias</NavLink>
-            <NavLink to="/" className={whereNavLink} >Meus Pedidos</NavLink>
+            <NavLink to="/produtos" className={whereNavLink} >Produtos</NavLink>
+            <NavLink to="/categorias" className={whereNavLink} >Categorias</NavLink>
+            <NavLink to="/meus-pedidos" className={whereNavLink} >Meus Pedidos</NavLink>
             {/* <NavLink to="/POR A END-POINT AQUI" className={whereNavLink} >BATATA</NavLink> */}
         </nav>
     )
