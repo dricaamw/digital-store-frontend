@@ -11,10 +11,8 @@
 
 import styled from "styled-components";
 import { default as But } from '../components/buttons/Buttons.jsx';
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-
-// const rem = (pixel) => `${pixel / 16}rem`;
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -23,14 +21,67 @@ const HeaderContainer = styled.header`
     max-height: 192px;
     width: 100vw;
     height: 66.5px;
-    background-color: var(--white);
     margin: auto;
-    z-index: 6;
-    
-    .organizer{
+
+    .container{
+        background-color: var(--white);
+        padding: 20px;
         display: flex;
         justify-content: space-between;
-        width: max(335px, 89.34vw);
+        width: 100%;
+        height: 100%;
+        
+        nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy{
+            z-index: 4;
+        }
+
+        .fundo{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 66.5px;
+            background-color: inherit;
+        }
+
+        .overlay{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 3;
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transition-duration: 500ms;
+        }
+
+        &:has(input#menu-sidebar:checked){
+            .overlay {
+                opacity: 1;
+            }
+        }
+
+        &  #menu-sidebar {
+            display: none;
+        }
+
+        & label{
+            display: flex;
+            width: 24px;
+            height: 24px;
+
+            & img {
+                margin: 0;
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        & #menu-sidebar:checked ~ .links{
+            transform: translateX(0);
+            opacity: 1;
+        }
 
         & .digital-logo {
             display: flex;
@@ -72,118 +123,80 @@ const HeaderContainer = styled.header`
                 height: 44px;
             }
         }
-            & .inp-bloco{
-                display: flex;
-                align-items: center;
-                gap: 48px;
-                align-self: flex-start;
-                position: relative;
+        /* & .inp-bloco{
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            align-self: flex-start;
+            position: relative;
     
-                & > div > img {
-                    position: absolute;
-                    top: 18px;
-                    right: 24%
-                }
-                & .cadastre {
-                    inline-size: 102px;
-                    block-size: 28px;
+            & > div > img {
+                position: absolute;
+                top: 18px;
+                right: 24%
+            }
+            & .cadastre {
+                inline-size: 102px;
+                block-size: 28px;
+                color: var(--dark-gray-3);
+                text-decoration: none;
+            }
+        } */
+            
+        & nav.links{
+            z-index: 5;
+
+            & {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+                position: fixed;
+                top: 66.5px;
+                left: 0px;
+                background-color: var(--white);
+                height: calc(100vh - 66.5px);
+                width: 308px;
+                padding: 30px;
+                box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 5;
+                transition: all 500ms;
+                transform: translateX(-70%);
+                opacity: 0;
+    
+                & a {
+                    block-size: 29px;
                     color: var(--dark-gray-3);
                     text-decoration: none;
-                }
-            }
-            
-            & nav{
-
-                & label{
-                    display: flex;
-                    width: 24px;
-                    height: 24px;
-
-                    & img {
-                        margin: 0;
-                        width: 24px;
-                        height: 24px;
+    
+                    &[aria-current="page"] {
+                        color: var(--primary);
                     }
 
-                    & .overlay {
+                    &:not([aria-current="page"])::after {
                         content: "";
                         display: block;
-                        position: fixed;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0;
-                        height: 100vh;
-                        width: 100vw;
-                        background-color: rgba(0, 0, 0, 0.3);
-                        opacity: 1;
-                        transition: opacity 500ms;
-                        z-index: 4;
+                        border-radius: 2px;
+                        width: 0%;
+                        height: 2px;
+                        margin-top: 5px;
+                        background-color: transparent;
+                        transition-duration: 500ms;
                     }
-                }
-
-                &  #menu-sidebar {
-                        /* display: none; */
-                }
     
-                & .links {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 10px;
-                    align-items: flex-start;
-                    position: fixed;
-                    top: 66.5px;
-                    left: 0px;
-                    background-color: var(--white);
-                    align-self: flex-end;
-                    height: calc(100vh - 66.5px);
-                    width: 308px;
-                    padding: 30px;
-                    box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
-                    z-index: 5;
-                    transition: all 500ms;
-                    transform: translateX(-70%);
-                    opacity: 0;
-        
-                    & a {
-                        block-size: 29px;
-                        color: var(--dark-gray-3);
-                        text-decoration: none;
-        
-                        &[aria-current="page"] {
-                            color: var(--primary);
-                        }
-        
-                        &:not([aria-current="page"])::after {
-                            content: "";
-                            display: block;
-                            border-radius: 2px;
-                            width: 0%;
-                            height: 2px;
-                            margin-top: 5px;
-                            background-color: transparent;
-                            transition-duration: 500ms;
-                        }
-        
-                        &[aria-current="page"]::after {
-                            content: "";
-                            display: block;
-                            border-radius: 2px;
-                            inline-size: 100%;
-                            block-size: 2px;
-                            margin-block-start: 5px;
-                            background-color: var(--primary);
-                            transition-duration: 500ms;
-                        }
+                    &[aria-current="page"]::after {
+                        content: "";
+                        display: block;
+                        border-radius: 2px;
+                        inline-size: 100%;
+                        block-size: 2px;
+                        margin-block-start: 5px;
+                        background-color: var(--primary);
+                        transition-duration: 500ms;
                     }
-                    
-                }
-
-                & #menu-sidebar:checked ~ .links {
-                    transform: translateX(0);
-                    opacity: 1;
                 }
             }
+        }
     
         Button {
             block-size: 40px;
@@ -217,7 +230,6 @@ const HeaderContainer = styled.header`
                 align-items: center;
             }
         }
-        
     }
 `;
 
@@ -248,23 +260,44 @@ const Cadastre = () => {
     )
 }
 
-const Pages = () => {
+const Links = () => {
     return (
-        <nav>
+        <nav className="links">
+            <NavLink to="/" className={whereNavLink} >Home</NavLink>
+            <NavLink to="/batata" className={whereNavLink} >Produtos</NavLink>
+            <NavLink to="/" className={whereNavLink} >Categorias</NavLink>
+            <NavLink to="/" className={whereNavLink} >Meus Pedidos</NavLink>
+            {/* <NavLink to="/POR A END-POINT AQUI" className={whereNavLink} >BATATA</NavLink> */}
+        </nav>
+    )
+}
+
+const Filters = () => {
+    return (
+        <>
+
+        </>
+    )
+}
+
+const MenuSideBarButton = () => {
+    return (
+        <>
             <input type="checkbox" id="menu-sidebar" />
             <label htmlFor="menu-sidebar">
                 <img src="Menu.svg" />
-                <div className="overlay" />
             </label>
+        </>
+    )
+}
 
-            <div className="links" >
-                <NavLink to="/" className={whereNavLink} >Home</NavLink>
-                <NavLink to="/batata" className={whereNavLink} >Produtos</NavLink>
-                <NavLink to="/" className={whereNavLink} >Categorias</NavLink>
-                <NavLink to="/" className={whereNavLink} >Meus Pedidos</NavLink>
-                {/* <NavLink to="/POR A END-POINT AQUI" className={whereNavLink} >BATATA</NavLink> */}
-            </div>
-        </nav>
+const Pages = () => {
+    const location = useLocation();
+
+    return (
+        <>
+            {location.pathname === "/pesquisa" ? <Filters /> : <Links />}
+        </>
     )
 }
 
@@ -277,7 +310,7 @@ const Button = () => {
         <But
             className="text-small bold"
             label="Comprar"
-            buttonType="primary-button"></But>
+            buttonType="primary-button" />
     )
 }
 
@@ -293,9 +326,13 @@ const Carrin = () => {
 }
 
 const Header = () => {
+
     return (
         <HeaderContainer>
-            <div className="organizer">
+            <div className="container">
+                <div className="fundo"></div>
+                <label className="overlay" htmlFor="menu-sidebar"></label>
+                <MenuSideBarButton />
                 <Pages />
                 <DigitalLogo />
                 <div className="search-buy">
