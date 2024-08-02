@@ -30,7 +30,7 @@ const HeaderContainer = styled.header`
         width: 100%;
         height: 100%;
         
-        .carrinho, .out-search ,nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy{
+        .carrinho, .out-search, nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy{
             z-index: 4;
         }
 
@@ -50,14 +50,16 @@ const HeaderContainer = styled.header`
         width: 100vw;
         height: 100vh;
         z-index: 2;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(31, 31, 31, 0.4);
         opacity: 0;
+        visibility: hidden;
         transition-duration: 500ms;
         }
 
         &:has(input#menu-sidebar:checked){
             .overlay {
                 opacity: 1;
+                visibility: visible;
             }
         }
 
@@ -104,55 +106,52 @@ const HeaderContainer = styled.header`
             
         & nav.links{
             z-index: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+            position: fixed;
+            top: 66.5px;
+            left: 0px;
+            background-color: var(--white);
+            height: calc(100vh - 66.5px);
+            width: 308px;
+            padding: 30px;
+            box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 5;
+            transition: all 500ms;
+            transform: translateX(-70%);
+            opacity: 0;
+    
+            & a {
+                block-size: 29px;
+                color: var(--dark-gray-3);
+                text-decoration: none;
 
-            & {
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                align-items: flex-start;
-                position: fixed;
-                top: 66.5px;
-                left: 0px;
-                background-color: var(--white);
-                height: calc(100vh - 66.5px);
-                width: 308px;
-                padding: 30px;
-                box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
-                z-index: 5;
-                transition: all 500ms;
-                transform: translateX(-70%);
-                opacity: 0;
-    
-                & a {
-                    block-size: 29px;
-                    color: var(--dark-gray-3);
-                    text-decoration: none;
-    
-                    &[aria-current="page"] {
-                        color: var(--primary);
-                    }
+                &[aria-current="page"] {
+                    color: var(--primary);
+                }
 
-                    &:not([aria-current="page"])::after {
-                        content: "";
-                        display: block;
-                        border-radius: 2px;
-                        width: 0%;
-                        height: 2px;
-                        margin-top: 5px;
-                        background-color: transparent;
-                        transition-duration: 500ms;
-                    }
-    
-                    &[aria-current="page"]::after {
-                        content: "";
-                        display: block;
-                        border-radius: 2px;
-                        inline-size: 100%;
-                        block-size: 2px;
-                        margin-block-start: 5px;
-                        background-color: var(--primary);
-                        transition-duration: 500ms;
-                    }
+                &:not([aria-current="page"])::after {
+                    content: "";
+                    display: block;
+                    border-radius: 2px;
+                    width: 0%;
+                    height: 2px;
+                    margin-top: 5px;
+                    background-color: transparent;
+                    transition-duration: 500ms;
+                }
+
+                &[aria-current="page"]::after {
+                    content: "";
+                    display: block;
+                    border-radius: 2px;
+                    inline-size: 100%;
+                    block-size: 2px;
+                    margin-block-start: 5px;
+                    background-color: var(--primary);
+                    transition-duration: 500ms;
                 }
             }
         }
@@ -203,7 +202,24 @@ const HeaderContainer = styled.header`
             margin: 44px 70px 0 0;
         }
 
+        & .out-search{
+            height: 20px;
+            width: 20px;
+            transition-duration: 500ms;
 
+            & img{
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        & #search-buy:checked + .out-search > img{
+            filter: invert(20%) sepia(62%) saturate(3928%) hue-rotate(315deg) brightness(85%) contrast(91%);
+        }
+
+        & #search-buy{
+            display: none;
+        }
 
         & .search-buy{
             display: flex;
@@ -214,10 +230,7 @@ const HeaderContainer = styled.header`
             height: 80px;
             justify-content: space-between;
             z-index: 3;
-            
-            & #search-buy {
-                display: none;
-            }
+            transition-duration: 300ms;
 
             & .MenuTopBarSearch{
                 display: flex;
@@ -229,6 +242,7 @@ const HeaderContainer = styled.header`
                 padding: 0 40px 20px 20px;
                 
                 & input{
+                    color: var(--dark-gray-3);
                     width: 315px;
                     height: 60px;
                     padding: 16px 20px;
@@ -236,15 +250,30 @@ const HeaderContainer = styled.header`
                     border-radius: 8px;
                     background-color: rgba(71, 71, 71, 0.4);
 
+                    &::placeholder{
+                        color: var(--dark-gray-3);
+                    }
+
                     &:focus{
                         outline: none;
                     }
                 }
-                & img{
+
+                & a{
                     position: absolute;
                     margin-right: 20px;
+                    height: 24px;
+                    cursor: pointer;
+
+                    & img{
+                        opacity: 0.5;
+                    }
                 }
             }
+        }
+
+        & #search-buy:checked + * + .search-buy{
+            transform: translateY(80px);
         }
     
         .carrinho{
@@ -305,7 +334,6 @@ const Links = () => {
             <NavLink to="/produtos" className={whereNavLink} >Produtos</NavLink>
             <NavLink to="/categorias" className={whereNavLink} >Categorias</NavLink>
             <NavLink to="/meus-pedidos" className={whereNavLink} >Meus Pedidos</NavLink>
-            {/* <NavLink to="/POR A END-POINT AQUI" className={whereNavLink} >BATATA</NavLink> */}
         </nav>
     )
 }
@@ -374,15 +402,18 @@ const Header = () => {
                 <Pages />
                 <DigitalLogo />
 
+                <input type="checkbox" id="search-buy" />
                 <label className="out-search" htmlFor="search-buy">
                     <img src="Search.svg" />
                 </label>
+                
 
                 <div className="search-buy">
-                    <input type="checkbox" id="search-buy" />
                     <div className="MenuTopBarSearch">
                         <input type="text" className="text-small" placeholder="Pesquisar produto..." />
-                        <img src="Search.svg" />
+                        <Link to="/">
+                            <img src="Search.svg" />
+                        </Link>
                     </div>
                 </div>
 
