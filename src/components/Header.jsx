@@ -45,6 +45,7 @@ const HeaderContainer = styled.header`
 
         .overlay{
         position: fixed;
+        visibility: hidden;
         top: 0;
         left: 0;
         width: 100vw;
@@ -58,6 +59,7 @@ const HeaderContainer = styled.header`
         &:has(input#menu-sidebar:checked){
             .overlay {
                 opacity: 1;
+                visibility: visible;
             }
         }
 
@@ -81,26 +83,6 @@ const HeaderContainer = styled.header`
             transform: translateX(0);
             opacity: 1;
         }
-
-        /* & .inp-bloco{
-            display: flex;
-            align-items: center;
-            gap: 48px;
-            align-self: flex-start;
-            position: relative;
-    
-            & > div > img {
-                position: absolute;
-                top: 18px;
-                right: 24%
-            }
-            & .cadastre {
-                inline-size: 102px;
-                block-size: 28px;
-                color: var(--dark-gray-3);
-                text-decoration: none;
-            }
-        } */
             
         & nav.links{
             z-index: 3;
@@ -120,7 +102,7 @@ const HeaderContainer = styled.header`
                 box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
                 z-index: 5;
                 transition: all 500ms;
-                transform: translateX(-70%);
+                transform: translateX(-100%);
                 opacity: 0;
     
                 & a {

@@ -9,6 +9,7 @@ Para usar este componente, primeiro instale as dependências necessárias:
 ```bash {"id":"01J3QF9NHQ153W67WJEJ4MAY0N"}
 npm install primereact prop-types
 
+
 ```
 
 **Importação**
@@ -19,6 +20,7 @@ Em seu arquivo JavaScript, importe o componente `Button` e o `PropTypes`:
 import Button from "./Button";
 import PropTypes from "prop-types";
 
+
 ```
 
 **Uso**
@@ -27,21 +29,22 @@ Você pode usar o componente `Button` passando as propriedades necessárias. Vej
 
 ```jsx {"id":"01J3QF9NHQ153W67WJEQ0Q9YXH"}
 // Botão comum
-<Button buttonType="primary" label="Clique Aqui" />
+<Button buttonType="primary-button" label="Clique Aqui" />
 
 // Botão desabilitado
-<Button buttonType="secondary" label="Clique Aqui" disabled />
+<Button buttonType="secondary-button" label="Clique Aqui" disabled />
 
 // Botão com ícone
 <Button buttonType="icon-button" label="Adicionar" />
 
 // Botão com evento onClick
-<Button buttonType="primary" label="Clique Aqui" onClick={() => console.log("Botão clicado")} />
+<Button buttonType="primary-button" label="Clique Aqui" onClick={() => console.log("Botão clicado")} />
 
 // Botão com children
-<Button buttonType="secondary">
+<Button buttonType="secondary-button">
     <span>Botão com children</span>
 </Button>
+
 
 ```
 

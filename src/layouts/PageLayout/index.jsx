@@ -5,10 +5,10 @@ const PageLayout = () => {
     return (
         <>
             <Header />
-            {/* <Outlet /> */}
+            <Outlet />
             {/* Componente Footer */}
         </>
     );
 }
- 
+
 export default PageLayout;
