@@ -60,6 +60,7 @@ const HeaderContainer = styled.header`
 
         .overlay{
         position: fixed;
+        visibility: hidden;
         top: 0;
         left: 0;
         width: 100vw;
@@ -102,41 +103,31 @@ const HeaderContainer = styled.header`
         & #menu-sidebar:checked ~ .links{
             transform: translateX(0);
             opacity: 1;
-            visibility: visible;
         }
             
-        & .links{
-            visibility: hidden;
+        & nav.links{
             z-index: 3;
-            display: flex;
-            flex-direction: column;
-            position: fixed;
-            top: 66.5px;
-            left: 0px;
-            background-color: var(--white);
-            height: calc(100vh - 66.5px);
-            width: 308px;
-            padding: 30px;
-            box-shadow: 3px 2px 5px rgba(255, 255, 255, 0.2);
-            z-index: 5;
-            transition: all 500ms;
-            transform: translateX(-70%);
-            opacity: 0;
 
-            & p{
-                margin: 0 0 20px 0;
-                color: var(--dark-gray-2);
-            }
-    
-            & nav{
+            & {
                 display: flex;
                 flex-direction: column;
-                align-items: flex-start;
-                width: 100%;
-                height: 100%;
                 gap: 10px;
-
+                align-items: flex-start;
+                position: fixed;
+                top: 66.5px;
+                left: 0px;
+                background-color: var(--white);
+                height: calc(100vh - 66.5px);
+                width: 308px;
+                padding: 30px;
+                box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
+                z-index: 5;
+                transition: all 500ms;
+                transform: translateX(-100%);
+                opacity: 0;
+    
                 & a {
+                    block-size: 29px;
                     color: var(--dark-gray-3);
                     text-decoration: none;
     
