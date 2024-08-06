@@ -12,6 +12,7 @@
 import styled from "styled-components";
 import { default as But } from '../components/buttons/Buttons.jsx';
 import { Link, useLocation, NavLink } from "react-router-dom";
+import { useState } from "react";
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -22,13 +23,23 @@ const HeaderContainer = styled.header`
     height: 66.5px;
     margin: auto;
 
+    @media (min-width: 768px) {
+        height: 192px;
+    }
+
     .container{
         background-color: var(--white);
         padding: 20px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         width: 100%;
         height: 100%;
+        flex-wrap: wrap;
+
+        @media (min-width: 768px) {
+            padding: 45px 100px 29px 100px;
+        }
         
         .carrinho, .out-search, nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy{
             z-index: 4;
@@ -41,6 +52,10 @@ const HeaderContainer = styled.header`
             width: 100vw;
             height: 66.5px;
             background-color: inherit;
+
+            @media (min-width: 768px) {
+                height: 192px;
+            }
         }
 
         .overlay{
@@ -56,18 +71,19 @@ const HeaderContainer = styled.header`
         transition-duration: 500ms;
         }
 
-        &:has(input#menu-sidebar:checked){
+        &:has(#menu-sidebar:checked){
             .overlay {
                 opacity: 1;
                 visibility: visible;
             }
         }
 
-        &  #menu-sidebar {
+        & #menu-sidebar {
             display: none;
+            visibility: hidden;
         }
 
-        & label{
+        & label[for="menu-sidebar"] {
             display: flex;
             width: 24px;
             height: 24px;
@@ -77,39 +93,23 @@ const HeaderContainer = styled.header`
                 width: 24px;
                 height: 24px;
             }
+
+            @media (min-width: 768px) {
+                display: none;
+            }
         }
 
         & #menu-sidebar:checked ~ .links{
             transform: translateX(0);
             opacity: 1;
+            visibility: visible;
         }
-
-        /* & .inp-bloco{
-            display: flex;
-            align-items: center;
-            gap: 48px;
-            align-self: flex-start;
-            position: relative;
-    
-            & > div > img {
-                position: absolute;
-                top: 18px;
-                right: 24%
-            }
-            & .cadastre {
-                inline-size: 102px;
-                block-size: 28px;
-                color: var(--dark-gray-3);
-                text-decoration: none;
-            }
-        } */
             
-        & nav.links{
+        & .links{
+            visibility: hidden;
             z-index: 3;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            align-items: flex-start;
             position: fixed;
             top: 66.5px;
             left: 0px;
@@ -117,41 +117,121 @@ const HeaderContainer = styled.header`
             height: calc(100vh - 66.5px);
             width: 308px;
             padding: 30px;
-            box-shadow: 3px 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 3px 2px 5px rgba(255, 255, 255, 0.2);
             z-index: 5;
             transition: all 500ms;
             transform: translateX(-70%);
             opacity: 0;
+
+            & p{
+                margin: 0 0 20px 0;
+                color: var(--dark-gray-2);
+            }
     
-            & a {
-                block-size: 29px;
-                color: var(--dark-gray-3);
-                text-decoration: none;
+            & nav{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                height: 100%;
+                gap: 10px;
 
-                &[aria-current="page"] {
-                    color: var(--primary);
+                & a {
+                    color: var(--dark-gray-3);
+                    text-decoration: none;
+    
+                    &.active {
+                        color: var(--primary);
+                    }
+    
+                    &:not(.active)::after {
+                        content: "";
+                        display: block;
+                        border-radius: 2px;
+                        width: 0%;
+                        height: 2px;
+                        margin-top: 5px;
+                        background-color: transparent;
+                        transition-duration: 500ms;
+                    }
+    
+                    &.active::after {
+                        content: "";
+                        display: block;
+                        border-radius: 2px;
+                        inline-size: 100%;
+                        block-size: 2px;
+                        margin-block-start: 5px;
+                        background-color: var(--primary);
+                        transition-duration: 500ms;
+                    }
+                }
+            }
+
+            &::after{
+                content: "";
+                width: calc(100% - 60px);
+                height: 1px;
+                background-color: var(--light-gray-2);
+                position: absolute;
+                bottom: calc(30px + 85px + 20px);
+            }
+            & .but-link{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 17px;
+
+                & button {
+                    width: 100%;
+                    min-height: 40px;
+                    position: relative;
                 }
 
-                &:not([aria-current="page"])::after {
-                    content: "";
-                    display: block;
-                    border-radius: 2px;
-                    width: 0%;
-                    height: 2px;
-                    margin-top: 5px;
-                    background-color: transparent;
-                    transition-duration: 500ms;
+                & .cadastre{
+                    color: var(--dark-gray-2);
+                }
+            }
+
+            @media (min-width: 768px) {
+                z-index: 4;
+                flex-direction: row;
+                opacity: 1;
+                visibility: visible;
+                background-color: transparent;
+                box-shadow: none;
+                transform: none;
+                position: static;
+                align-self: self-start;
+                height: auto;
+                padding: 0;
+                height: 29px;
+                width: 424px;
+
+                p {
+                    display: none;
                 }
 
-                &[aria-current="page"]::after {
-                    content: "";
-                    display: block;
-                    border-radius: 2px;
-                    inline-size: 100%;
-                    block-size: 2px;
-                    margin-block-start: 5px;
-                    background-color: var(--primary);
-                    transition-duration: 500ms;
+                nav {
+                    flex-direction: row;
+                    gap: 32px;
+                    align-items: center;
+                    height: 25px;
+
+                    & a {
+                        color: var(--dark-gray-3);
+                        text-decoration: none;
+                        /* font-size: 17.5px; */
+                        line-height: 25px;
+                    }
+                }
+
+                &:after {
+                    display: none;
+                }
+
+                .but-link {
+                    display: none;
                 }
             }
         }
@@ -162,7 +242,7 @@ const HeaderContainer = styled.header`
             justify-content: space-between;
             width: 138px;
             height: 24px;
-            margin-left: 33px;
+            margin-left: 70px;
     
             & img {
                 margin: 2.73px 0 3.27px 0;
@@ -189,29 +269,28 @@ const HeaderContainer = styled.header`
                 @media (min-width: 768px) {
                     font-size: 36px;
                     line-height: 44px;
-                    letter-spacing: 1px;
                 }
             }
             @media (min-width: 768px) {
                 height: 44px;
+                width: 253px;
+                margin: 0;
             }
-        }
-    
-        Button {
-            block-size: 40px;
-            margin: 44px 70px 0 0;
         }
 
         & .out-search{
             height: 20px;
             width: 20px;
             transition-duration: 500ms;
+            margin-left: 28px;
 
             & img{
                 width: 20px;
                 height: 20px;
             }
         }
+
+
 
         & #search-buy:checked + .out-search > img{
             filter: invert(20%) sepia(62%) saturate(3928%) hue-rotate(315deg) brightness(85%) contrast(91%);
@@ -221,7 +300,7 @@ const HeaderContainer = styled.header`
             display: none;
         }
 
-        & .search-buy{
+        & .search-buy, & #menu-sidebar:checked {
             display: flex;
             position: absolute;
             top: -13.5px;
@@ -229,21 +308,21 @@ const HeaderContainer = styled.header`
             width: 100vw;
             height: 80px;
             justify-content: space-between;
-            z-index: 3;
+            z-index: 1;
             transition-duration: 300ms;
 
             & .MenuTopBarSearch{
                 display: flex;
                 align-items: center;
                 gap: 10px;
-                position: absolute;
+                width: 100%;
                 background-color: var(--white);
                 justify-content: flex-end;
                 padding: 0 40px 20px 20px;
                 
                 & input{
                     color: var(--dark-gray-3);
-                    width: 315px;
+                    width: 100%;
                     height: 60px;
                     padding: 16px 20px;
                     border: 0;
@@ -264,6 +343,7 @@ const HeaderContainer = styled.header`
                     margin-right: 20px;
                     height: 24px;
                     cursor: pointer;
+                    justify-content: flex-end;
 
                     & img{
                         opacity: 0.5;
@@ -329,12 +409,26 @@ const Cadastre = () => {
 
 const Links = () => {
     return (
-        <nav className="links">
-            <NavLink to="/" className={whereNavLink} >Home</NavLink>
-            <NavLink to="/produtos" className={whereNavLink} >Produtos</NavLink>
-            <NavLink to="/categorias" className={whereNavLink} >Categorias</NavLink>
-            <NavLink to="/meus-pedidos" className={whereNavLink} >Meus Pedidos</NavLink>
-        </nav>
+        <div className="links">
+            <p className="text-small bold">Páginas</p>
+
+            <nav>
+                <NavLink to="/" className={(a) => `${whereNavLink(a)} text-small`} >Home</NavLink>
+                <NavLink to="/produtos" className={(a) => `${whereNavLink(a)} text-small`} >Produtos</NavLink>
+                <NavLink to="/categorias" className={(a) => `${whereNavLink(a)} text-small`} >Categorias</NavLink>
+                <NavLink to="/meus-pedidos" className={(a) => `${whereNavLink(a)} text-small`} >Meus Pedidos</NavLink>
+            </nav>
+            <div className="but-link">
+                <But
+                    className="text-extra-small bold"
+                    label="Comprar"
+                    buttonType="primary-button"
+                />
+
+                <Link className="cadastre text-small" to="/" >Cadastre-se</Link>
+            </div>
+
+        </div>
     )
 }
 
@@ -342,17 +436,6 @@ const Filters = () => {
     return (
         <>
 
-        </>
-    )
-}
-
-const MenuSideBarButton = () => {
-    return (
-        <>
-            <input type="checkbox" id="menu-sidebar" />
-            <label htmlFor="menu-sidebar">
-                <img src="Menu.svg" />
-            </label>
         </>
     )
 }
@@ -368,17 +451,14 @@ const Pages = () => {
 }
 
 const whereNavLink = ({ isActive, isPending }) => {
-    isPending ? "pending" : isActive ? "active" : ""
+    if (isPending) {
+        return "pending"
+    } else if (isActive) {
+        return "active"
+    } else {
+        return ""
+    }
 };
-
-const Button = () => {
-    return (
-        <But
-            className="text-small bold"
-            label="Comprar"
-            buttonType="primary-button" />
-    )
-}
 
 const Carrin = () => {
     return (
@@ -398,7 +478,10 @@ const Header = () => {
             <div className="container">
                 <div className="fundo"></div>
                 <label className="overlay" htmlFor="menu-sidebar"></label>
-                <MenuSideBarButton />
+                <input type="checkbox" id="menu-sidebar" />
+                <label htmlFor="menu-sidebar">
+                    <img src="Menu.svg" />
+                </label>
                 <Pages />
                 <DigitalLogo />
 
@@ -406,7 +489,8 @@ const Header = () => {
                 <label className="out-search" htmlFor="search-buy">
                     <img src="Search.svg" />
                 </label>
-                
+
+                {/* <Links /> */}
 
                 <div className="search-buy">
                     <div className="MenuTopBarSearch">
