@@ -4,8 +4,8 @@ import Header from "../../components/Header";
 const PageLayout = () => {
     return (
         <>
-            {/* <Header /> */}
-            <Outlet />
+            <Header />
+            {/* <Outlet /> */}
             {/* Componente Footer */}
         </>
     );

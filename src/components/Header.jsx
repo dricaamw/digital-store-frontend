@@ -40,7 +40,7 @@ const HeaderContainer = styled.header`
             justify-content: space-between;
         }
         
-        .carrinho, .out-search, nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy{
+        .carrinho, .out-search, nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy, .carrin{
             z-index: 4;
         }
 
@@ -340,8 +340,6 @@ const HeaderContainer = styled.header`
             }
         }
 
-
-
         & #search-buy:checked + .out-search > img{
             filter: invert(20%) sepia(62%) saturate(3928%) hue-rotate(315deg) brightness(85%) contrast(91%);
         }
@@ -421,31 +419,96 @@ const HeaderContainer = styled.header`
             transform: translateY(80px);
             visibility: visible;
         }
-    
-        .carrinho{
+        
+
+        & .carrin{
             position: relative;
 
-            @media (min-width: 768px){
-                    order: 3;
+            .carrin-but{
+                position: relative;
+    
+                @media (min-width: 768px){
+                    
+                }
+    
+                & #carrinho {
+                    display: none;
+                }
+    
+                & label img{
+                    cursor: pointer;
+                }
+    
+                & span.p-badge{
+                    clip-path: circle(8.5px at center);
+                    display: flex;
+                    position: absolute;
+                    top: -5px;
+                    right: -11px;
+                    background-color: var(--error);
+                    height: 17px;
+                    width: 17px;
+                    color: var(--white);
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
             }
 
-            & #carrinho {
-                display: none;
-            }
-
-            & span.p-badge{
-                clip-path: circle(8.5px at center);
-                display: flex;
+            & .dropdown-carrin {
+                background-color: var(--white);
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
                 position: absolute;
-                top: -5px;
-                right: -11px;
-                background-color: var(--error);
-                height: 17px;
-                width: 17px;
-                color: var(--white);
-                justify-content: center;
-                align-items: center;
+                padding: 30px;
+                right: 0px;
+                width: 315px;
+                height: 454px;
+                border-radius: 4px;
 
+                & p{
+                    color: var(--dark-gray-2);
+                }
+
+                & .prods {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+
+                    & div{
+                        width: 255px;
+                        height: 93px;
+                        background-color: var(--error);
+                    }
+                }
+
+                & .down{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    & .total{
+                        display: flex;
+                        justify-content: space-between;
+                        height: 84px;
+
+                        & .valor{
+                            color: var(--dark-gray-2);
+                        }
+
+                        & num-valor{
+                            color: var(--dark-gray-2);
+                        }
+                    }
+
+                    & .ab{
+                        display: flex;
+                        justify-content: space-between;
+
+                        & .esvaziar {
+                            color: var(--dark-gray-2);
+                        }
+                    }
+                }
             }
         }
     }
@@ -510,11 +573,34 @@ const whereNavLink = ({ isActive, isPending }) => {
 
 const Carrin = () => {
     return (
-        <label className="carrinho">
-            <input type="checkbox" id="carrinho" />
-            <img src="Buy.svg" />
-            <span className="p-badge">2</span>
-        </label>
+        <div className="carrin">
+            <div className="carrin-but">
+                <input type="checkbox" id="carrinho" />
+                <label htmlFor="carrinho">
+                    <img src="Buy.svg" />
+                </label>
+                <span className="p-badge">2</span>
+            </div>
+            <div className="dropdown-carrin">
+                <p className="text-small bold">Meu Carrinho</p>
+                <div className="prods">
+                    <div>prod1</div>
+                    <div>prod2</div>
+                </div>
+                <div className="down">
+                    <div className="total">
+                        <p className="valor text-small bold">Valor Total:</p>
+                        <p className="num-valor text-small bold">R$50,00</p>
+                    </div>
+                    <div className="ab">
+                        <Link className="text-small esvaziar" to="/" >Esvaziar</Link>
+                        <Link>
+                            <But className={"text-small bold ver-carrin-maior"} label={"Ver Carrinho"} buttonType="primary-button"></But>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 
 }
