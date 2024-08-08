@@ -1,5 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
 import styled from "styled-components";
-import Button from "./buttons/Buttons.jsx"
+import {default as But} from "./buttons/Buttons.jsx";
 
 const Banner1Container = styled.div`
     display: flex;
@@ -60,10 +72,9 @@ const Banner1 = () => {
                 <h4 className="text-small bold">Melhores ofertas personalizadas</h4>
                 <h2>Queima de stoque Nike</h2>
                 <p className="text-medium">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
-                <Button buttonType="primary-button" label="Clique Aqui" className={"text-small bold"} />
+                <But buttonType="primary-button" label="Clique Aqui" className={"text-small bold"} />
             </div>
             <img src="White-Sneakers.svg" alt="Sapatão" />
-
         </Banner1Container>
     );
 }
@@ -78,9 +89,13 @@ const Banner2 = () => {
 
 const Banners = () => {
     return (
-        <>
+        <section className="banners-wraper">
             <Banner1 />
-        </>
+            <div>
+                <a href=""></a>
+                <a href=""></a>
+            </div>
+        </section>
     );
 }
 

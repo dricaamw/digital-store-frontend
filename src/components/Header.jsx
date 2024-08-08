@@ -11,7 +11,7 @@
 
 import styled from "styled-components";
 import { default as But } from '../components/buttons/Buttons.jsx';
-import { Link, useLocation, NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const HeaderContainer = styled.header`
     display: flex;
@@ -30,31 +30,66 @@ const HeaderContainer = styled.header`
         background-color: var(--white);
         padding: 20px;
         display: flex;
-        justify-content: space-between;
-        align-items: center;
         width: 100%;
         height: 100%;
         flex-wrap: wrap;
 
         @media (min-width: 768px) {
             padding: 45px 100px 29px 100px;
-            
+            flex-direction: column;
+            justify-content: space-between;
         }
         
         .carrinho, .out-search, nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy{
             z-index: 4;
         }
 
+        & .top-side{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+
+            & > .cadastre{
+                display: none;
+                a {
+                    color: var(--dark-gray-2);
+                    margin-left: 10px;
+                }
+                @media (min-width: 768px){
+                    display: inline;
+                }
+            }
+
+            & > .login {
+                display: none;
+
+                & a {
+                    width: fit-content;
+                    margin-right: 50px;
+
+                    button {
+                        width: 114px;
+                    }
+                }
+
+                @media (min-width: 768px) {
+                    display: inline;
+                    margin-right: max(0, calc(100% -50px));
+                }
+            }
+        }
+
         .fundo{
-            position: fixed;
+            position: absolute;
             top: 0;
             left: 0;
             width: 100vw;
             height: 66.5px;
-            background-color: inherit;
+            background-color: var(--white);
 
             @media (min-width: 768px) {
-                height: 192px;
+                display: none;
             }
         }
 
@@ -65,14 +100,14 @@ const HeaderContainer = styled.header`
         left: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 2;
+        z-index: 3;
         background-color: rgba(31, 31, 31, 0.4);
         opacity: 0;
         visibility: hidden;
         transition-duration: 500ms;
         }
 
-        &:has(#menu-sidebar:checked){
+        &:has(div #menu-sidebar:checked){
             .overlay {
                 opacity: 1;
                 visibility: visible;
@@ -82,6 +117,7 @@ const HeaderContainer = styled.header`
         & #menu-sidebar {
             display: none;
             visibility: hidden;
+            width: 0;
         }
 
         & label.menu-button {
@@ -100,7 +136,7 @@ const HeaderContainer = styled.header`
             }
         }
 
-        & #menu-sidebar:checked ~ .links{
+        &:has(#menu-sidebar:checked) .links{
             transform: translateX(0);
             opacity: 1;
         }
@@ -183,14 +219,23 @@ const HeaderContainer = styled.header`
                 gap: 17px;
 
 
-                & button {
+                & .login{
                     width: 100%;
-                    min-height: 40px;
-                    position: relative;
+
+                    & a{
+                        width: inherit;
+                        order: 1;
+                        & button {
+                            width: inherit;
+                        }
+                    } 
                 }
 
                 & .cadastre{
-                    color: var(--dark-gray-2);
+                    & a{
+                        color: var(--dark-gray-2);
+                    }
+                    order: 2;
                 }
             }
 
@@ -255,7 +300,6 @@ const HeaderContainer = styled.header`
                     width: 33px;
                     height: 33px;
                     margin: 5px 0 6px 0;
-                    order: 1;
                 }
             }
     
@@ -306,7 +350,7 @@ const HeaderContainer = styled.header`
             display: none;
         }
 
-        & .search-buy, & #menu-sidebar:checked {
+        & .search-buy {
             display: flex;
             position: absolute;
             top: -13.5px;
@@ -358,6 +402,19 @@ const HeaderContainer = styled.header`
                     }
                 }
             }
+
+            @media (min-width: 768px) {
+                width: min(559px, 47%);
+                position: static;
+                visibility: visible;
+                height: fit-content;
+
+                & .MenuTopBarSearch{
+                    padding: 0;
+                    height: fit-content;
+                }
+            }
+            
         }
 
         & #search-buy:checked + * + .search-buy{
@@ -403,21 +460,22 @@ const DigitalLogo = () => {
     );
 }
 
-const Input = () => {
+const Usuario = () => {
     return (
-        <div className="input-drop">
-            <input type="text" placeholder="Pesquisar produto..." />
-        </div>
-    )
-}
-
-
-const Cadastre = () => {
-    return (
-        <div className="cadastre">
-            <Link className="text-small" to="/" >Cadastre-se</Link>
-            {/* <Link className="text-small" to="end-point de cadastro simples" */}
-        </div>
+        <>
+            <div className="cadastre">
+                <Link className="text-small" to="/cadastro" >Cadastre-se</Link>
+            </div>
+            <div className="login">
+                <Link to="/login" >
+                    <But
+                        className={"text-extra-small bold"}
+                        buttonType="primary-button"
+                        label={"Entrar"}
+                    />
+                </Link>
+            </div>
+        </>
     )
 }
 
@@ -433,34 +491,10 @@ const Links = () => {
                 <NavLink to="/meus-pedidos" className={(a) => `${whereNavLink(a)} text-small`} >Meus Pedidos</NavLink>
             </nav>
             <div className="but-link">
-                <But
-                    className="text-extra-small bold"
-                    label="Comprar"
-                    buttonType="primary-button"
-                />
-
-                <Link className="cadastre text-small" to="/" >Cadastre-se</Link>
+                <Usuario />
             </div>
 
         </div>
-    )
-}
-
-const Filters = () => {
-    return (
-        <>
-
-        </>
-    )
-}
-
-const Pages = () => {
-    const location = useLocation();
-
-    return (
-        <>
-            {location.pathname === "/pesquisa" ? <Filters /> : <Links />}
-        </>
     )
 }
 
@@ -490,30 +524,36 @@ const Header = () => {
     return (
         <HeaderContainer>
             <div className="container">
-                <div className="fundo"></div>
-                <label className="overlay" htmlFor="menu-sidebar"></label>
-                <input type="checkbox" id="menu-sidebar" />
-                <label className="menu-button" htmlFor="menu-sidebar">
-                    <img src="Menu.svg" />
-                </label>
-                <Pages />
-                <DigitalLogo />
+                <div className="top-side">
 
-                <input type="checkbox" id="search-buy" />
-                <label className="out-search" htmlFor="search-buy">
-                    <img src="Search.svg" />
-                </label>
+                    <div className="fundo"></div>
 
-                <div className="search-buy">
-                    <div className="MenuTopBarSearch">
-                        <input type="text" className="text-small" placeholder="Pesquisar produto..." />
-                        <Link to="/">
-                            <img src="Search.svg" />
-                        </Link>
+                    <label className="overlay" htmlFor="menu-sidebar"></label>
+                    <input type="checkbox" id="menu-sidebar" />
+                    <label className="menu-button" htmlFor="menu-sidebar">
+                        <img src="Menu.svg" />
+                    </label>
+                    <DigitalLogo />
+
+                    <input type="checkbox" id="search-buy" />
+                    <label className="out-search" htmlFor="search-buy">
+                        <img src="Search.svg" />
+                    </label>
+
+                    <div className="search-buy">
+                        <div className="MenuTopBarSearch">
+                            <input type="text" className="text-small" placeholder="Pesquisar produto..." />
+                            <Link to="/produtos">
+                                <img src="Search.svg" />
+                            </Link>
+                        </div>
                     </div>
+                    <Usuario />
+
+                    <Carrin />
                 </div>
 
-                <Carrin />
+                <Links />
             </div>
         </HeaderContainer>
     );
