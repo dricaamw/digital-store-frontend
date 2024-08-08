@@ -377,7 +377,7 @@ const HeaderContainer = styled.header`
                     padding: 16px 20px;
                     border: 0;
                     border-radius: 8px;
-                    background-color: rgba(71, 71, 71, 0.4);
+                    background-color: rgba(71, 71, 71, 0.04);
 
                     &::placeholder{
                         color: var(--dark-gray-3);
@@ -439,7 +439,7 @@ const HeaderContainer = styled.header`
                     cursor: pointer;
                 }
     
-                & span.p-badge{
+                & .p-badge{
                     clip-path: circle(8.5px at center);
                     display: flex;
                     position: absolute;
@@ -455,6 +455,11 @@ const HeaderContainer = styled.header`
                 }
             }
 
+            &:has(.carrin-but #carrinho:checked) .dropdown-carrin{
+                visibility: visible;
+                opacity: 1;
+            }
+
             & .dropdown-carrin {
                 background-color: var(--white);
                 box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -464,9 +469,13 @@ const HeaderContainer = styled.header`
                 width: 315px;
                 height: 454px;
                 border-radius: 4px;
+                transition-duration: 300ms;
+                visibility: hidden;
+                opacity: 0;
 
-                & p{
+                & > p{
                     color: var(--dark-gray-2);
+                    margin: 0;
                 }
 
                 & .prods {
@@ -474,28 +483,101 @@ const HeaderContainer = styled.header`
                     flex-direction: column;
                     gap: 20px;
 
-                    & div{
+                    & .wrapper{
                         width: 255px;
                         height: 93px;
-                        background-color: var(--error);
+                        background-color: transparent;
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+
+                        & img{
+                            width: 71px;
+                            height: 71px;
+                        }
+                        
+                        & .info {
+                            display: flex;
+                            justify-content: space-between;
+                            flex-direction: column;
+                            width: 150px;
+
+                            & .descricao {
+                                font-family: "Inter";
+                                font-size: 14px;
+                                font-weight: 700;
+                                line-height: 20px;
+                                letter-spacing: 0.75px;
+                                text-align: left;
+                                margin: 0;
+                                color: var(--dark-gray);
+                            }
+
+                            & .valores {
+                                display: flex;
+                                align-items: center;
+                                flex-direction: row;
+                                justify-content: space-around;
+
+                                & p{
+                                    margin: 0;
+                                }
+
+                                & .descontado{
+                                    color: var(--dark-gray-2);
+                                }
+                                & .valor {
+                                    font-family: Inter;
+                                    font-size: 12px;
+                                    font-weight: 400;
+                                    line-height: 28px;
+                                    letter-spacing: 0.75px;
+                                    text-align: center;
+                                    color: var(--light-gray-2);
+                                    text-decoration: line-through;
+                                }
+                            }
+                        }
                     }
+
+                    &::before{
+                        content: "";
+                        width: 100%;
+                        height: 1px;
+                        background-color: var(--light-gray-2);
+                        bottom: calc(30px + 85px + 20px);
+                        margin-top: 10px
+                    }
+                    &::after{
+                        content: "";
+                        width: 100%;
+                        height: 1px;
+                        background-color: var(--light-gray-2);
+                        margin-bottom: 20px
+                    }
+
                 }
 
                 & .down{
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
+                    height: 84px;
 
                     & .total{
                         display: flex;
                         justify-content: space-between;
-                        height: 84px;
+                        height: auto;
+
+                        & p{
+                            margin: 0;
+                        }
 
                         & .valor{
                             color: var(--dark-gray-2);
                         }
 
-                        & num-valor{
+                        & .num-valor{
                             color: var(--dark-gray-2);
                         }
                     }
@@ -579,13 +661,43 @@ const Carrin = () => {
                 <label htmlFor="carrinho">
                     <img src="Buy.svg" />
                 </label>
-                <span className="p-badge">2</span>
+                <label className="p-badge" htmlFor="carrinho">2</label>
             </div>
             <div className="dropdown-carrin">
                 <p className="text-small bold">Meu Carrinho</p>
                 <div className="prods">
-                    <div>prod1</div>
-                    <div>prod2</div>
+                    <div className="wrapper">
+                        <img src="Batata.png" alt="" />
+                        <div className="info">
+                            <p className="descricao title-small bold">
+                                Batata premium
+                            </p>
+                            <div className="valores">
+                                <p className="descontado text-small bold">
+                                    R$ 10,00
+                                </p>
+                                <p className="valor text-extra-small">
+                                    R$ 19,00
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="wrapper">
+                        <img src="Batata.png" alt="" />
+                        <div className="info">
+                            <p className="descricao title-small bold">
+                                Batata Premium
+                            </p>
+                            <div className="valores">
+                                <p className="descontado text-small bold">
+                                    R$ 10,00
+                                </p>
+                                <p className="valor text-extra-small">
+                                    R$ 19,00
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="down">
                     <div className="total">
