@@ -31,8 +31,10 @@ const HeaderContainer = styled.header`
         padding: 20px;
         display: flex;
         width: 100%;
-        height: 100%;
+        height: fit-content;
         flex-wrap: wrap;
+        position: fixed;
+        z-index: 10;
 
         @media (min-width: 768px) {
             padding: 45px 100px 29px 100px;
@@ -81,7 +83,7 @@ const HeaderContainer = styled.header`
         }
 
         .fundo{
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
