@@ -12,14 +12,12 @@
 
 import styled from "styled-components";
 import { default as But } from "./buttons/Buttons.jsx";
-import { NavLink } from "react-router-dom";
 
 const Banner1Container = styled.div`
     display: flex;
     position: relative;
     float: left;
     flex-direction: column;
-    overflow: hidden;
 
     & .sapato{
         width: calc(100% - 5px - 43px);
@@ -31,7 +29,8 @@ const Banner1Container = styled.div`
     & .pirilampos{
         position: absolute;
         top: 20px;
-        right: -70px;
+        right: 0;
+        transform: translateX(50%);
     }
     
     & .propag{
@@ -80,9 +79,17 @@ const BannersWraperContainer = styled.div`
     background-color: var(--light-gray-3);
     width: 100%;
     height: 662px;
+`
+
+const BannersBigWraperContainer = styled.div`
+    overflow-x: hidden;
+    background-color: var(--light-gray-3);
+    width: 100%;
+    height: 662px;
     display: flex;
     position: relative;
     flex-direction: column;
+    z-index: 0;
 
     & .banners-links{
         height: 12px;
@@ -102,7 +109,7 @@ const BannersWraperContainer = styled.div`
             transition-duration: 300ms;
             background-color: var(--light-gray-2);
 
-            &:active{
+            &:hover {
                 background-color: var(--primary);
             }
         }
@@ -124,6 +131,7 @@ const Banner1 = () => {
     );
 }
 
+
 const Banner2 = () => {
     return (
         <>
@@ -134,15 +142,20 @@ const Banner2 = () => {
 
 const Banners = () => {
     return (
-        <BannersWraperContainer>
-            <Banner1 />
+        <BannersBigWraperContainer>
+
+            <div className="banners-wrapper">
+                <Banner1 />
+            </div>
+
             <nav className="banners-links">
                 <a to="#banner1"></a>
                 <a to="#banner2"></a>
                 <a to="#banner3"></a>
                 <a to="#banner4"></a>
             </nav>
-        </BannersWraperContainer>
+
+        </BannersBigWraperContainer>
     );
 }
 
