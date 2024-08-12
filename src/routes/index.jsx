@@ -5,6 +5,7 @@ import Login from "../components/Login";
 import RecuperarSenha from "../EsqueciASenha";
 import Cadastro from "../pages/Cadastro";
 import MeusPedidos from "../pages/MeusPedidos";
+import Produtos from "../components/Produtos";
 
 export const Paths = () => {
     return(
@@ -21,6 +22,7 @@ export const Paths = () => {
                 
                 <Route path="/login" element={<Login/>} />
                 <Route path="/recuperar" element={<RecuperarSenha/>}/>
+                <Route path="/produtos" element={<Produtos/>}/>
             </Routes>
         </BrowserRouter>
     );
