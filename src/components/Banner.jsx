@@ -18,6 +18,7 @@ const Banner1Container = styled.div`
     position: relative;
     float: left;
     flex-direction: column;
+    /* overflow: hidden; */
 
     & .sapato{
         width: calc(100% - 5px - 43px);
@@ -39,6 +40,8 @@ const Banner1Container = styled.div`
         text-align: center;
         color: black;
         justify-content: start;
+        width: calc(100vw - 40px);
+        overflow-wrap: normal;
         margin: 0 20px;
         order: 1;
 
@@ -82,9 +85,9 @@ const BannersWraperContainer = styled.div`
 `
 
 const BannersBigWraperContainer = styled.div`
-    overflow-x: hidden;
+    overflow: hidden;
     background-color: var(--light-gray-3);
-    width: 100%;
+    width: 100vw;
     height: 662px;
     display: flex;
     position: relative;
@@ -122,7 +125,7 @@ const Banner1 = () => {
             <div className="propag">
                 <h4 className="text-small bold">Melhores ofertas personalizadas</h4>
                 <h2>Queima de stoque Nike 🔥</h2>
-                <p className="text-extra-small">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaLorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                <p className="text-extra-small">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
                 <But buttonType="primary-button" label="Clique Aqui" className={"text-small bold"} />
             </div>
             <img className="sapato" src="White-Sneakers.svg" />

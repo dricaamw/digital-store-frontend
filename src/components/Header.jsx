@@ -40,6 +40,8 @@ const HeaderContainer = styled.header`
             padding: 45px 100px 29px 100px;
             flex-direction: column;
             justify-content: space-between;
+            height: 192px;
+            position: static;
         }
         
         .carrinho, .out-search, nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy, .carrin{
