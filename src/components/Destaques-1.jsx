@@ -7,10 +7,13 @@
 
 
 
+
+
+
+import PropTypes from "prop-types"
 import styled from "styled-components";
 import Button from "./buttons/Buttons";
-
-
+import { Link } from "react-router-dom";
 
 const Highlights1WrapperComponent = styled.div`
 * {
@@ -19,8 +22,9 @@ const Highlights1WrapperComponent = styled.div`
 
     display: flex;
     flex-direction: column;
-    margin: 42px 20px 0 20px;
+    margin: 42px 20px 40px;
     gap: 10px;
+    height: fit-content;
 
     & .colections{
         color: var(--dark-gray-2);
@@ -36,41 +40,103 @@ const Highlights1WrapperComponent = styled.div`
         & .item{
             background-color: #D8E3F2;
             border-radius: 8px;
-            border: 3px solid var(--light-gray);
-        }
+            padding: 20px;
+            position: relative;
 
-        & .discount{
-            background-color: #E7FF86;
+            & .texts{
+                display: flex;
+                text-align: left;
+                flex-direction: column;
+                
+                max-width: 194px;
+                gap: 10px;
 
-            & p{
-                color: var(--dark-gray-2);
+                & .discount{
+                background-color: #E7FF86;
+                width: 90px;
+                height: 32px;
+                border-radius: 29px;
+                display: flex;
+                padding-inline: 12.27px;
+                justify-content: space-between;
+                align-items: center;
+                z-index: 1;
+
+                    & p{
+                        color: var(--dark-gray-2);
+                    }
+                }
+
+                & h3{
+                    color: var(--dark-gray);
+                    height: 72px;
+                    z-index: 1;
+                }
+
+                & button {
+                    width: 144px;
+                    height: 48px;
+                    z-index: 1;
+                }
+            }
+
+            & .image {
+                position: absolute;
+                width: max-content;
+                display: flex;
+                height: 212px;
+                width: 190px;
+                right: 0;
+                top: 0;
+                z-index: 0;
+
+                & img {
+                    align-self: end;
+                    width: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                }
             }
         }
-
-        & h3{
-            color: var(--dark-gray);
-        }
     }
-
 `
+const HighlightCard = (props) => {
+    return (
+        <div className={`item ${props.className}`}>
+            <div className="texts">
+                <div className="discount">
+                    <p className="percentage text-extra-small bold">{props.discount}%</p>
+                    <p className="text-extra-small bold">OFF</p>
+                </div>
+                <h3 className="keynote title-extra-small bold">
+                    {props.title}
+                </h3>
+                <Link to="/produtos">
+                    <Button buttonType="secondary-button" label={"Comprar"} className={"text-small bold"}></Button>
+                </Link>
+            </div>
+            <div className="image">
+                <img src={props.img} />
+            </div>
+        </div>
+    )
+}
 
+HighlightCard.propTypes = {
+    className: PropTypes.string,
+    discount: PropTypes.string,
+    img: PropTypes.string,
+    title: PropTypes.string
+}
 
 const Destaques1 = () => {
     return (
-        <Highlights1WrapperComponent >
+        <Highlights1WrapperComponent>
             <h3 className="colections text-small bold">Coleções em Destaque</h3>
             <div className="cards-container">
-                <div className="item item-1">
-                    <div className="discount">
-                        <p className="text-extra-small bold">30% OFF</p>
-                    </div>
-                    <h3 className="keynote title-small">
-                        Novo Beats Bass
-                    </h3>
-                    <Button buttonType="secondary-button" label={"Comprar"} className={"text-small bold"}></Button>
-                </div>
-                <div className="item item-2"></div>
-                <div className="item item-3"></div>
+                <HighlightCard className="item 1" img="Highlight-shirt.svg" title="New drop Supreme" discount="30" />
+                <HighlightCard className="item 2" img="Highlight-shoe.svg" title="Adidas Colection" discount="30" />
+                <HighlightCard className="item 3" img="Highlight-headphone.svg" title="New Beats Bass" discount="30" />
             </div>
         </Highlights1WrapperComponent>
     );
