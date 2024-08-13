@@ -13,6 +13,49 @@
 import styled from "styled-components";
 import { default as But } from "./buttons/Buttons.jsx";
 
+const BannersBigWraperContainer = styled.div`
+    overflow: hidden;
+    background-color: var(--light-gray-3);
+    width: 100vw;
+    height: 662px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    z-index: 0;
+
+    @media (min-width: 768px) {
+        height: 681px;
+    }
+
+    & .banners-links{
+        height: 12px;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        align-self: center;
+        margin-top: 40px;
+        width: 78px;
+
+        @media (min-width: 768px) {
+            margin-top: 140px;
+        }
+
+        & a{
+            display: flex;
+            gap: 10px;
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            transition-duration: 300ms;
+            background-color: var(--light-gray-2);
+
+            &:hover {
+                background-color: var(--primary);
+            }
+        }
+    }
+`
+
 const Banner1Container = styled.div`
     display: flex;
     position: relative;
@@ -42,12 +85,22 @@ const Banner1Container = styled.div`
         justify-content: start;
         width: calc(100vw - 40px);
         overflow-wrap: normal;
-        margin: 0 20px;
+        margin: 124px 0 0 100px;
         order: 1;
+
+        @media (min-width: 768px) {
+            width: 510px;
+            height: 352px;
+            text-align: start;
+        }
 
         & h4{
             margin: 0;
-            color: var(--primary)
+            color: var(--primary);
+
+            @media (min-width: 768px) {
+                color: var(--warning)
+            }
         }
 
         & h2 {
@@ -58,6 +111,12 @@ const Banner1Container = styled.div`
             line-height: 50px;
             letter-spacing: 1px;
             margin: 10px 0 20px 0;
+
+            @media (min-width: 768px) {
+                font-size: 64px;
+                line-height: 66px;
+                margin: 20px 0;
+            }
         }
 
         & p{
@@ -69,79 +128,45 @@ const Banner1Container = styled.div`
             height: 48px;
             width: 100%;
             margin-top: 40px;
+
+            @media (min-width: 768px) {
+                width: 220px;
+            }
         }
     }
 `;
 
-const Banner2Container = styled.div`
-    width: 100%;
-    height: 128px;
-`
+// const Banner2Container = styled.div`
+//     width: 100%;
+//     height: 128px;
+// `
 
-const BannersWraperContainer = styled.div`
-    background-color: var(--light-gray-3);
-    width: 100%;
-    height: 662px;
-`
 
-const BannersBigWraperContainer = styled.div`
-    overflow: hidden;
-    background-color: var(--light-gray-3);
-    width: 100vw;
-    height: 662px;
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    z-index: 0;
-
-    & .banners-links{
-        height: 12px;
-        z-index: 2;
-        display: flex;
-        justify-content: space-between;
-        align-self: center;
-        margin-top: 40px;
-        width: 78px;
-
-        & a{
-            display: flex;
-            gap: 10px;
-            width: 12px;
-            height: 12px;
-            border-radius: 6px;
-            transition-duration: 300ms;
-            background-color: var(--light-gray-2);
-
-            &:hover {
-                background-color: var(--primary);
-            }
-        }
-    }
-`
 
 const Banner1 = () => {
+
     return (
         <Banner1Container id="banner1">
             <div className="propag">
                 <h4 className="text-small bold">Melhores ofertas personalizadas</h4>
                 <h2>Queima de stoque Nike 🔥</h2>
-                <p className="text-extra-small">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                <p className={window.innerWidth <= 768 ? "text-extra-small" : "text-medium"}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
                 <But buttonType="primary-button" label="Clique Aqui" className={"text-small bold"} />
             </div>
-            <img className="sapato" src="White-Sneakers.svg" />
+            {/* <img className="sapato" src="White-Sneakers.svg" /> */}
             <img className="pirilampos" src="Ornament 11.svg" />
         </Banner1Container>
     );
 }
 
 
-const Banner2 = () => {
-    return (
-        <>
+// const Banner2 = () => {
+//     return (
+//         <>
 
-        </>
-    );
-}
+//         </>
+//     );
+// }
 
 const Banners = () => {
     return (
