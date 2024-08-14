@@ -26,6 +26,10 @@ const Highlights1WrapperComponent = styled.div`
     gap: 10px;
     height: fit-content;
 
+    @media (min-width: 768px) {
+        margin: 38px 100px 100px;
+    }
+
     & .colections{
         color: var(--dark-gray-2);
         align-self: flex-start;
@@ -33,15 +37,26 @@ const Highlights1WrapperComponent = styled.div`
 
     & .cards-container{
         display: grid;
-        grid-template-rows: repeat(3, 212px);
+        grid-template-rows: repeat(auto-fit, 212px);
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
         gap: 10px;
+
+        @media (min-width: 768px) {
+            gap: 12px;
+            grid-template-rows: repeat(auto-fit, 251px);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            max-width: 100%;
+        }
 
         & .item{
             background-color: #D8E3F2;
             border-radius: 8px;
             padding: 20px;
             position: relative;
+
+            @media (min-width: 768px) {
+                padding: 35px 0 35px 30px;
+            }
 
             & .texts{
                 display: flex;
@@ -50,6 +65,15 @@ const Highlights1WrapperComponent = styled.div`
                 
                 max-width: 194px;
                 gap: 10px;
+
+                @media (min-width: 768px) {
+                    gap: unset;
+
+                    & .keynote {
+                        margin-top: 10px;
+                        margin-bottom: 20px;
+                    }
+                }
 
                 & .discount{
                 background-color: #E7FF86;
@@ -84,11 +108,15 @@ const Highlights1WrapperComponent = styled.div`
                 position: absolute;
                 width: max-content;
                 display: flex;
-                height: 212px;
+                height: 100%;
                 width: 190px;
                 right: 0;
                 top: 0;
                 z-index: 0;
+
+                @media (min-width: 768px) {
+                    width: 242px;
+                }
 
                 & img {
                     align-self: end;

@@ -27,17 +27,25 @@ const BannersBigWraperContainer = styled.div`
         height: 681px;
     }
 
+    & .banners-wrapper {
+        width: inherit;
+        height: 616px;
+
+        @media (min-width: 768px) {
+            height: 622px;
+        }
+    }
+
     & .banners-links{
         height: 12px;
         z-index: 2;
         display: flex;
         justify-content: space-between;
         align-self: center;
-        margin-top: 40px;
         width: 78px;
 
         @media (min-width: 768px) {
-            margin-top: 140px;
+
         }
 
         & a{
@@ -61,6 +69,7 @@ const Banner1Container = styled.div`
     position: relative;
     float: left;
     flex-direction: column;
+    width: 100vw;
     /* overflow: hidden; */
 
     & .sapato{
@@ -68,6 +77,15 @@ const Banner1Container = styled.div`
         height: fit-content;
         order: 0;
         margin: 12px 43px 0 5px;
+
+        @media (min-width: 768px) {
+            position: absolute;
+            margin: 0;
+            right: 91px;
+            top: 10px;
+            width: min(62%, 886px);
+            object-fit: scale-down;
+        }
     }
 
     & .pirilampos{
@@ -75,6 +93,12 @@ const Banner1Container = styled.div`
         top: 20px;
         right: 0;
         transform: translateX(50%);
+
+        @media (min-width: 768px) {
+            top: 78px;
+            right: 37px;
+            transform: none;
+        }
     }
     
     & .propag{
@@ -85,13 +109,14 @@ const Banner1Container = styled.div`
         justify-content: start;
         width: calc(100vw - 40px);
         overflow-wrap: normal;
-        margin: 124px 0 0 100px;
+        margin: 0 20px;
         order: 1;
 
         @media (min-width: 768px) {
             width: 510px;
             height: 352px;
             text-align: start;
+            margin: 124px 0 0 100px;
         }
 
         & h4{
@@ -153,20 +178,11 @@ const Banner1 = () => {
                 <p className={window.innerWidth <= 768 ? "text-extra-small" : "text-medium"}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
                 <But buttonType="primary-button" label="Clique Aqui" className={"text-small bold"} />
             </div>
-            {/* <img className="sapato" src="White-Sneakers.svg" /> */}
+            <img className="sapato" src="White-Sneakers.svg" />
             <img className="pirilampos" src="Ornament 11.svg" />
         </Banner1Container>
     );
 }
-
-
-// const Banner2 = () => {
-//     return (
-//         <>
-
-//         </>
-//     );
-// }
 
 const Banners = () => {
     return (
