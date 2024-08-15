@@ -10,9 +10,10 @@
 
 
 
+import PropTypes from "prop-types"
 import styled from "styled-components";
 import { default as But } from "./buttons/Buttons.jsx";
-import { NavLink } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 
 const BannersBigWraperContainer = styled.div`
     overflow: hidden;
@@ -37,6 +38,7 @@ const BannersBigWraperContainer = styled.div`
         scroll-snap-type: x mandatory;
         scroll-behavior: smooth;
         overflow-x: hidden;
+        position: absolute;
 
         @media (min-width: 768px) {
             height: 622px;
@@ -44,12 +46,13 @@ const BannersBigWraperContainer = styled.div`
     }
 
     & .banners-links{
-        height: 12px;
         z-index: 2;
         display: flex;
         justify-content: space-between;
         align-self: center;
         width: 78px;
+        padding: 0;
+        margin: 0;
         position: absolute;
         bottom: 34px;
 
@@ -57,15 +60,20 @@ const BannersBigWraperContainer = styled.div`
 
         }
 
-        & a{
+        & li{
             display: flex;
             width: 12px;
             height: 12px;
             border-radius: 6px;
-            transition: background-color ease 250ms;
+            transition: background-color ease 300ms;
             background-color: var(--light-gray-2);
 
             &:hover {
+                background-color: #007bffaa;
+
+            }
+
+            &.active {
                 background-color: var(--primary);
             }
         }
@@ -187,25 +195,70 @@ const Banner = (props) => {
     );
 }
 
+Banner.propTypes = {
+    id: PropTypes.string.isRequired,
+    textinho: PropTypes.string
+}
+
 const Banners = () => {
+    const [activeBannerIndex, setActiveBannerIndex] = useState(0);
+    const bannersWrapperRef = useRef(null);
+    const intervalRef = useRef(null);
+
+    // Handle click on banner. This function is triggered when a user clicks on a banner.
+    const handleBannerClick = (index) => {
+        setActiveBannerIndex(index);
+
+        bannersWrapperRef.current.scrollTo({
+            left: index * window.innerWidth,
+            behavior: 'auto',
+        });
+
+        // Clear the interval when the component unmounts to restart the auto slide.
+        clearInterval(intervalRef.current);
+        autoSlide();
+    };
+
+    // Automatically switch to the next banner every 3 seconds.
+    const autoSlide = () => intervalRef.current = setInterval(() => {
+        setActiveBannerIndex((prevIndex) => (prevIndex + 1) % 4);
+    }, 3000);
+
+    // Reload the auto slide.
+    const reloadAutoSlide = () => clearInterval(intervalRef.current);
+
+    // Start the auto slide when the component mounts. Stop it when the component unmounts.
+    useEffect(() => {
+        autoSlide();
+
+        return () => {
+            reloadAutoSlide();
+        }
+    }, []);
+
+    // This makes sure the banners wrapper scrolls to the active banner when the active banner index changes.
+    useEffect(() => {
+        bannersWrapperRef.current.scrollTo({
+            left: activeBannerIndex * window.innerWidth,
+            behavior: 'auto',
+        });
+    }, [activeBannerIndex]);
+    
     return (
         <BannersBigWraperContainer>
 
-            <div className="banners-wrapper">
+            <div className="banners-wrapper" ref={bannersWrapperRef}>
                 <Banner id="banner1" textinho="bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
                 <Banner id="banner2" textinho="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
                 <Banner id="banner3" />
                 <Banner id="banner4" />
             </div>
 
-{/* Usar UL com 4 LIs, assim evitando o uso de links desnecessários */}
-
-            <nav className="banners-links">
-                <NavLink to="#banner1"/>
-                <NavLink to="#banner2"/>
-                <NavLink to="#banner3"/>
-                <NavLink to="#banner4"/>
-            </nav>
+            <ul className="banners-links">
+            {[1, 2, 3, 4].map((index) => (
+                <li key={index} onClick={() => {handleBannerClick(index - 1)}} className={index === activeBannerIndex + 1 ? 'active' : ''} />
+            ))}
+            </ul>
 
         </BannersBigWraperContainer>
     );
