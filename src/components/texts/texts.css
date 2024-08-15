@@ -4,6 +4,7 @@
 /* Global Styles */
 html {
     background-color: antiquewhite;
+    overflow-x: hidden;
 }
 
 body {

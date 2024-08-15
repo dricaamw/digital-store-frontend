@@ -12,6 +12,7 @@
 
 import styled from "styled-components";
 import { default as But } from "./buttons/Buttons.jsx";
+import { NavLink } from "react-router-dom";
 
 const BannersBigWraperContainer = styled.div`
     overflow: hidden;
@@ -30,6 +31,12 @@ const BannersBigWraperContainer = styled.div`
     & .banners-wrapper {
         width: inherit;
         height: 616px;
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
 
         @media (min-width: 768px) {
             height: 622px;
@@ -43,6 +50,8 @@ const BannersBigWraperContainer = styled.div`
         justify-content: space-between;
         align-self: center;
         width: 78px;
+        position: absolute;
+        bottom: 34px;
 
         @media (min-width: 768px) {
 
@@ -50,11 +59,10 @@ const BannersBigWraperContainer = styled.div`
 
         & a{
             display: flex;
-            gap: 10px;
             width: 12px;
             height: 12px;
             border-radius: 6px;
-            transition-duration: 300ms;
+            transition: background-color ease 250ms;
             background-color: var(--light-gray-2);
 
             &:hover {
@@ -69,13 +77,14 @@ const Banner1Container = styled.div`
     position: relative;
     float: left;
     flex-direction: column;
-    width: 100vw;
-    /* overflow: hidden; */
+    scroll-snap-align: start;
+    overflow-y: hidden;
+    flex: 1 0 100%;
 
     & .sapato{
         width: calc(100% - 5px - 43px);
         height: fit-content;
-        order: 0;
+        order: -1;
         margin: 12px 43px 0 5px;
 
         @media (min-width: 768px) {
@@ -93,6 +102,7 @@ const Banner1Container = styled.div`
         top: 20px;
         right: 0;
         transform: translateX(50%);
+        clip-path: rect(0 50% 100% 0);
 
         @media (min-width: 768px) {
             top: 78px;
@@ -161,25 +171,18 @@ const Banner1Container = styled.div`
     }
 `;
 
-// const Banner2Container = styled.div`
-//     width: 100%;
-//     height: 128px;
-// `
-
-
-
-const Banner1 = () => {
+const Banner = (props) => {
 
     return (
-        <Banner1Container id="banner1">
+        <Banner1Container id={props.id}>
             <div className="propag">
                 <h4 className="text-small bold">Melhores ofertas personalizadas</h4>
                 <h2>Queima de stoque Nike 🔥</h2>
-                <p className={window.innerWidth <= 768 ? "text-extra-small" : "text-medium"}>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                <p className={window.innerWidth <= 768 ? "text-extra-small" : "text-medium"}>{props.textinho}</p>
                 <But buttonType="primary-button" label="Clique Aqui" className={"text-small bold"} />
             </div>
             <img className="sapato" src="White-Sneakers.svg" />
-            <img className="pirilampos" src="Ornament 11.svg" />
+            {/* <img className="pirilampos" src="Ornament 11.svg" /> */}
         </Banner1Container>
     );
 }
@@ -189,14 +192,19 @@ const Banners = () => {
         <BannersBigWraperContainer>
 
             <div className="banners-wrapper">
-                <Banner1 />
+                <Banner id="banner1" textinho="bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
+                <Banner id="banner2" textinho="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa Lorem ipsum, dolor sit amet consectetur adipisicing elit." />
+                <Banner id="banner3" />
+                <Banner id="banner4" />
             </div>
 
+{/* Usar UL com 4 LIs, assim evitando o uso de links desnecessários */}
+
             <nav className="banners-links">
-                <a to="#banner1"></a>
-                <a to="#banner2"></a>
-                <a to="#banner3"></a>
-                <a to="#banner4"></a>
+                <NavLink to="#banner1"/>
+                <NavLink to="#banner2"/>
+                <NavLink to="#banner3"/>
+                <NavLink to="#banner4"/>
             </nav>
 
         </BannersBigWraperContainer>
