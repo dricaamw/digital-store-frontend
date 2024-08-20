@@ -4,7 +4,9 @@ const PageLayout = () => {
     return (
         <>
             {/* Componente Header */}
-            <Outlet />
+            <div className="w-full">
+                <Outlet />
+            </div>
             {/* Componente Footer */}
         </>
     );

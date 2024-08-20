@@ -1,12 +1,14 @@
+import MeusPedidos from "../components/MeusPedidos";
 import MinhasInformacoes from "../components/MinhasInformacoes";
 
 
-const MeusPedidos = () => {
+const MeuPerfil = () => {
     return ( 
         <>
+            <MeusPedidos />
             <MinhasInformacoes />
         </>
      );
 }
  
-export default MeusPedidos;
+export default MeuPerfil;
