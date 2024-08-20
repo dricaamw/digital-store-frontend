@@ -39,6 +39,7 @@ const Highlights2WrapperContainer = styled.div`
             gap: 48px;
             width: 712px;
             height: 138px;
+            overflow: hidden;
         }
 
         & .card {
