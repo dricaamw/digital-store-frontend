@@ -160,7 +160,7 @@ HighlightCard.propTypes = {
 const Destaques1 = () => {
     return (
         <Highlights1WrapperContainer>
-            <h3 className="colections text-small bold">Coleções em Destaque</h3>
+            <h3 className={`colections ${window.innerWidth >= 768 ? "text-large" : "text-small"} bold`}>Coleções em Destaque</h3>
             <div className="cards-container">
                 <HighlightCard img="Highlight-shirt.svg" title="New drop Supreme" discount="30" />
                 <HighlightCard img="Highlight-shoe.svg" title="Adidas Colection" discount="30" />
