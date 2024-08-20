@@ -2,7 +2,7 @@ import PropTypes from "prop-types"
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Highlights2WrapperComponent = styled.div`
+const Highlights2WrapperContainer = styled.div`
     & * {
         margin: 0;
         padding: 0;
@@ -112,7 +112,7 @@ HighlightCard.propTypes = {
 const Destaques2 = () => {
 
     return (
-        <Highlights2WrapperComponent>
+        <Highlights2WrapperContainer>
             <h3 className={`colecoes bold ${window.innerWidth >= 768 ? "text-large" : "text-small"}`}>Coleções em destaque</h3>
             <div className="cards">
                 <HighlightCard img="Highlight-2-shirt.svg" title="Camisetas" />
@@ -121,7 +121,7 @@ const Destaques2 = () => {
                 <HighlightCard img="Highlight-2-headphones.svg" title="Headphones" />
                 <HighlightCard img="Highlight-2-shoe.svg" title="Tênis" />
             </div>
-        </Highlights2WrapperComponent>
+        </Highlights2WrapperContainer>
     );
 }
 

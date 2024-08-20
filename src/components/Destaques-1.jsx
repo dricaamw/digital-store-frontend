@@ -15,7 +15,7 @@ import styled from "styled-components";
 import Button from "./buttons/Buttons";
 import { Link } from "react-router-dom";
 
-const Highlights1WrapperComponent = styled.div`
+const Highlights1WrapperContainer = styled.div`
 * {
     margin: 0;
 }
@@ -159,14 +159,14 @@ HighlightCard.propTypes = {
 
 const Destaques1 = () => {
     return (
-        <Highlights1WrapperComponent>
+        <Highlights1WrapperContainer>
             <h3 className="colections text-small bold">Coleções em Destaque</h3>
             <div className="cards-container">
                 <HighlightCard img="Highlight-shirt.svg" title="New drop Supreme" discount="30" />
                 <HighlightCard img="Highlight-shoe.svg" title="Adidas Colection" discount="30" />
                 <HighlightCard img="Highlight-headphone.svg" title="New Beats Bass" discount="30" />
             </div>
-        </Highlights1WrapperComponent>
+        </Highlights1WrapperContainer>
     );
 }
 
