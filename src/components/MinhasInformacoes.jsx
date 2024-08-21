@@ -6,10 +6,11 @@ import validator from "validator";
 
 const MinhasInformacoes = () => {
   const { register, handleSubmit, formState: {errors} } = useForm();
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false); 
 
-  const onSubmit = (dados) => {
-    console.log(dados)
+  const onSubmit = (data) => {
+    console.log(data);
+  }
     // try {
     //   const response = await axios.post('https://localhost:5173/endpoint', dados, {
     //     headers: {
@@ -24,7 +25,7 @@ const MinhasInformacoes = () => {
     //   console.error('Erro ao enviar dados:', error);
     //   alert('Erro ao enviar dados');
     // }
-  };
+
  
 
   return (
@@ -96,8 +97,9 @@ const MinhasInformacoes = () => {
           <h2 className="text-lg font-semibold mb-1 lg:mb-3 text-dark-gray">
             Editar Informações
           </h2>
-          <form
-           className="flex flex-col lg:flex-row lg:gap-10 items-center"             
+          <form            
+            className="flex flex-col lg:flex-row lg:gap-10 items-center"   
+            onSubmit={handleSubmit(onSubmit)}          
           >
             <div className="flex flex-col rounded p-1 w-full">
               <h3 className="my-1 text-dark-gray">Informações Pessoais</h3>
@@ -111,11 +113,12 @@ const MinhasInformacoes = () => {
                 </label>
                 <InputText
                   id="nome"
+                  autoClear
                   {...register("nome", { required: true })}
                   className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                 />
                 {errors?.nome?.type === "required" && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className="mt-1 text-sm text-red">
                     O nome é obrigatório.
                   </p>
                 )}
@@ -133,7 +136,7 @@ const MinhasInformacoes = () => {
                   className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                 />
                 {errors?.cpf?.type === "required" && (
-                  <p className="mt-1 text-sm text-red-600">
+                  <p className="mt-1 text-sm text-red">
                     O CPF é obrigatório.
                   </p>
                 )}
@@ -154,7 +157,7 @@ const MinhasInformacoes = () => {
                   className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                 />
                 {errors?.email?.type === "required" && (
-                  <p className="mt- text-sm text-red-600">
+                  <p className="mt- text-sm text-red">
                     O email é obrigatório.
                   </p>
                 )}
@@ -238,7 +241,6 @@ const MinhasInformacoes = () => {
           <div className="flex justify-center items-center md:justify-end gap-2 mt-1">
             <button
               type="submit"
-              onSubmit={handleSubmit(onSubmit)} 
               className="w-28 h-11 py-2 px-4 mb-4 text-light-gray-3 bg-primary-1 hover:bg-tertiary font-bold text-sm tracking-wider shadow-md rounded"
             >
               Salvar

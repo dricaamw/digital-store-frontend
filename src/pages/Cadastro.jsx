@@ -15,7 +15,7 @@ const Cadastro = () => {
   return (
     <main className=" flex min-h-screen bg-gradient-to-b from-secondary-1 to-secondary-2 items-center justify-center">
       <section className=" flex gap-8">
-        <div className="lg:h-[399px] lg:w-[583px] rounded flex flex-col items-center lg:items-start justify-center p-5 bg-white font-sans mt-9">
+        <div className="w-[315px] h-[411px] lg:h-[399px] lg:w-[583px] rounded flex flex-col items-center lg:items-start justify-center p-5 bg-white font-sans mt-9">
           <header className="flex flex-col items-center lg:items-start justify-center lg:justify-start h-[84px] mb-3 lg:mb-5">
             <h3 className="text-dark-gray text-center font-bold text-xl tracking-widest leading-8 lg:text-3xl lg:tracking-wider lg:leading-9 lg:mb-3">
               Crie sua conta
@@ -37,15 +37,15 @@ const Cadastro = () => {
               Email *
             </label>
             <div className="mb-5">
-              <InputText className="bg-light-gray-3 text-dark-gray-3 rounded-lg leading-7 tracking-wider pl-4 w-full h-[60px] outline-none focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
+              <InputText className="bg-light-gray-3 text-dark-gray-3 text-sm lg:text-base rounded-lg leading-7 tracking-wider pl-4 w-full h-[60px] outline-none focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                 type="text"
                 placeholder="Insira seu email"
                 autoComplete="email"
                 { ...register("email", {required: true, validate: (value) => validator.isEmail(value)})}
               />
-              { errors?.email?.type === 'required' && <p className="mt-1 text-sm text-red-600">O email é obrigatório.</p>
+              { errors?.email?.type === 'required' && <p className="mt-1 text-sm text-red">O email é obrigatório.</p>
               }
-              { errors?.email?.type === 'validate' && <p className="mt-1 text-sm text-red-600">O email é inválido.</p>
+              { errors?.email?.type === 'validate' && <p className="mt-1 text-sm text-red">O email é inválido.</p>
               }
             </div>
             <div>

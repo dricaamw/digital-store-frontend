@@ -1,27 +1,30 @@
-import visa from "../assets/images/visa.svg";
-import chip from "../assets/images/chip.png";
-import Modal from "./Modal";
 import { useState } from "react";
 import { InputMask } from "primereact/inputmask";
-import { InputTextarea } from 'primereact/inputtextarea';
-import { InputText } from "primereact/inputtext";
 import { Tooltip } from "primereact/tooltip";
 import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
 import { Dialog } from "primereact/dialog";
-import { useForm } from "react-hook-form";
-import CardType from "./CardType";
+import visa from "../assets/images/visa.svg";
+import Modal from "./Modal";
+import Cards from "react-credit-cards-2";
+import "react-credit-cards-2/dist/es/styles-compiled.css";
 
 const MetodosPagamentos = () => {
   const [openModal, setOpenModal] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [cardNumber, setCardNumber] = useState(""); 
 
-  const { register, handleSubmit, } = useForm();
+  const [state, setState] = useState({
+    identifier: "",
+    number: "",
+    expiry: "",
+    cvc: "",
+    name: "",
+    cvv: "",
+  });
 
-  const onSubmit = (data) => {
-    const cleanedCardNumber = data.numberCard.replace(/\D/g, '');
-   setCardNumber(cleanedCardNumber); 
-   };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setState((prev) => ({ ...prev, [name]: value }));
+  };
 
   const [cartoes, setCartoes] = useState([
     {
@@ -46,6 +49,34 @@ const MetodosPagamentos = () => {
       accept: () => setCartoes(cartoes.filter((cartao) => cartao.id !== id)),
     });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    const value = state.expiry;
+    const [mes, ano] = value.split("/").map(Number);
+    const anoAtual = new Date().getFullYear();
+    const mesAtual = new Date().getMonth() + 1;
+    
+    const anoCompleto = ano < 100 ? 2000 + ano : ano;
+    if (
+      anoCompleto < anoAtual ||
+      (anoCompleto === anoAtual && mes < mesAtual)
+    ) {
+      window.alert("Data de validade expirada");
+      e.preventDefault();
+    } else {
+      return (window.confirm("Dados cadastrados com sucesso!")) && 
+         setState({
+           identifier: "",
+           number: "",
+           expiry: "",
+           cvc: "",
+           name: "",
+           cvv: "",
+         });
+       }
+    }
 
   return (
     <div>
@@ -114,7 +145,6 @@ const MetodosPagamentos = () => {
                   acceptLabel="Sim"
                 />
               </div>
-
               <div className="hidden gap-2 mb-[10px]">
                 <dt className="text-light-gray">Nome:</dt>
                 <dd>{cartao.nome}</dd>
@@ -127,168 +157,163 @@ const MetodosPagamentos = () => {
                 <dt className="text-light-gray">CVV:</dt>
                 <dd>{cartao.cvv}</dd>
               </div>
-            </dl> 
+            </dl>
           ))}
         </div>
       </section>
       <Modal visible={openModal}>
         <div className="bg-white shadow transition-all flex-col justify-center items-center h-[550px] w-[315px] lg:w-[700px] lg:h-[466px] overflow-auto lg:gap-2 lg:px-4 pt-5 pl-5 rounded">
-          <div className="flex flex-col">
-            <div className="flex gap-3">
-              <div className="flex-col">
-                <h2 className="text-lg font-semibold mb-1 ml-1 text-dark-gray">
-                  Adicionar cartão
-                </h2>
-                <form className="flex flex-col items-start lg:w-[340px] rounded p-1 mb-2">
-                  <h3 className="mt-1 text-dark-gray">Informações do cartão</h3>
-                  <div className="w-full border-t border-light-gray-2 mb-4"></div>
-                  <div className="inline-flex flex-col mb-2 w-full">
-                    <label
-                      htmlFor="identifier"
-                      className="text-light-gray font-semibold text-sm"
-                    >
-                      Apelido do cartão (opcional):
-                    </label>
-                    <InputText
-                      id="identifier"                      
-                      autoComplete
-                     { ...register('identifier')}
-                      className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
-                    />
-                  </div>
-                  <div className="inline-flex flex-col mb-2 w-full">
-                    <label
-                      htmlFor="numberCard"
-                      className="text-light-gray font-semibold text-sm"
-                    >
-                      Número do cartão
-                    </label>
-                    <InputMask
-                      id="numberCard"
-                      mask="9999.9999.9999.9999"
-                      autoClear
-                      invalid
-                      { ...register('numberCard')}
-                      className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
-                    ></InputMask>
-                  </div>
-                  <div className="inline-flex flex-col mb-2 w-full">
-                    <label
-                      htmlFor="nameCard"
-                      className="text-light-gray font-semibold text-sm"
-                    >
-                      Nome
-                    </label>
-                    <InputText
-                      id="nameCard"
-                      { ...register('nameCard')}
-                      className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
-                    />
-                  </div>
-
-                  <div className=" flex flex-col lg:flex-row lg:gap-3">
-                    <div className="inline-flex flex-col mb-2 lg:w-1/3">
-                      <label
-                        htmlFor="expiry"
-                        className="text-light-gray font-semibold text-sm"
-                      >
-                        Validade
-                      </label>
-                      <InputMask
-                        id="expiry"
-                        type="text"
-                        mask="99/99"
-                        slotChar="mm/aa"
-                        autoClear
-                        invalid
-                        { ...register('expiry')}
-                        className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
-                      ></InputMask>
-                    </div>
-                    <div className="relative inline-flex flex-col mb-2 lg:w-1/3">
-                      <label
-                        htmlFor="cvv"
-                        className="text-light-gray font-semibold text-sm"
-                      >
-                        cvv
-                      </label>
-                      <InputText
-                        id="cvv"
-                        type="password"
-                        { ...register('cvv')}
-                        className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
-                      />
-                      <i
-                        className="pi pi-question-circle text-gray-500 cursor-pointer absolute top-1/2 right-3"
-                        onClick={() => setVisible(true)}
-                      ></i>
-                      <Dialog
-                        className="bg-light-gray-3 text-dark-gray-3 drop-shadow-md leading-5 lg:leading-6 tracking-tight lg:tracking-normal rounded w-2/3 md:w-1/4 p-4 text-justify font-bold border"
-                        visible={visible}
-                        onHide={() => {
-                          if (!visible) return;
-                          setVisible(false);
-                        }}
-                      >
-                        <p className="m-0 text-dark-gray-2">
-                          O número CVV é representado pelos três últimos dígitos
-                          no verso do seu cartão. Em cartões American Express, o
-                          CVV é um número de 4 dígitos na frente do cartão.
-                        </p>
-                      </Dialog>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <div className={`hidden lg:flex flex-col w-[300px] h-[180px] mt-5 bg-gradient-to-tr from-[#0F418A] to-[#0995C1] text-light-gray-3 rounded-lg drop-shadow-md`}
+          <div className="flex gap-3">
+            <div className="flex-col">
+              <h2 className="text-lg font-semibold mb-1 ml-1 text-dark-gray">
+                Adicionar cartão
+              </h2>
+              <h3 className="mt-1 text-dark-gray">Informações do cartão</h3>
+              <div className="w-full border-t border-light-gray-2 mb-4"></div>
+              <form
+                className="flex flex-col items-start lg:w-[340px] rounded p-1 mb-2"
+                onSubmit={handleSubmit}
               >
-                <div className="w-full flex justify-end h-12">
-                  {cardNumber && 
-                    <CardType cardNumber={cardNumber} />
-                  }
-                </div>
-                <div>
-                  <img className="h-8 ml-5 mb-2" src={chip} alt="chip" />
-                </div>
-                <div className="ml-5 text-lg">
+                <div className="inline-flex flex-col mb-2 w-full">
+                  <label
+                    htmlFor="identifier"
+                    className="text-light-gray font-semibold text-sm"
+                  >
+                    Apelido do cartão (opcional):
+                  </label>
                   <input
-                    className="bg-transparent text-light-gray-3 outline-none"
-                    type="text"                  
-                    placeholder="**** **** **** ****"
-
+                    type="text"
+                    name="identifier"
+                    autoComplete="organization"
+                    value={state.identifier}
+                    onChange={handleInputChange}
+                    className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                   />
                 </div>
-                <div className="flex justify-start ml-5 pb-2 mb-2 text-sm">
-                  <div className="flex flex-col items-start justify-start">
-                    <InputTextarea
-                      className="bg-transparent placeholder-light-gray-3 h-10 mt-2 outline-none text-light-gray-3 overflow-hidden resize-none whitespace-pre-wrap break-words text-start"
-                      placeholder="NOME"
-                    ></InputTextarea>
+                <div className="inline-flex flex-col mb-2 w-full">
+                  <label
+                    htmlFor="number"
+                    className="text-light-gray font-semibold text-sm"
+                  >
+                    Número do cartão:
+                  </label>
+                  <InputMask
+                    type="text"
+                    name="number"
+                    mask="9999 9999 9999 9999"
+                    style={{ color: "#8f8f8f" }}
+                    required
+                    autoComplete="cc-number"
+                    value={state.number}
+                    onChange={handleInputChange}
+                    className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
+                  />
+                </div>
+                <div className="inline-flex flex-col mb-2 w-full">
+                  <label
+                    htmlFor="name"
+                    className="text-light-gray font-semibold text-sm"
+                  >
+                    Nome impresso no cartão:
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    autoComplete="cc-name"
+                    pattern="^[A-Za-z\s]+$"
+                    value={state.name}
+                    onChange={handleInputChange}
+                    className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
+                  />
+                </div>
+
+                <div className=" flex flex-col lg:flex-row mb-2 lg:gap-3">
+                  <div className="inline-flex flex-col mb-2 lg:w-1/3">
+                    <label
+                      htmlFor="expiry"
+                      className="text-light-gray font-semibold text-sm"
+                    >
+                      Validade:
+                    </label>
+                    <InputMask
+                      type="text"
+                      name="expiry"
+                      mask="99/99"
+                      style={{ color: "#8f8f8f" }}
+                      slotChar="mm/aa"
+                      required
+                      autoComplete="cc-exp"
+                      pattern="^(0[1-9]|1[0-2])\/(0[1-9]|[1-9][0-9])$"
+                      value={state.expiry}
+                      onChange={handleInputChange}
+                      className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
+                    />
                   </div>
-                  <div className="flex flex-col items-center">
-                    <span className="text-xs mt-2 text-light-gray-3">Validade </span>
+                  <div className="relative inline-flex flex-col mb-2 lg:w-1/3">
+                    <label
+                      htmlFor="cvv"
+                      className="text-light-gray font-semibold text-sm"
+                    >
+                      CVV:
+                    </label>
+                    <input
+                      type="text"
+                      name="cvv"
+                      required
+                      autoComplete="cc-csc"
+                      pattern="^\d{3,4}$"
+                      value={state.cvv}
+                      onChange={handleInputChange}
+                      className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
+                    />
+                    <i
+                      className="pi pi-question-circle text-dark-gray-3 cursor-pointer absolute top-1/2 right-3"
+                      onClick={() => setVisible(true)}
+                    ></i>
+                    <Dialog
+                      className="bg-light-gray-3 text-dark-gray-3 drop-shadow-md leading-5 lg:leading-6 tracking-tight lg:tracking-normal rounded w-2/3 md:w-1/4 p-4 text-justify font-bold border"
+                      visible={visible}
+                      onHide={() => {
+                        if (!visible) return;
+                        setVisible(false);
+                      }}
+                    >
+                      <p className="m-0 text-dark-gray-2">
+                        O número CVV é representado pelos três últimos dígitos
+                        no verso do seu cartão. Em cartões American Express, o
+                        CVV é um número de 4 dígitos na frente do cartão.
+                      </p>
+                    </Dialog>
                   </div>
                 </div>
-                <div className="hidden">
-                  <span></span>
+                <div className="flex justify-center items-center lg:justify-end w-full gap-3 lg:mr-10">
+                  <button
+                    className="w-28 h-11 py-2 px-4 text-light-gray-3 bg-primary-1 hover:bg-tertiary font-bold text-sm tracking-wider shadow-md rounded outline-none focus:shadow-[0_0_0_0.2rem_#991956]"
+                    type="submit"
+                  >
+                    Salvar
+                  </button>
+                  <button
+                    className="w-28 h-11 py-2 px-4 text-primary-1 hover:text-tertiary hover:bg-light-gray-3 font-bold text-sm tracking-wider hover:shadow-md rounded outline-none focus:shadow-[0_0_0_0.2rem_#c92071]"
+                    type="button"
+                    onClick={() => setOpenModal(false)}
+                  >
+                    Cancelar
+                  </button>
                 </div>
-              </div>
+              </form>
             </div>
-            <div className="flex justify-center items-center md:justify-end gap-3 lg:mr-10">
-              <button
-                className="w-28 h-11 py-2 px-4 text-light-gray-3 bg-primary-1 hover:bg-tertiary font-bold text-sm tracking-wider shadow-md rounded"
-                type="submit"
-                onClick={handleSubmit(onSubmit)}
-              >
-                Salvar
-              </button>
-              <button
-                className="w-28 h-11 py-2 px-4 text-primary-1 hover:text-tertiary hover:bg-light-gray-3 font-bold text-sm tracking-wider hover:shadow-md rounded"
-                type="button"
-                onClick={() => setOpenModal(false)}
-              >
-                Cancelar
-              </button>
+            <div className="hidden lg:block">
+              <Cards
+                number={state.number}
+                expiry={state.expiry}
+                cvc={state.cvc}
+                name={state.name}
+                focused={state.focus}
+                placeholders={{ name: "NOME" }}
+                locale={{ valid: "Validade" }}
+              />
             </div>
           </div>
         </div>
