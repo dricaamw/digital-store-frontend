@@ -4,7 +4,7 @@ import Login from './components/Login';
 import RecuperarSenha from './EsqueciASenha';
 import './index.css';
 import 'primeicons/primeicons.css';
-import { Paths } from './Routes';
+import { Paths } from './routes';
 
 const App = () => {
   return (
