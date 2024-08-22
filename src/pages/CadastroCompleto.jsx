@@ -4,15 +4,19 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { InputMask } from 'primereact/inputmask';
 import { data } from "autoprefixer";
-        
+
 
 const CadastroCompletoContainer = styled.div`
   background-color: #f9f8fe;
+  & form{
+    width: 750px;
+    margin: 0 auto;
+    padding-top: 60px;
+    padding-bottom: 150px;
+  }
   & .informacoesPessoais,
   .informacoesDeEntrega {
     color: #474747;
-    width: 750px;
-    margin: 0 auto;
     font-family: "Inter", sans-serif;
     font-weight: 700;
     background-color: #ffffff;
@@ -27,7 +31,6 @@ const CadastroCompletoContainer = styled.div`
 
   & .topo-form {
     margin: 70px 0px 22px 0;
-    width: 440px;
     height: 36px;
     display: block;
     
@@ -36,18 +39,17 @@ const CadastroCompletoContainer = styled.div`
   & h2 {
     letter-spacing: 1px;
     line-height: 36px;
-    margin: 70px 656px 22px 344px;
+    margin-bottom: 22px;
     font-weight: 700;
     font-size: 32px;
     color: #1f1f1f;
-    width: 440px;
     height: 36px;
   }
 
   & h4 {
     font-size: 14px;
     gap: 365px;
-    width: 690px;
+    width: 100%;
     padding-bottom: 20px;
     margin-bottom: 20px;
     letter-spacing: 0.75px;
@@ -57,7 +59,7 @@ const CadastroCompletoContainer = styled.div`
   }
 
   & input {
-    width: 690px;
+    width: 100%;
     height: 60px;
     border-radius: 8px;
     font-weight: 400;
@@ -82,12 +84,12 @@ const CadastroCompletoContainer = styled.div`
     font-size: 12px;
     line-height: 24px;
     letter-spacing: 0.75px;
-    width: 470.82px;
+    width: 100%;
     height: 24px;
   }
 
   & .confirmacao {
-    width: 750px;
+    width: 100%;
     height: 44px;
     margin: 0 auto;
     gap: 10px;
@@ -115,14 +117,14 @@ const CadastroCompletoContainer = styled.div`
   }
 
   & .btn {
-    width: 750px;
+    width: 100%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
   }
 
   & button {
-    width: 750px;
+    width: 100%;
     height: 48px;
     margin-top: 40px;
     background: #c92071;
@@ -135,14 +137,20 @@ const CadastroCompletoContainer = styled.div`
     text-align: center;
   }
 
-  @media only screen and (max-width: 763px) {
-
+  @media only screen and (max-width: 600px) {
+    & form {
+      width: 100%;
+      padding: 0 30px;
+      & h2{
+        text-align: center;
+      }
+    }
   }
 `;
 
 const CadastroCompleto = () => {
-  
-  const {register, handleSubmit, setValue} = useForm();
+
+  const { register, handleSubmit, setValue } = useForm();
   function carregarEndereco(cep) {
     if (cep.length == 9) {
       const cepTratado = cep.replace(/\D/g, '');
@@ -156,18 +164,16 @@ const CadastroCompleto = () => {
           setValue("uf", data.uf);
 
         });
-    
+
     }
 
   }
 
   return (
     <CadastroCompletoContainer>
-      
-      <div className="topo-form">
-      <h2 className="form-criar">Criar Conta</h2>      
-      </div>
+
       <form>
+        <h2 className="form-criar">Criar Conta</h2>
         <section className="informacoesPessoais">
           <h4>Informações Pessoais</h4>
           <label htmlFor="nomecompleto">Nome Completo *</label>
@@ -175,11 +181,18 @@ const CadastroCompleto = () => {
             id="nomecompleto"
             type="text"
             placeholder="Insira seu nome"
+            className="mb-3"
             required
           />
 
           <label htmlFor="cpf">CPF *</label>
-          <InputMask id="cpf" mask="999.999-999-99" placeholder="Insira seu CPF" required />
+          <InputMask
+            id="cpf"
+            mask="999.999.999-99"
+            placeholder="Insira seu CPF"
+            className="mb-3"
+            required
+          />
 
           <label htmlFor="email">E-mail *</label>
           <input
@@ -187,18 +200,20 @@ const CadastroCompleto = () => {
             name=""
             id="email"
             placeholder="Insira seu e-mail"
+            className="mb-3"
             required
           />
 
           <label htmlFor="celular">Celular *</label>
-          <InputMask id="celular" mask="(99) 99999-9999" placeholder="Insira seu celular" required/>
+          <InputMask id="celular" mask="(99) 99999-9999" placeholder="Insira seu celular" required />
         </section>
         <section className="informacoesDeEntrega">
           <h4>Informações de Entrega</h4>
           <label htmlFor="cep">CEP *</label>
           <InputMask id="cep" mask="99999-999" placeholder="Insira seu cep"
             onChange={(e) => carregarEndereco(e.target.value)}
-           required />
+            className="mb-3"
+            required />
 
           <label htmlFor="endereco">Endereço *</label>
           <input
@@ -206,15 +221,17 @@ const CadastroCompleto = () => {
             type="text"
             placeholder="Insira seu endereço"
             {...register("endereco")}
+            className="mb-3"
             required
           />
 
-<label htmlFor="complemento">Número * </label>
+          <label htmlFor="complemento">Número * </label>
           <input
             type="text"
             name=""
             id="numero"
             placeholder="Insira seu número"
+            className="mb-3"
           />
 
           <label htmlFor="complemento">Complemento </label>
@@ -222,6 +239,7 @@ const CadastroCompleto = () => {
             type="text"
             name=""
             id="complemento"
+            className="mb-3"
             placeholder="Insira complemento"
           />
 
@@ -232,6 +250,7 @@ const CadastroCompleto = () => {
             name=""
             id="bairro"
             placeholder="Insira seu bairro"
+            className="mb-3"
             {...register("bairro")}
             required
           />
@@ -242,6 +261,7 @@ const CadastroCompleto = () => {
             name=""
             id="cidade"
             placeholder="Insira sua cidade"
+            className="mb-3"
             {...register("cidade")} required
           />
           <label htmlFor="uf">Estado *</label>
@@ -250,6 +270,7 @@ const CadastroCompleto = () => {
             name=""
             id="uf"
             placeholder="Insira seu estado"
+            className="mb-3"
             {...register("uf")} required
           />
         </section>
@@ -260,9 +281,9 @@ const CadastroCompleto = () => {
             Store. A frequência de envios pode variar de acordo com a interação
             do cliente.
           </label>
-      <div className="btn">
-         <button className="btn-confirmacao">Criar Conta</button>
-      </div>
+          <div className="btn">
+            <button className="btn-confirmacao">Criar Conta</button>
+          </div>
         </section>
       </form>
     </CadastroCompletoContainer>
