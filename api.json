@@ -7,6 +7,14 @@
       "sapato_image": "Highlight-3-shoe.svg",
       "sapato_type": "Tênis",
       "sapato_discount": 30
+    },
+    {
+      "sapato_id": 1,
+      "sapato_name": "K-Swiss V8 - Masculino",
+      "sapato_value": 200,
+      "sapato_image": "Highlight-3-shoe.svg",
+      "sapato_type": "Tênis",
+      "sapato_discount": 0
     }
   ]
 }

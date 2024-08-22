@@ -3,7 +3,7 @@
 
 /* Global Styles */
 html {
-    background-color: cadetblue;
+    background-color: var(--light-gray-3);
     overflow-x: hidden;
 }
 

@@ -14,7 +14,7 @@
 
 
 import axios from "axios";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -29,6 +29,7 @@ const Highlights3WrapperContainer = styled.div`
     gap: 20px;
     margin-inline: 20px;
     margin-top: 80px;
+    margin-bottom: 40px;
 
     & .colecoes{
         display: flex;
@@ -40,15 +41,19 @@ const Highlights3WrapperContainer = styled.div`
         }
 
         & a{
-            width: 99px;
             height: 24px;
             display: flex;
             justify-content: space-between;
             text-decoration: none;
             color: var(--primary);
+            gap: 8px;
+
+            @media (min-width: 768px) {
+                height: 34px;
+            }
 
             & .writed{
-                text-align: center
+                text-align: center;
             }
 
             & .pi-arrow-right{
@@ -56,8 +61,13 @@ const Highlights3WrapperContainer = styled.div`
                 align-items: center;
 
                 &::before{
-                    font-size: 18.75px;
-                    height: 24px;
+                    font-size: 17.75px;
+                    height: 22px;
+
+                    @media (min-width: 768px) {
+                        display: flex;
+                        align-self: start;
+                    }
                 }
             }
         }
@@ -68,24 +78,49 @@ const Highlights3WrapperContainer = styled.div`
         gap: 40px 9px;
         grid-template-columns: repeat(auto-fit, 163px);
         grid-template-rows: repeat(auto-fit, 264px);
+        grid-auto-rows: 264px;
+        
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(auto-fit, 292px);
+            grid-template-rows: repeat(auto-fit, 439px);
+            grid-auto-rows: 439px;
+        }
 
         & .card{
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: start;
+            text-decoration: none;
 
             & .img-disc{
+                display: flex;
                 position: relative;
+                height: 179px;
+                width: 100%;
+                background-color: var(--white);
+
+                @media (min-width: 768px) {
+                    height: 371px;
+                }
 
                 & .discount{
                     display: flex;
                     align-items: center;
-                    justify-content: space-between;
+                    position: absolute;
+                    justify-content: space-evenly;
                     width: 88px;
                     height: 32px;
                     border-radius: 29px;
                     color: var(--dark-gray-2);
                     padding: 4px 11px;
+                    background-color: #E7FF86;
+                    left: 13px;
+                    top: 14px;
+                }
+
+                & img{
+                    width: 90%;
                 }
             }
 
@@ -96,16 +131,30 @@ const Highlights3WrapperContainer = styled.div`
 
                 & .prod-type{
                     color: var(--light-gray);
+                    width: fit-content;
                 }
 
                 & .prod-name{
                     color: var(--dark-gray-2);
+                    width: 149px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
 
                 & .prices{
                     display: flex;
-                    justify-content: space-between;
-                    width: 101px;
+                    width: fit-content;
+                    gap: 8px;
+
+                    & .origin-price{
+                        color: var(--light-gray);
+                        text-decoration: line-through;
+                    }
+
+                    & .now-price{
+                        color: var(--dark-gray)
+                    }
                 }
             }
         }
@@ -129,12 +178,13 @@ const Card = () => {
 
     return (
         data ? (
-            <div className="card">
+            <Link className="card">
                 <div className="img-disc">
-                    <div className="discount">
-                        <p className="percentage text-extra-small bold">{data[0].sapato_discount}%</p>
-                        <p className="text-extra-small bold">OFF</p>
-                    </div>
+                    {data[0].sapato_discount > 0 && <div className="discount">
+                        <p className="percentage text-tinny bold">{data[0].sapato_discount}%</p>
+                        <p className="text-tinny bold">OFF</p>
+                    </div>}
+
                     <img src={data[0].sapato_image} />
                 </div>
 
@@ -142,11 +192,11 @@ const Card = () => {
                     <p className="prod-type text-tinny bold">{data[0].sapato_type}</p>
                     <h3 className="prod-name text-extra-small">{data[0].sapato_name}</h3>
                     <div className="prices">
-                        <p className="origin-price text-extra-small">${data[0].sapato_value}</p>
-                        <p className="now-price text-extra-small">${(data[0].sapato_value * data[0].sapato_discount) / 100}</p>
+                        <p className="origin-price text-small "> ${" " + data[0].sapato_value + " "} </p>
+                        <p className="now-price text-small bold">${(data[0].sapato_value * data[0].sapato_discount) / 100}</p>
                     </div>
                 </div>
-            </div>
+            </Link>
         ) : (
             <p>Loading...</p>
         )
@@ -154,11 +204,12 @@ const Card = () => {
 }
 
 const Destaques3 = () => {
+
     return (
         <Highlights3WrapperContainer>
             <div className="colecoes">
-                <h3 className={`colecoes-dest bold ${window.innerWidth >= 768 ? "text-large" : "text-small"}`}>Coleções em destaque</h3>
-                <Link to="/produtos" className="text-extra-small">
+                <h3 className={`colecoes-dest bold ${window.innerWidth >= 768 ? "text-large" : "text-small"}`}>Produtos em alta</h3>
+                <Link to="/produtos" className={ window.innerWidth >= 768 ? "text-medium" : "text-extra-small"}>
                     <p className="writed">Ver todos</p>
                     <p className="pi-arrow-right"></p>
                 </Link>
