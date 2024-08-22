@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card-container {
+  perspective: 1000px;
+}
+
+/* Estilo base para o cartão */
+.card {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  /* Adicione outros estilos do cartão aqui */
+}
+
+/* Estilo para girar o cartão */
+.card.flip {
+  transform: rotateY(180deg);
+}
