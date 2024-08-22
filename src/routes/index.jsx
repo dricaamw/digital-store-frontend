@@ -8,6 +8,7 @@ import CadastroCompleto from "../pages/CadastroCompleto";
 import ProfileLayout from "../layouts/ProfileLayout";
 import MeusPedidos from "../components/MeusPedidos";
 import MinhasInformacoes from "../components/MinhasInformacoes";
+import MetodosPagamentos from "../components/MetodosPagamentos";
 
 export const Paths = () => {
     return(
@@ -17,8 +18,9 @@ export const Paths = () => {
                     <Route index element={<Home />} />
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route path="/meu-perfil" element={<ProfileLayout />}>
-                        <Route path="/meu-perfil/meus-pedidos" element={<MeusPedidos />} />
+                        <Route index element={<MeusPedidos />} />
                         <Route path="/meu-perfil/minhas-informacoes" element={<MinhasInformacoes />} />
+                        <Route path="/meu-perfil/metodos-de-pagamentos" element={<MetodosPagamentos />} />
                     </Route>
                     
                     {/* <Route path="seu-caminho" element={seu componente } /> */}

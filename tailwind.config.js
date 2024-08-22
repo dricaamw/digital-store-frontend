@@ -29,6 +29,7 @@ export default {
         'warning': '#F6AA1C',
         'primary-2': '#EDABCA',
         'secondary-2': '#EFEFFF',
+        'red': '#e11d48',
       },
     },
   },
