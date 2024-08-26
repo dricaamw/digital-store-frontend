@@ -2,21 +2,12 @@
 
 Este componente `Checkbox` é um wrapper para o input de checkbox com um estilo personalizado e uma função de retorno de chamada. Ele foi criado para facilitar a reutilização de caixas de seleção em diferentes partes de um aplicativo.
 
-**Instalação**
-
-Para usar este componente, primeiro instale as dependências necessárias:
-
-```bash
-npm install prop-types
-```
-
 **Importação**
 
-Em seu arquivo JavaScript, importe o componente `Checkbox` e o `PropTypes`:
+Em seu arquivo JavaScript, importe o componente `Checkbox`:
 
 ```javascript
 import Checkbox from "./Checkbox";
-import PropTypes from "prop-types";
 ```
 
 **Uso**

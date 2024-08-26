@@ -210,7 +210,7 @@ const Card = () => {
 
                 <div className="texts">
                     <Link to="/produtos" className="prod-type text-tinny bold">{data[0].sapato_type}</Link>
-                    <Link to="/produtos" className={`prod-name ${window.innerWidth >= 768 ? 'text-large' : 'text-extra-small'}` }>{data[0].sapato_name}</Link>
+                    <Link to="/produtos" className={`prod-name ${window.innerWidth >= 768 ? 'text-large' : 'text-extra-small'} `}>{data[0].sapato_name}</Link>
                     <Link to="/produtos" className="prices">
                         <p className={`origin-price ${window.innerWidth >= 768 ? 'text-large' : 'text-extra-small'} `}>${data[0].sapato_value}</p>
                         <p className={`now-price ${window.innerWidth >= 768 ? 'text-large' : 'text-extra-small'} bold`}>${(data[0].sapato_value * data[0].sapato_discount) / 100}</p>

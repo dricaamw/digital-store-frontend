@@ -11,6 +11,7 @@
     "api": "npx json-server api.json --watch -- port 3000"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@tanstack/react-query": "^5.35.5",
     "axios": "^1.6.8",
     "framer-motion": "^11.2.12",
@@ -23,7 +24,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.4",
     "react-router-dom": "^6.23.1",
-    "styled-components": "^6.1.11"
+    "styled-components": "^6.1.11",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
