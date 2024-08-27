@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import Footer from "../../components/Footer";
 
 const PageLayout = () => {
     return (
@@ -7,7 +8,7 @@ const PageLayout = () => {
             <div className="w-full">
                 <Outlet />
             </div>
-            {/* Componente Footer */}
+            <Footer />
         </>
     );
 }
