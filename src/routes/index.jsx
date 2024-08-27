@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../components/Login";
 import RecuperarSenha from "../EsqueciASenha";
 import Cadastro from "../pages/Cadastro";
+import Produtos from "../components/Produtos";
 import CadastroCompleto from "../pages/CadastroCompleto";
 import ProfileLayout from "../layouts/ProfileLayout";
 import MeusPedidos from "../components/MeusPedidos";
@@ -35,9 +36,10 @@ export const Paths = () => {
                     <Route index element={<Dashboard />} />
                     <Route path="/dashboard/marcas" element={<DashboardMarcas />} />
                 </Route>
-                <Route path="/login" element={<Login />} />
-                <Route path="/cadastro-completo" element={<CadastroCompleto />} />
-                <Route path="/recuperar" element={<RecuperarSenha />} />
+                <Route path="/login" element={<Login/>} />
+                <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
+                <Route path="/recuperar" element={<RecuperarSenha/>}/>
+                <Route path="/produtos" element={<Produtos/>}/>
             </Routes>
         </BrowserRouter>
     );
