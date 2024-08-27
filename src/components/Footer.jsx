@@ -2,9 +2,9 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-10 px-6 md:px-20 min-h-screen md:min-h-0 flex flex-col md:flex-none justify-between">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 flex-grow md:flex-grow-0">
-        <div>
+    <footer className="bg-black text-white py-[50px] md:py-[70px] px-[20px] md:px-20 flex flex-col md:flex-row md:flex-wrap justify-between">
+      {/* <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 flex-grow md:flex-grow-0"> */}
+        <div className="md:w-5">
           <h1 className="text-white text-4xl font-bold mb-4 flex items-center">
             <span className="mr-2">
               <svg
@@ -22,11 +22,11 @@ const Footer = () => {
             </span>
             Digital Store
           </h1>
-          <p className="text-base mb-4">
+          <p className="text-base mb-4 md:w-[310px]">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore.
           </p>
-          <div className="flex space-x-4">
+          <div className="flex gap-[35px]">
             <a href="#">
               <svg
                 width="11"
@@ -83,7 +83,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="md:col-span-2 grid grid-cols-2 gap-10 md:ml-8">
+        <div className="flex gap-[32px] md:gap-[100px] mt-[40px] md:mt-[0px] md:col-span-2 md:w-4">
           <div>
             <h2 className="text-white text-xl font-bold mb-4">Informação</h2>
             <ul className="space-y-2 text-base">
@@ -152,19 +152,17 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="-mt-2">
+        <div className="mt-[40px] md:mt-[0px] md:w-2 ">
           <h2 className="text-white text-xl font-bold mb-3">Contato</h2>
           <p className="text-base">
-            Av. Santos Dumont, 1510 - 1 andar - Aldeota, Fortaleza - CE,
+            Av. Santos Dumont, 1510 - 1<br/> andar - Aldeota, Fortaleza -<br /> CE,
             60150-161
           </p>
           <p className="text-base mt-3">(85) 3051-3411</p>
         </div>
-      </div>
+      {/* </div> */}
 
-      <div className="mt-10 border-t border-gray-700 pt-4 text-center text-sm">
-        @ 2022 Digital College
-      </div>
+      <div className="mt-10 md:pt-6 border-t border-gray-700 pt-4 text-center text-sm md:w-12">&copy; 2022 Digital College</div>
     </footer>
   );
 };
