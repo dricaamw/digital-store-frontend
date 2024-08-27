@@ -33,7 +33,8 @@ const Highlights3WrapperContainer = styled.div`
     overflow-x: hidden;
 
     @media (min-width: 768px) {
-        margin-inline: 100px;
+        width: calc(100% - 13.88%);
+        margin-inline: 0px;
         margin-bottom: 120px;
     }
 
