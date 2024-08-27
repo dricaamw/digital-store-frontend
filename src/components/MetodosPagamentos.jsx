@@ -8,6 +8,7 @@ import Modal from "./Modal";
 import Cards from "react-credit-cards-2";
 import "react-credit-cards-2/dist/es/styles-compiled.css";
 
+
 const MetodosPagamentos = () => {
   const [openModal, setOpenModal] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -16,21 +17,24 @@ const MetodosPagamentos = () => {
     identifier: "",
     number: "",
     expiry: "",
-    cvc: "",
-    name: "",
     cvv: "",
+    name: "",
+    focus: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
   };
+  const handleInputFocus = (e) => {
+    setState((prev) => ({ ...prev, focus: e.target.name }));
+  };
 
   const [cartoes, setCartoes] = useState([
     {
       id: 1,
       apelido: "C6 Black",
-      numero: "4756 5469 8547 5634",
+      numero: "4756 5469 8547 2020",
       nome: "Francisco Antonio Pereira",
       validade: "12/25",
       cvv: "123",
@@ -62,18 +66,17 @@ const MetodosPagamentos = () => {
     if (
       anoCompleto < anoAtual ||
       (anoCompleto === anoAtual && mes < mesAtual)
-    ) {
+    ) { 
       window.alert("Data de validade expirada");
-      e.preventDefault();
     } else {
       return (window.confirm("Dados cadastrados com sucesso!")) && 
          setState({
            identifier: "",
            number: "",
            expiry: "",
-           cvc: "",
-           name: "",
            cvv: "",
+           name: "",
+           focus: "",
          });
        }
     }
@@ -81,26 +84,18 @@ const MetodosPagamentos = () => {
   return (
     <div>
       <section className="bg-white min-w-[315px] h-[466px] lg:w-[890px] lg:h-[466px] mx-5 lg:mr-[101px] flex flex-col items-start justify-start px-5 lg:py-5 font-sans rounded">
-        <div className="w-full flex-col lg:flex lg:flex-row lg:justify-between mt-1">
-          <div className="lg:hidden w-full flex justify-end items-end mb-4">
-            <button
-              className="lg:hidden mt-5 text-sm text-primary-1 hover:text-tertiary underline font-semibold mr-3 lg:mr-4 underline-offset-[3px]"
-              onClick={() => setOpenModal(true)}
-            >
-              Adicionar cartão
-            </button>
-          </div>
-          <h6 className="font-bold text-sm tracking-[0.75px] leading-[22px] text-dark-gray-2">
+        <div className="w-full flex flex-col lg:flex-row lg:justify-between lg:items-center mt-1">
+          <h6 className="order-none font-bold text-sm tracking-[0.75px] leading-[22px] text-dark-gray-2">
             Cartões cadastrados
           </h6>
           <button
-            className=" hidden lg:block text-primary-1 hover:text-tertiary underline font-semibold text-sm tracking-wide mr-3 lg:mr-4 underline-offset-[3px]"
+            className="-order-1 lg:order-1 text-primary-1 hover:text-tertiary underline font-semibold lg:text-sm mr-3 lg:mr-4 mt-4 lg:mt-1 mb-3 text-end underline-offset-[3px]"
             onClick={() => setOpenModal(true)}
           >
             Adicionar cartão
           </button>
         </div>
-        <div className="w-full border-t border-light-gray-2 my-1 lg:my-3"></div>
+        <div className="w-full border-t border-light-gray-2 my-1 lg:mb-3"></div>
         <div className="flex mt-3 lg:mt-2">
           {cartoes.map((cartao) => (
             <dl
@@ -187,6 +182,7 @@ const MetodosPagamentos = () => {
                     autoComplete="organization"
                     value={state.identifier}
                     onChange={handleInputChange}
+                    onFocus={handleInputFocus}
                     className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                   />
                 </div>
@@ -206,6 +202,7 @@ const MetodosPagamentos = () => {
                     autoComplete="cc-number"
                     value={state.number}
                     onChange={handleInputChange}
+                    onFocus={handleInputFocus}
                     className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                   />
                 </div>
@@ -221,9 +218,10 @@ const MetodosPagamentos = () => {
                     name="name"
                     required
                     autoComplete="cc-name"
-                    pattern="^[A-Za-z\s]+$"
+                    pattern="^(?=.*[A-Za-z])[A-Za-z\s]+$"
                     value={state.name}
                     onChange={handleInputChange}
+                    onFocus={handleInputFocus}
                     className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                   />
                 </div>
@@ -247,6 +245,7 @@ const MetodosPagamentos = () => {
                       pattern="^(0[1-9]|1[0-2])\/(0[1-9]|[1-9][0-9])$"
                       value={state.expiry}
                       onChange={handleInputChange}
+                      onFocus={handleInputFocus}
                       className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                     />
                   </div>
@@ -265,6 +264,7 @@ const MetodosPagamentos = () => {
                       pattern="^\d{3,4}$"
                       value={state.cvv}
                       onChange={handleInputChange}
+                      onFocus={handleInputFocus}
                       className="bg-light-gray-3 rounded outline-none p-2 text-dark-gray-3 focus:shadow-[0_0_0_0.2rem_#e1e1e1]"
                     />
                     <i
@@ -308,7 +308,7 @@ const MetodosPagamentos = () => {
               <Cards
                 number={state.number}
                 expiry={state.expiry}
-                cvc={state.cvc}
+                cvc={state.cvv}
                 name={state.name}
                 focused={state.focus}
                 placeholders={{ name: "NOME" }}

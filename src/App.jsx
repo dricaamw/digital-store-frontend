@@ -13,7 +13,7 @@ const App = () => {
     <>
       <Paths />
     </>
-  );
+  )
 }
 
 export default App;

@@ -22,7 +22,7 @@ const Cadastro = () => {
             </h3>
             <p className="text-sm lg:text-base leading-6 lg:leading-7 tracking-wide text-dark-gray-2">
               Já possui uma conta? Entre{" "}
-              <Link to="/login" className="underline hover:text-primary-1">
+              <Link to="/login" className="inline-block transition-transform duration-300 hover:scale-110 underline underline-offset-2 hover:text-primary-1">
                 aqui
               </Link>
               .
@@ -51,7 +51,7 @@ const Cadastro = () => {
             <div>
               <button
                 type="submit"
-                className="bg-primary-1 hover:bg-tertiary transition-all duration-300 ease-out hover:ease-in w-full h-12 text-light-gray-3 font-bold leading-6 tracking-wider rounded-lg"
+                className="bg-primary-1 hover:bg-tertiary transition transform duration-300 ease-out hover:ease-in w-full h-12 text-light-gray-3 hover:text-white font-bold leading-6 tracking-wider rounded-lg"
               >
                 Criar Conta
               </button>
@@ -62,14 +62,14 @@ const Cadastro = () => {
             <div className="flex gap-4 mt-3">
               <Link to="/">
                 <img
-                  className="transition-transform transform hover:translate-y-[-6px] hover:scale-110"
+                  className="transition transform ease-out duration-300 hover:translate-y-[-3px] hover:scale-110"
                   src="src/assets/images/gmail.png"
                   alt="Logo Gmail"
                 />
               </Link>
               <Link to="/">
                 <img
-                  className="transition-transform transform hover:translate-y-[-6px] hover:scale-110"
+                  className="transition transform ease-out duration-300 hover:translate-y-[-3px] hover:scale-110"
                   src="src/assets/images/facebook.png"
                   alt="Logo Facebook"
                 />

@@ -53,8 +53,8 @@ const statusCor = (status) => {
 
 const MeusPedidos = () => {
   return (
-    <div>
-        <div className="font-sans min-w-[315px] lg:w-[890px] lg:h-[572px] rounded bg-white mx-5 lg:mr-[101px] px-5 py-5 lg:py-6">
+    
+        <div className="font-sans min-w-[315px] xl:w-[890px] lg:h-[572px] rounded bg-white mb-5 mx-5 lg:mr-[101px] px-5 py-5 lg:py-6">
           <div className="flex md:justify-between lg:items-center mb-3 lg:mb-4">
             <h2 className="text-sm leading-[22px] tracking-[0.75px] font-bold text-dark-gray-2">Meus Pedidos</h2>
             <span className="hidden md:flex text-sm leading-[22px] tracking-[0.25px] font-medium text-dark-gray-2">STATUS</span>
@@ -78,7 +78,7 @@ const MeusPedidos = () => {
             
           </div>
         </div>
-    </div>
+  
   );
 };
 
