@@ -11,9 +11,12 @@ import MinhasInformacoes from "../components/MinhasInformacoes";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard";
 import DashboardMarcas from "../pages/DashboardMarcas";
+import Produtos from "../pages/Produtos";
+import Categorias from "../pages/Categorias";
+import FinalizarCompra from "../pages/FinalizarCompra.jsx";
 
 export const Paths = () => {
-    return(
+    return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<PageLayout />}>
@@ -23,14 +26,18 @@ export const Paths = () => {
                         <Route path="/meu-perfil/meus-pedidos" element={<MeusPedidos />} />
                         <Route path="/meu-perfil/minhas-informacoes" element={<MinhasInformacoes />} />
                     </Route>
+                    <Route path="/produtos" element={<Produtos />} />
+                    <Route path="/categorias" element={<Categorias />} />
+                    <Route path="/meus-pedidos" element={<MeusPedidos />} />
                 </Route>
+                <Route path="/finalizar-compra" element={<FinalizarCompra />} />
                 <Route path="/dashboard" element={<DashboardLayout />}>
                     <Route index element={<Dashboard />} />
                     <Route path="/dashboard/marcas" element={<DashboardMarcas />} />
                 </Route>
-                <Route path="/login" element={<Login/>} />
-                <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
-                <Route path="/recuperar" element={<RecuperarSenha/>}/>
+                <Route path="/login" element={<Login />} />
+                <Route path="/cadastro-completo" element={<CadastroCompleto />} />
+                <Route path="/recuperar" element={<RecuperarSenha />} />
             </Routes>
         </BrowserRouter>
     );
