@@ -1,7 +1,11 @@
+import OfertaEspecial from "../components/OfertaEspecial";
+
 const Home = () => {
     return (
         <>
-            <h1>Hello World</h1>
+            {/* Components de cima */}
+            <OfertaEspecial />
+            {/* Components de baixo */}
         </>
     );
 }
