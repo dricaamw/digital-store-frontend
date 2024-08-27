@@ -10,6 +10,9 @@ import MeusPedidos from "../components/MeusPedidos";
 import MinhasInformacoes from "../components/MinhasInformacoes";
 import MetodosPagamentos from "../components/MetodosPagamentos";
 import CompraRealizada from "../pages/CompraRealizada";
+import DashboardLayout from "../layouts/DashboardLayout";
+import Dashboard from "../pages/Dashboard";
+import DashboardMarcas from "../pages/DashboardMarcas";
 
 export const Paths = () => {
     return(
@@ -25,10 +28,11 @@ export const Paths = () => {
                         <Route path="/meu-perfil/minhas-informacoes" element={<MinhasInformacoes />} />
                         <Route path="/meu-perfil/metodos-de-pagamentos" element={<MetodosPagamentos />} />
                     </Route>
-                    
-                    {/* <Route path="seu-caminho" element={seu componente } /> */}
                 </Route>
-                
+                <Route path="/dashboard" element={<DashboardLayout />}>
+                    <Route index element={<Dashboard />} />
+                    <Route path="/dashboard/marcas" element={<DashboardMarcas />} />
+                </Route>
                 <Route path="/login" element={<Login/>} />
                 <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
                 <Route path="/recuperar" element={<RecuperarSenha/>}/>

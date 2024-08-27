@@ -1,14 +1,73 @@
 import tennis from "../assets/images/tenis-produtos.png";
 import lancaConfetes from "../assets/images/lanca-confetes.png";
+import logo from "../assets/images/logo.png";
 import { Link } from "react-router-dom";
+import { Document, Image, Page, PDFDownloadLink, Text, View } from "@react-pdf/renderer";
+
+const ReciboPDF = () => (
+  <Document>
+    <Page size="A4" style={{ padding: 30 }}>
+      <Image src={logo} style={{ width: 100, marginBottom: 30 }} />
+      <View style={{ display: "flex", justifyContent: "center", alignItems: "center", marginBottom: 20, fontWeight: 'extrabold' }}>
+        <Text style={{ fontSize: 20, marginBottom: 10 }}>Recibo de Compra</Text>
+        <Text style={{ fontSize: 16, color: "#991956" }}>Detalhes do pedido nº 7028597</Text>
+      </View>
+      <View style={{ height: 1, backgroundColor: "#000", marginVertical: 5 }}/>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
+        <View>
+          <Text style={{ fontSize: 16, marginBottom: 8, fontWeight: 'bold' }}>Item(ns) pedido(s)</Text>
+          <Text style={{ fontSize: 14 }}>Tênis Nike Revolution 6 Next Nature Masculino</Text>
+        </View>
+        <View>
+          <Text style={{ fontSize: 16, marginBottom: 8, alignSelf: "center", fontWeight: 'bold' }}>Preço</Text>
+          <Text style={{ fontSize: 14 }}>R$ 219,80</Text>
+        </View>
+      </View>
+      <View style={{ height: 1, backgroundColor: "#000", marginVertical: 5 }}/>
+      <View>
+        <Text style={{ marginBottom: 15, fontSize: 16, fontWeight: 'bold' }}>Informações de Entrega</Text>
+      </View>
+      <View style={{ marginBottom: 20, fontSize: 14 }}>
+        <Text style={{ marginBottom: 5 }}>Nome: Francisco Antonio Pereira</Text>
+        <Text style={{ marginBottom: 5 }}>Endereço: Rua João Pessoa, 333</Text>
+        <Text style={{ marginBottom: 5 }}>Bairro: Centro</Text>
+        <Text style={{ marginBottom: 5 }}>Cidade: Fortaleza, Ceará</Text>
+        <Text>CEP: 433-8800</Text>
+      </View>
+      <View style={{ height: 1, backgroundColor: "#000", marginVertical: 5 }}/>
+      <View>
+        <Text style={{ marginBottom: 15, fontSize: 16, fontWeight: 'bold' }}>Informações de Pagamento</Text>
+      </View>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 20 }}>
+        <View style={{ fontSize: 14 }}>
+          <Text style={{ marginBottom: 8, fontSize: 15, fontWeight: 'bold' }}>Método de pagamento:</Text>
+          <Text>Visa Final: *********2020</Text>
+        </View>
+        <View style={{ fontSize: 14}}>
+          <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+            <Text style={{ marginBottom: 5 }}>Subtotal do(s) item(ns):{" "}</Text>
+            <Text>R$ 219,80</Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 10 }}>
+            <Text style={{ marginBottom: 8 }}>Frete e manuseio:</Text>
+            <Text style={{ marginBottom: 5 }}>R$ 0,00</Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", fontWeight: 'bold' }}>
+            <Text>Total geral:</Text>
+            <Text>R$ 219,80</Text>
+          </View>
+        </View>
+      </View>
+      <View>
+        <Text style={{ textAlign: "center", fontSize: 12, marginTop: 40, fontWeight: 'bold' }}>Observação: esta não é uma nota fiscal eletrônica.</Text>
+      </View>
+    </Page>
+  </Document>
+);
 
 const CompraRealizada = () => {
-  const handlePrint = () => {
-    print();
-  };
-
   return (
-    <main className="bg-light-gray-3 flex justify-center items-center flex-grow">
+    <main className="bg-light-gray-3 flex justify-center items-center flex-grow text-[#]">
       <div className="w-full min-h-[1048px] flex flex-col gap-10 items-center justify-center mb-[30px]">
         <div className="bg-white flex flex-col justify-center w-[315px] md:w-[700px] lg:w-[838px] font-sans p-5 rounded mx-3 mt-[30px]">
           <div className="flex flex-col justify-center items-center">
@@ -111,21 +170,20 @@ const CompraRealizada = () => {
               ou 10x de R$ 21,00 sem juros
             </div>
           </div>
-          <div
-            onClick={handlePrint}
+          <PDFDownloadLink
+            document={<ReciboPDF />}
+            fileName="recibo.pdf"
             className="text-dark-gray-2 leading-7 tracking-[0.75px] underline underline-offset-[4px] text-center cursor-pointer transition transform duration-300 ease-out hover:scale-110 hover:font-bold hover:text-warning"
           >
-            Imprimir Recibo
-          </div>
+            {({ loading }) =>
+              loading ? "Gerando Recibo..." : "Imprimir Recibo"
+            }
+          </PDFDownloadLink>
         </div>
 
         <Link to={"/"}>
-          <div
-            className="flex justify-center items-center font-bold text-sm leading-[22px] tracking-[0.75px] rounded-lg text-light-gray-3 hover:text-white w-[315px] md:w-[700px] lg:w-[778px] p-3 mb-[23px] bg-warning hover:bg-warning-hover transition transform ease-out duration-300;
-]"
-          >
-            Voltar para Home
-          </div>
+          <div className="flex justify-center items-center font-bold text-sm leading-[22px] tracking-[0.75px] rounded-lg text-light-gray-3 hover:text-white w-[315px] md:w-[700px] lg:w-[778px] p-3 mb-[23px] bg-warning hover:bg-warning-hover transition transform ease-out duration-300;
+]">Voltar para Home</div>
         </Link>
       </div>
     </main>
