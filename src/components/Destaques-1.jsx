@@ -22,7 +22,7 @@ const Highlights1WrapperContainer = styled.div`
 
     display: flex;
     flex-direction: column;
-    margin: 42px 20px 40px;
+    margin: 42px 0px 40px;
     gap: 10px;
     height: fit-content;
 
