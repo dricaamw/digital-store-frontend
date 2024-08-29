@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 import img from "../assets/oferta-especial.png";
 
-
 const OfertaEspecialContainer = styled.div`
     width: 100%;
     & .oferta-especial{

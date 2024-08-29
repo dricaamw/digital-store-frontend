@@ -3,8 +3,8 @@
 
 /* Global Styles */
 html {
-    background-color: var(--dark-gray-3);
-    overflow-x: hidden;
+    background-color: var(--light-gray-3);
+    /* overflow-x: hidden; */
 }
 
 body {

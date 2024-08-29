@@ -27,7 +27,8 @@ const Highlights1WrapperContainer = styled.div`
     height: fit-content;
 
     @media (min-width: 768px) {
-        margin: 38px 100px 100px;
+        margin: 38px 0 100px;
+        width: calc(100% - 13.88%);
     }
 
     & .colections{
@@ -44,8 +45,7 @@ const Highlights1WrapperContainer = styled.div`
         @media (min-width: 768px) {
             gap: 12px;
             grid-template-rows: repeat(auto-fit, 251px);
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            max-width: 100%;
+            grid-template-columns: repeat(3, minmax(320px, 1fr));
         }
 
         & .item{
@@ -108,6 +108,7 @@ const Highlights1WrapperContainer = styled.div`
                 position: absolute;
                 width: max-content;
                 display: flex;
+                justify-content: end;
                 height: 100%;
                 width: 190px;
                 right: 0;
@@ -119,8 +120,7 @@ const Highlights1WrapperContainer = styled.div`
                 }
 
                 & img {
-                    align-self: end;
-                    width: 100%;
+                    height: 100%;
                     object-fit: cover;
                     object-position: center;
                 }

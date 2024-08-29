@@ -14,6 +14,7 @@ const Highlights2WrapperContainer = styled.div`
 
     @media (min-width: 768px) {
         align-items: center;
+        width: fit-content;
     }
     
 

@@ -14,11 +14,13 @@ import { default as But } from '../components/buttons/Buttons.jsx';
 import { Link, NavLink } from "react-router-dom";
 
 const HeaderContainer = styled.header`
+
+
     display: flex;
     align-items: center;
     justify-content: center;
     max-height: 192px;
-    width: 100vw;
+    width: 100%;
     height: 66.5px;
     margin: auto;
 
@@ -42,6 +44,7 @@ const HeaderContainer = styled.header`
             justify-content: space-between;
             height: 192px;
             position: static;
+            max-width: 100%;
         }
         
         .carrinho, .out-search, nav.links, .fundo, #menu-sidebar, #menu-sidebar + label, .digital-logo, .search-buy, .carrin{
