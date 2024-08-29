@@ -19,7 +19,9 @@ import InputMask from "react-input-mask";
 import styled from "styled-components";
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Button from "../components/buttons/Buttons.jsx"
 
 const schema = z.object({
     paymentMethod: z.string().nonempty("Método de pagamento é obrigatório")
@@ -123,25 +125,46 @@ const FinalizarCompraContainer = styled.div`
         }
     }
 
+    & .resumo {
+        background-color: var(--white);
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+
+        & .resumoTexto {
+            color: var(--dark-gray-2)
+        }
+
+        & .item {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+
+            & .imagem {
+                position: relative;
+                background-color: #E2E3FF;
+                width: 71px;
+                height: 58px;
+                position: relative;
+
+                & .sapatao {
+                    
+                }
+            }
+        }
+    }
 `;
 
 const Payment = () => {
     const [paymentMethod, setPaymentMethod] = useState("");
 
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(schema)
+        resolver: zodResolver(schema),
+        mode: "onChange"
     });
 
     const handlePaymentForm = (data) => {
         console.log(data);
-        /*  console ( •_•)>⌐■-■
-            {
-                paymentMethod: ...,
-                cardNumber: ...,
-                cardHolderName: ...,
-                cardExpireDate: ...,
-                cardCvv:...
-            } */
     };
 
     return (
@@ -165,14 +188,12 @@ const Payment = () => {
                 {paymentMethod === "pix" && (
                     <div className="pix-info">
                         <p>Escaneie o QR Code abaixo para realizar o pagamento via Pix:</p>
-                        {/* Coloque aqui o código ou imagem para exibir o QR Code */}
                     </div>
                 )}
 
                 {paymentMethod === "boleto" && (
                     <div className="boleto-info">
                         <p>Um boleto será gerado para o pagamento. Use o código de barras abaixo:</p>
-                        {/* Exibir o código de barras do boleto */}
                     </div>
                 )}
 
@@ -221,22 +242,80 @@ const Payment = () => {
                         </div>
                     </>
                 )}
-
-                <button type="submit">Finalizar Compra</button>
             </form>
         </div>
     )
 }
 
+const Resumo = () => {
+
+    const [data, setData] = useState();
+
+    useEffect(() => {
+        const fecthData = async () => {
+
+            const response = await axios.get("http://localhost:3000/sapatos");
+            setData(response.data[0]);
+            console.log(data);
+            
+        }
+
+        fecthData();
+    }, []);
+
+    return (
+        data ? (
+        <div className="resumo">
+            <p className="resumoTexto text-extra-small bold">RESUMO</p>
+
+            <div className="item">
+                <div className="imagem">
+                    <img className="sapatao" src={data.sapato_image} alt={data.sapato_name} />
+                </div>
+                <div className="nome">
+                    <p>{data.sapato_name}</p>
+                </div>
+            </div>
+
+            <div className="valueInfo">
+                <div className="value text-extra-small">
+                    <p>Subtotal:</p>
+                    <p>R$ {data.sapato_value}</p>
+                </div>
+                <div className="value text-extra-small">
+                    <p>Frete:</p>
+                    <p>R$ {data.sapato_value}</p>
+                </div>
+                <div className="value text-extra-small">
+                    <p>Desconto:</p>
+                    <p>R$ {data.sapato_value}</p>
+                </div>
+
+                <div className="total">
+                    <div className="totalValue">
+                        <p>Total</p>
+                        <p>RS {data.sapato_value}</p>
+                    </div>
+                    <p>ou 10x de {data.sapato_value / 10} sem juros</p>
+                </div>
+
+                <Button></Button>
+            </div>
+        </div>
+        ) : (
+            <p>Loading...</p>
+        )
+    )
+}
+
 const FinalizarCompra = () => {
-
-
 
     return (
         <FinalizarCompraContainer>
             <h2 className="finalize-purchase text-medium bold">Finalizar Compra</h2>
 
             <Payment />
+            <Resumo />
 
         </FinalizarCompraContainer>
     );
