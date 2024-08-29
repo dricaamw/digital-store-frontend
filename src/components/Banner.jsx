@@ -18,7 +18,7 @@ import { useEffect, useRef, useState } from "react";
 const BannersBigWraperContainer = styled.div`
     overflow: hidden;
     background-color: var(--light-gray-3);
-    width: 100vw;
+    width: 100%;
     height: 662px;
     display: flex;
     position: relative;
