@@ -1,15 +1,10 @@
-import './index.css';
-import 'primeicons/primeicons.css';
-import { Paths } from './Routes';
+import { Paths } from './routes';
 
+function App() {
 
-
-const App = () => {
   return (
-    <>
       <Paths />
-    </>
-  )
+  );
 }
 
 export default App;

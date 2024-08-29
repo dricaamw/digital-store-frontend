@@ -1,0 +1,293 @@
+/* Font Family */
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+/* Global Styles */
+html {
+    background-color: var(--light-gray-3);
+    /* overflow-x: hidden; */
+}
+
+body {
+    font-family: "Inter", primeicons;
+    margin: 0;
+    /* padding: 0; */
+}
+
+/* Title Large - H1 */
+.title-large {
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 66px;
+    letter-spacing: 1px;
+}
+
+/* Title Medium - H2 */
+.title-medium {
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 5px;
+    letter-spacing: 1px;
+}
+
+/* Title Small - H3 */
+.title-small {
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 1px;
+}
+
+/* Title Extra Small - H4 */
+.title-extra-small {
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 2px;
+}
+
+/* Normal Text Large - P */
+.text-large {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 38px;
+    letter-spacing: 0.74px;
+}
+
+/* Normal Text Medium - P */
+.text-medium {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 0.74px;
+}
+
+/* Normal Text Small - P */
+.text-small {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.74px;
+}
+
+/* Normal Text Extra Small - P */
+.text-extra-small {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.25px;
+}
+
+/* Normal Text Tinny - P */
+.text-tinny {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+}
+
+/* Bold Title Large - H1 Bold */
+.title-large.bold {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 66px;
+    letter-spacing: 1px;
+}
+
+/* Bold Title Medium - H2 Bold */
+.title-medium.bold {
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 5px;
+    letter-spacing: 1px;
+}
+
+/* Bold Title Small - H3 Bold */
+.title-small.bold {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 1px;
+}
+
+/* Bold Title Extra Small - H4 Bold */
+.title-extra-small.bold {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 2px;
+}
+
+/* Bold Normal Text Large - P Bold */
+.text-large.bold {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 38px;
+    letter-spacing: 0.74px;
+}
+
+/* Bold Normal Text Medium - P Bold */
+.text-medium.bold {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: 0.74px;
+}
+
+/* Bold Normal Text Small - P Bold */
+.text-small.bold {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0.74px;
+}
+
+/* Bold Normal Text Extra Small - P Bold */
+.text-extra-small.bold {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 0.74px;
+}
+
+/* Bold Normal Text Tinny - P Bold */
+.text-tinny.bold {
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 18px;
+    letter-spacing: 0.74px;
+}
+
+
+/* MOBILE TYPOGRAPHY */
+
+/* H1 Title - Mobile */
+.title-large.mobile{
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 1px;
+}
+
+/* H2 Title - Mobile */
+.title-medium.mobile{
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 36px;
+    letter-spacing: 1px;
+}
+
+/* H3 Title - Mobile */
+.title-small.mobile{
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 1px
+}
+
+/* H4 Title - Mobile */
+.title-extra-small.mobile{
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 34px;
+    letter-spacing: 2px;
+}
+
+/* P Normal Text Large- Mobile */
+.text-large.mobile{
+    font-family: Inter;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 32px;
+    letter-spacing: 0.9999998807907104px;
+    text-align: left;
+}
+
+/* P Normal Text Medium - Mobile */
+.text-medium.mobile{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.75px;
+}
+
+/* P Normal Text Small - Mobile */
+.text-small.mobile{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.25px
+}
+
+/* P Normal Text Extra Small - Mobile */
+/* P Normal Text Tinny - Mobile */
+.text-extra-small.mobile, .text-tinny.mobile{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 1px;
+}
+
+/* Bold H1 Title - Mobile */
+.title-large.bold.mobile{
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 50px;
+    letter-spacing: 1px;
+}
+
+/* Bold H2 Title - Mobile */
+.title-medium.bold.mobile{
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 1px;
+}
+
+/* Bold H3 Title - Mobile */
+.title-small.bold.mobile{
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 1px;
+}
+
+/* Bold H4 Title - Mobile */
+.title-extra-small.bold.mobile{
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 34px;
+    letter-spacing: 2px;
+}
+
+/* Bold P Normal Text Large - Mobile */
+.text-large.bold.mobile{
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+    letter-spacing: 0.75px;
+}
+
+/* Bold P Normal Text Medium - Mobile */
+.text-medium.bold.mobile{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0.75px;
+}
+
+/* Bold P Normal Text Small - Mobile */
+.text-small.bold.mobile{
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: 0.25px;
+}
+
+/* Bold P Normal Text Extra Small - Mobile */ 
+/* Bold P Normal Text Tinny - Mobile */
+.text-extra-small.bold.mobile, .text-tinny.bold.mobile{
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 22px;
+    letter-spacing: 1px;
+}

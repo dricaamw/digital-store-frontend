@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import Login from "../components/Login";
 import RecuperarSenha from "../EsqueciASenha";
 import Cadastro from "../pages/Cadastro";
+import Produtos from "../components/Produtos";
 import CadastroCompleto from "../pages/CadastroCompleto";
 import ProfileLayout from "../layouts/ProfileLayout";
 import MeusPedidos from "../components/MeusPedidos";
@@ -13,9 +14,11 @@ import CompraRealizada from "../pages/CompraRealizada";
 import DashboardLayout from "../layouts/DashboardLayout";
 import Dashboard from "../pages/Dashboard";
 import DashboardMarcas from "../pages/DashboardMarcas";
+import Categorias from "../pages/Categorias";
+import FinalizarCompra from "../pages/FinalizarCompra.jsx";
 
 export const Paths = () => {
-    return(
+    return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<PageLayout />}>
@@ -28,6 +31,10 @@ export const Paths = () => {
                         <Route path="/meu-perfil/minhas-informacoes" element={<MinhasInformacoes />} />
                         <Route path="/meu-perfil/metodos-de-pagamentos" element={<MetodosPagamentos />} />
                     </Route>
+                    <Route path="/produtos" element={<Produtos />} />
+                    <Route path="/categorias" element={<Categorias />} />
+                    <Route path="/meus-pedidos" element={<MeusPedidos />} />
+                    <Route path="/finalizar-compra" element={<FinalizarCompra />} />
                 </Route>
                 <Route path="/dashboard" element={<DashboardLayout />}>
                     <Route index element={<Dashboard />} />
@@ -36,6 +43,7 @@ export const Paths = () => {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
                 <Route path="/recuperar" element={<RecuperarSenha/>}/>
+                <Route path="/produtos" element={<Produtos/>}/>
             </Routes>
         </BrowserRouter>
     );

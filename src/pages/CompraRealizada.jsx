@@ -67,7 +67,7 @@ const ReciboPDF = () => (
 
 const CompraRealizada = () => {
   return (
-    <main className="bg-light-gray-3 flex justify-center items-center flex-grow text-[#]">
+    <main className="bg-light-gray-3 flex justify-center items-center flex-grow">
       <div className="w-full min-h-[1048px] flex flex-col gap-10 items-center justify-center mb-[30px]">
         <div className="bg-white flex flex-col justify-center w-[315px] md:w-[700px] lg:w-[838px] font-sans p-5 rounded mx-3 mt-[30px]">
           <div className="flex flex-col justify-center items-center">

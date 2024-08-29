@@ -1,4 +1,3 @@
-import React from 'react'
 import RecuperarSenha from '../EsqueciASenha'
 
 const PageForgotPass = () => {
