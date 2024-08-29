@@ -22,18 +22,18 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from "react";
 
 const schema = z.object({
-    'payment-method': z.string().nonempty("Método de pagamento é obrigatório")
+    paymentMethod: z.string().nonempty("Método de pagamento é obrigatório")
         .refine(value => value !== "metodo", { message: "Por favor, escolha um método de pagamento válido" }),
-    'card-number': z.string().nonempty("Número do cartão é obrigatório")
+    cardNumber: z.string().nonempty("Número do cartão é obrigatório")
         .refine(value => value.replace(/\s/g, '').length === 16, { message: "Número do cartão incompleto" }),
-    'card-holder-name': z.string().nonempty("Nome do titular é obrigatório"),
-    'expire-date': z.string().nonempty("Data de validade é obrigatório")
+    cardHolderName: z.string().nonempty("Nome do titular é obrigatório"),
+    cardExpireDate: z.string().nonempty("Data de validade é obrigatório")
         .regex(/^\d{2}\/\d{2}$/, "Data inválida")
         .refine(value => {
             const month = parseInt(value.split('/')[0], 10);
             return month >= 1 && month <= 12;
         }, { message: "Mês deve ser entre 01 e 12" }),
-    'cvv': z.string().nonempty("CVV é obrigatório")
+    cardCvv: z.string().nonempty("CVV é obrigatório")
         .length(3, "CVV deve ter exatamente 3 dígitos")
 });
 
@@ -60,7 +60,7 @@ const FinalizarCompraContainer = styled.div`
         flex-direction: column;
         background-color: var(--white);
 
-        & .form-batata{
+        & .form-batata {
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -92,7 +92,7 @@ const FinalizarCompraContainer = styled.div`
             position: relative;
             gap: 5px;
 
-            & #payment-method {
+            & #paymentMethod {
                 padding: 16px 12px;
                 background-color: rgba(var(--dark-gray-2), 4%);
                 border: 0;
@@ -123,28 +123,25 @@ const FinalizarCompraContainer = styled.div`
         }
     }
 
-`
-const Payment = () => {
+`;
 
+const Payment = () => {
     const [paymentMethod, setPaymentMethod] = useState("");
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(schema)
-    })
-
+    });
 
     const handlePaymentForm = (data) => {
-        // Implement your payment processing logic here.
-
-        console.log(data)
-        {/*  console ( •_•)>⌐■-■
+        console.log(data);
+        /*  console ( •_•)>⌐■-■
             {
-                payment-method: ...,
-                card-number: ...,
-                card-holder-name: ...,
-                expire-date: ...,
-                cvv:...
-            } */}
+                paymentMethod: ...,
+                cardNumber: ...,
+                cardHolderName: ...,
+                cardExpireDate: ...,
+                cardCvv:...
+            } */
     };
 
     return (
@@ -154,15 +151,15 @@ const Payment = () => {
             <form onSubmit={handleSubmit(handlePaymentForm)} className="form-batata" >
 
                 <div className="formaDePagamento">
-                    <label className="text-tinny bold" htmlFor="payment-method">Forma de Pagamento</label>
-                    <select id="payment-method" {...register('payment-method')} onChange={(e) => setPaymentMethod(e.target.value)} >
+                    <label className="text-tinny bold" htmlFor="paymentMethod">Forma de Pagamento</label>
+                    <select id="paymentMethod" {...register('paymentMethod')} onChange={(e) => setPaymentMethod(e.target.value)} >
                         <option value="metodo" hidden defaultValue>Escolha o metodo</option>
                         <option value="boleto">Boleto</option>
                         <option value="pix">Pix</option>
                         <option value="cartao">Cartão de Crédito</option>
                         <option value="debito">Cartão de Débito</option>
                     </select>
-                    {errors['payment-method'] && <p className="error-alert text-tinny bold" >{errors['payment-method'].message}</p>}
+                    {errors.paymentMethod && <p className="error-alert text-tinny bold" >{errors.paymentMethod.message}</p>}
                 </div>
 
                 {paymentMethod === "pix" && (
@@ -182,45 +179,45 @@ const Payment = () => {
                 {(paymentMethod === "cartao" || paymentMethod === "debito") && (
                     <>
                         <div className="numeroCartao">
-                            <label htmlFor="card-number" className="text-tinny bold">Número do Cartão</label>
+                            <label htmlFor="cardNumber" className="text-tinny bold">Número do Cartão</label>
                             <InputMask
                                 mask="9999 9999 9999 9999"
                                 maskChar={null}
-                                {...register('card-number')}
+                                {...register('cardNumber')}
                             >
-                                {(inputProps) => <input type="text" id="card-number" {...inputProps} placeholder="Insira o número do cartão." />}
+                                {(inputProps) => <input type="text" id="cardNumber" {...inputProps} placeholder="Insira o número do cartão." />}
                             </InputMask>
-                            {errors['card-number'] && <p className="error-alert text-tinny bold" >{errors['card-number'].message}</p>}
+                            {errors.cardNumber && <p className="error-alert text-tinny bold" >{errors.cardNumber.message}</p>}
                         </div>
 
                         <div className="nomeTitular">
-                            <label htmlFor="card-holder-name" className="text-tinny bold">Nome do Titular *</label>
-                            <input type="text" id="card-holder-name" name="card-holder-name" {...register('card-holder-name')} placeholder="Insira o nome do dono do cartão." />
-                            {errors['card-holder-name'] && <p className="error-alert text-tinny bold" >{errors['card-holder-name'].message}</p>}
+                            <label htmlFor="cardHolderName" className="text-tinny bold">Nome do Titular *</label>
+                            <input type="text" id="cardHolderName" name="cardHolderName" {...register('cardHolderName')} placeholder="Insira o nome do dono do cartão." />
+                            {errors.cardHolderName && <p className="error-alert text-tinny bold" >{errors.cardHolderName.message}</p>}
                         </div>
 
                         <div className="dataValidade">
-                            <label htmlFor="-card-expire-date" className="text-tinny bold">Data de Validade *</label>
+                            <label htmlFor="cardExpireDate" className="text-tinny bold">Data de Validade *</label>
                             <InputMask
                                 mask="99/99"
                                 maskChar={null}
-                                {...register('card-expire-date')}
+                                {...register('cardExpireDate')}
                             >
-                                {(inputProps) => <input type="text" id="card-expire-date" {...inputProps} placeholder="Insira a data de vencimento." />}
+                                {(inputProps) => <input type="text" id="cardExpireDate" {...inputProps} placeholder="Insira a data de vencimento." />}
                             </InputMask>
-                            {errors['card-expire-date'] && <p className="error-alert text-tinny bold" >{errors['card-expire-date'].message}</p>}
+                            {errors.cardExpireDate && <p className="error-alert text-tinny bold" >{errors.cardExpireDate.message}</p>}
                         </div>
 
                         <div className="cvv">
-                            <label htmlFor="card-cvv" className="text-tinny bold">CVV *</label>
+                            <label htmlFor="cardCvv" className="text-tinny bold">CVV *</label>
                             <InputMask
                                 mask="999"
                                 maskChar={null}
-                                {...register('card-cvv')}
+                                {...register('cardCvv')}
                             >
-                                {(inputProps) => <input type="text" id="card-cvv" {...inputProps} placeholder="Insira o cvv do cartão." />}
+                                {(inputProps) => <input type="text" id="cardCvv" {...inputProps} placeholder="Insira o cvv do cartão." />}
                             </InputMask>
-                            {errors['card-cvv'] && <p className="error-alert text-tinny bold" >{errors['card-cvv'].message}</p>}
+                            {errors.cardCvv && <p className="error-alert text-tinny bold" >{errors.cardCvv.message}</p>}
                         </div>
                     </>
                 )}
