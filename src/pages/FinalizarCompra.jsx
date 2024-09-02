@@ -125,11 +125,20 @@ const FinalizarCompraContainer = styled.div`
         }
     }
 
+    & .divisoria {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: var(--light-gray-2);
+    }
+
     & .resumo {
         background-color: var(--white);
         margin-top: 30px;
         display: flex;
         flex-direction: column;
+        padding: 30px;
+        gap: 20px;
 
         & .resumoTexto {
             color: var(--dark-gray-2)
@@ -146,10 +155,25 @@ const FinalizarCompraContainer = styled.div`
                 width: 71px;
                 height: 58px;
                 position: relative;
+                border-radius: 2.5px;
 
                 & .sapatao {
-                    
+                    width: 65px;
                 }
+            }
+
+            & .nome {
+                color: var(--dark-gray);
+                height: 58px;
+
+                font-family: "Inter";
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 20px;
+                letter-spacing: 0.75px;
+
+                display: flex;
+                align-items: center;
             }
         }
     }
@@ -268,6 +292,8 @@ const Resumo = () => {
         <div className="resumo">
             <p className="resumoTexto text-extra-small bold">RESUMO</p>
 
+            <div className="divisoria"></div>
+            
             <div className="item">
                 <div className="imagem">
                     <img className="sapatao" src={data.sapato_image} alt={data.sapato_name} />
@@ -277,17 +303,19 @@ const Resumo = () => {
                 </div>
             </div>
 
+            <div className="divisoria"></div>
+
             <div className="valueInfo">
                 <div className="value text-extra-small">
-                    <p>Subtotal:</p>
+                    <p className="tit">Subtotal:</p>
                     <p>R$ {data.sapato_value}</p>
                 </div>
                 <div className="value text-extra-small">
-                    <p>Frete:</p>
+                    <p className="tit">Frete:</p>
                     <p>R$ {data.sapato_value}</p>
                 </div>
                 <div className="value text-extra-small">
-                    <p>Desconto:</p>
+                    <p className="tit">Desconto:</p>
                     <p>R$ {data.sapato_value}</p>
                 </div>
 
