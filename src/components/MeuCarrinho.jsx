@@ -48,8 +48,8 @@ const MeuCarrinho = () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="flex flex-col lg:flex-row flex-wrap justify-center lg:gap-[16px] bg-light-gray-3 w-full">
-        <section className="flex flex-col min-w-[315px] lg:w-[700px] xl:w-[890px] h-auto lg:h-[352px] gap-[10px] lg:gap-0 mt-12 lg:mt-20 lg:mb-[50px]">
+      <div className="flex flex-col lg:flex-row flex-wrap justify-center items-center lg:items-start lg:gap-[16px] bg-light-gray-3 w-full">
+        <section className="flex flex-col w-11/12 xl:w-[890px] h-auto lg:h-[352px] gap-[10px] lg:gap-0 mt-12 lg:mt-20 lg:mb-[50px]">
           <div className="flex flex-col bg-white rounded lg:rounded-t-[4px] lg:rounded-b-0 p-[25px] lg:px-[30px] lg:pt-[30px] lg:pb-0">
             <div className="lg:flex justify-between text-sm">
               <h2 className="font-bold text-dark-gray-2 text-sm leading-[22px] tracking-[0.75px]">
@@ -94,13 +94,13 @@ const MeuCarrinho = () => {
                   </div>
                   <div className="flex flex-col flex-wrap lg:flex-row justify-center gap-[20px] lg:gap-[25px]">
                     <div className="flex flex-col lg:items-center gap-[10px]">
-                      <h2 className="flex lg:hidden mb-[10px] font-medium tracking-[0.25px]">
+                      <h2 className="flex lg:hidden mb-[10px] font-medium tracking-[0.25px] text-dark-gray-2">
                         QUANTIDADE
                       </h2>
                       <div className="flex justify-between space-x-[18px]">
                         <button
                           onClick={() => handleQuantityChange(-1)}
-                          className="w-[80px] lg:w-[35px] h-[35px] border border-light-gray-2 rounded-[3px] cursor-pointer"
+                          className="w-[80px] lg:w-[35px] h-[35px] border border-light-gray-2 rounded-[3px] cursor-pointer text-dark-gray-2"
                         >
                           -
                         </button>
@@ -109,7 +109,7 @@ const MeuCarrinho = () => {
                         </span>
                         <button
                           onClick={() => handleQuantityChange(1)}
-                          className="w-[80px] lg:w-[35px] h-[35px] border border-light-gray-2 rounded-[3px] cursor-pointer"
+                          className="w-[80px] lg:w-[35px] h-[35px] border border-light-gray-2 rounded-[3px] cursor-pointer text-dark-gray-2"
                         >
                           +
                         </button>
@@ -129,7 +129,7 @@ const MeuCarrinho = () => {
                         <span className="line-through text-xs lg:text-sm leading-7 tracking-[0.75px] text-light-gray-2 lg:mb-[2px]">
                           {"R$ " + item.preco + ",00"}
                         </span>
-                        <span className="font-bold text-sm lg:text-base leading-6 ml-2">
+                        <span className="font-bold text-sm lg:text-base leading-6 ml-2 text-dark-gray-2">
                           {"R$ " + item.preco + ",00"}
                         </span>
                       </div>
@@ -142,7 +142,7 @@ const MeuCarrinho = () => {
                         <span className="line-through text-xs lg:text-sm leading-7 tracking-[0.75px] text-light-gray-2 lg:mb-[2px]">
                           R$ 219,00
                         </span>
-                        <span className="font-bold text-sm lg:text-base leading-6 ml-2">
+                        <span className="font-bold text-sm lg:text-base leading-6 ml-2 text-dark-gray-2">
                           R$ 219,00
                         </span>
                       </div>
@@ -152,63 +152,65 @@ const MeuCarrinho = () => {
               ))}
             
           </div>
-          <div className="flex flex-col lg:flex-row flex-wrap lg:justify-between min-w-[315px] xl:w-[890px] gap-[10px] lg:gap-0 lg:bg-white p-[25px] lg:p-0 rounded">
-            <div className="bg-white flex flex-col lg:flex-row items-center w-auto  gap-[10px] p-[25px] lg:pt-[20px] rounded ">
-              <div className="flex flex-col gap-[5px]">
-                <label
-                  className="font-bold text-xs leading-6 tracking-[0.75px] text-dark-gray-2"
-                  htmlFor="coupon"
+          
+            <div className="flex flex-col lg:flex-row w-full xl:w-[890px]">
+              <div className="flex bg-white flex-col lg:flex-row items-center w-full border-b-[10px] border-light-gray-3 lg:border-0 gap-[10px] p-[25px] lg:pt-[20px] rounded">
+                <div className="flex flex-col gap-[5px] w-full">
+                  <label
+                    className="font-bold text-xs leading-6 tracking-[0.75px] text-dark-gray-2"
+                    htmlFor="coupon"
+                  >
+                    Cupom de desconto
+                  </label>
+                  <input
+                    className="text-base leading-7 tracking-[0.75px] bg-light-gray-3 text-dark-gray-2 placeholder:text-dark-gray-3 h-[60px] min-w-[255px] xl:w-[270px] pl-3 rounded-lg"
+                    id="coupon"
+                    type="text"
+                    placeholder="Insira seu código"
+                    value={coupon}
+                    onChange={(e) => setCoupon(e.target.value)}
+                  />
+                </div>
+                <button
+                  onClick={handleApplyCoupon}
+                  className="font-bold text-sm leading-[22px] tracking-[0.75px] text-center text-primary-1 h-[60px] w-full xl:min-w-[114px] lg:mt-[30px] bg-light-gray-3 rounded-lg"
                 >
-                  Cupom de desconto
-                </label>
-                <input
-                  className="text-base leading-7 tracking-[0.75px] bg-light-gray-3 text-dark-gray-2 placeholder:text-dark-gray-3 h-[60px] min-w-[255px] xl:w-[270px] pl-3 rounded-lg"
-                  id="coupon"
-                  type="text"
-                  placeholder="Insira seu código"
-                  value={coupon}
-                  onChange={(e) => setCoupon(e.target.value)}
-                />
+                  OK
+                </button>
               </div>
-              <button
-                onClick={handleApplyCoupon}
-                className="font-bold text-sm leading-[22px] tracking-[0.75px] text-center text-primary-1 h-[60px] w-full xl:min-w-[114px] lg:mt-[30px] bg-light-gray-3 rounded-lg"
-              >
-                OK
-              </button>
-            </div>
-            <div className="bg-white flex flex-col lg:flex-row items-center gap-[10px] p-[25px] lg:pt-[20px] rounded">
-              <div className="flex flex-col gap-[5px]">
-                <label
-                  className="font-bold text-xs leading-6 tracking-[0.75px] text-dark-gray-2"
-                  htmlFor="frete"
+              <div className="bg-white flex flex-col lg:flex-row items-center w-full gap-[10px] p-[25px] lg:pt-[20px] rounded">
+                <div className="flex flex-col gap-[5px] w-full">
+                  <label
+                    className="font-bold text-xs leading-6 tracking-[0.75px] text-dark-gray-2"
+                    htmlFor="frete"
+                  >
+                    Calcular frete
+                  </label>
+                  <InputMask
+                    className="text-base leading-7 tracking-[0.75px] bg-light-gray-3 text-dark-gray-2 placeholder:text-dark-gray-3 h-[60px] min-w-[255px] xl:w-[270px] pl-3 rounded-lg"
+                    name="frete"
+                    type="text"
+                    placeholder="Insira seu CEP"
+                    required
+                    autoComplete="cep"
+                    pattern="^\d{5}-\d{3}$"
+                    mask="99999-999"
+                    slotChar="_____-___"
+                    value={cep}
+                    onChange={(e) => setCep(e.target.value)}
+                  />
+                </div>
+                <button
+                  onClick={handleCalculateShipping}
+                  className="font-bold text-sm leading-[22px] tracking-[0.75px] text-center text-primary-1 h-[60px] w-full xl:min-w-[114px] lg:mt-[30px] bg-light-gray-3 rounded-lg"
                 >
-                  Calcular frete
-                </label>
-                <InputMask
-                  className="text-base leading-7 tracking-[0.75px] bg-light-gray-3 text-dark-gray-2 placeholder:text-dark-gray-3 h-[60px] min-w-[255px] xl:w-[270px] pl-3 rounded-lg"
-                  name="frete"
-                  type="text"
-                  placeholder="Insira seu CEP"
-                  required
-                  autoComplete="cep"
-                  pattern="^\d{5}-\d{3}$"
-                  mask="99999-999"
-                  slotChar="_____-___"
-                  value={cep}
-                  onChange={(e) => setCep(e.target.value)}
-                />
+                  OK
+                </button>
               </div>
-              <button
-                onClick={handleCalculateShipping}
-                className="font-bold text-sm leading-[22px] tracking-[0.75px] text-center text-primary-1 h-[60px] w-full xl:min-w-[114px] lg:mt-[30px] bg-light-gray-3 rounded-lg"
-              >
-                OK
-              </button>
             </div>
-          </div>
+          
         </section>
-        <section className="min-w-[315px] xl:w-[334px] h-auto xl:h-[364px] mt-[10px] lg:mt-20 lg:mb-[96px] p-[25px] rounded bg-white">
+        <section className="w-11/12 xl:w-[334px] h-auto xl:h-[364px] mt-[10px] lg:mt-20 mb-[96px] p-[25px] rounded bg-white">
           <div>
             <h2 className="font-bold text-dark-gray-2 text-sm leading-[22px] tracking-[0.75px] mb-[20px]">
               RESUMO
@@ -217,7 +219,7 @@ const MeuCarrinho = () => {
           <div className="w-full border-t border-light-gray-2 my-[20px]"></div>
           <div className="flex justify-between text-sm leading-[22px] tracking-[0.25px] font-medium mb-[20px]">
             <span className="text-light-gray">Subtotal:</span>
-            <span className="text-dark-gray"> R$ 219,00</span>
+            <span className="text-dark-gray"> R$ 249,00</span>
           </div>
           <div className="flex justify-between text-sm leading-[22px] tracking-[0.25px] font-medium  mb-[20px]">
             <span className=" text-light-gray">Frete:</span>
