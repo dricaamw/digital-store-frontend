@@ -50,19 +50,19 @@ const MinhasInformacoes = () => {
           <dl className="font-medium text-sm leading-[22px] tracking-[0.25px]">
             <div className="flex gap-2 mb-[10px]">
               <dt className="text-light-gray">Nome:</dt>
-              <dd>Francisco Antonio Pereira</dd>
+              <dd className="text-dark-gray">Francisco Antonio Pereira</dd>
             </div>
             <div className="flex gap-2 mb-[10px]">
               <dt className="text-light-gray">CPF:</dt>
-              <dd>123485913-35</dd>
+              <dd className="text-dark-gray">123485913-35</dd>
             </div>
             <div className="flex gap-2 mb-[10px]">
               <dt className="text-light-gray">Email:</dt>
-              <dd>francisco@gmail.com</dd>
+              <dd className="text-dark-gray">francisco@gmail.com</dd>
             </div>
             <div className="flex gap-2">
               <dt className="text-light-gray">Celular:</dt>
-              <dd>(85) 5555-5555</dd>
+              <dd className="text-dark-gray">(85) 5555-5555</dd>
             </div>
           </dl>
         </div>
@@ -74,19 +74,19 @@ const MinhasInformacoes = () => {
           <dl className="font-medium text-sm leading-[22px] tracking-[0.25px]">
             <div className="flex gap-2 mb-[10px]">
               <dt className="text-light-gray">Endereço:</dt>
-              <dd>Rua João Pessoa, 333</dd>
+              <dd className="text-dark-gray">Rua João Pessoa, 333</dd>
             </div>
             <div className="flex gap-2 mb-[10px]">
               <dt className="text-light-gray">Bairro:</dt>
-              <dd>Centro</dd>
+              <dd className="text-dark-gray">Centro</dd>
             </div>
             <div className="flex gap-2 mb-[10px]">
               <dt className="text-light-gray">Cidade:</dt>
-              <dd>Fortaleza, Ceará</dd>
+              <dd className="text-dark-gray">Fortaleza, Ceará</dd>
             </div>
             <div className="flex gap-2 mb-[10px]">
               <dt className="text-light-gray">CEP:</dt>
-              <dd>433-8800</dd>
+              <dd className="text-dark-gray">433-8800</dd>
             </div>
           </dl>
         </div>

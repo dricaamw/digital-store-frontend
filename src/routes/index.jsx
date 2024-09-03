@@ -16,6 +16,7 @@ import Dashboard from "../pages/Dashboard";
 import DashboardMarcas from "../pages/DashboardMarcas";
 import Categorias from "../pages/Categorias";
 import FinalizarCompra from "../pages/FinalizarCompra.jsx";
+import MeuCarrinho from "../components/MeuCarrinho.jsx";
 
 export const Paths = () => {
     return (
@@ -25,6 +26,7 @@ export const Paths = () => {
                     <Route index element={<Home />} />
                     <Route path="/cadastro" element={<Cadastro />} />
                     <Route path="/compra-realizada" element={<CompraRealizada />} />
+                    <Route path="/meu-carrinho" element={<MeuCarrinho/>}/>
 
                     <Route path="/meu-perfil" element={<ProfileLayout />}>
                         <Route index element={<MeusPedidos />} />
@@ -44,6 +46,7 @@ export const Paths = () => {
                 <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
                 <Route path="/recuperar" element={<RecuperarSenha/>}/>
                 <Route path="/produtos" element={<Produtos/>}/>
+                
             </Routes>
         </BrowserRouter>
     );

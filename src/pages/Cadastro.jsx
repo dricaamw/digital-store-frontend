@@ -13,7 +13,7 @@ const Cadastro = () => {
   }};
 
   return (
-    <main className=" flex min-h-screen bg-gradient-to-b from-secondary-1 to-secondary-2 items-center justify-center">
+    <main className="flex items-center justify-center w-full bg-gradient-to-b from-secondary-1 to-secondary-2 ">
       <section className=" flex gap-8">
         <div className="w-[315px] h-[411px] lg:h-[399px] lg:w-[583px] rounded flex flex-col items-center lg:items-start justify-center p-5 bg-white font-sans mt-9">
           <header className="flex flex-col items-center lg:items-start justify-center lg:justify-start h-[84px] mb-3 lg:mb-5">
@@ -31,7 +31,7 @@ const Cadastro = () => {
           <form className="flex flex-col w-full mb-2"
                 onSubmit={handleSubmit(onSubmit)}>
             <label
-              className="text-xs font-bold tracking-wider leading-6 mb-1"
+              className="text-xs font-bold tracking-wider leading-6 mb-1 text-dark-gray-2"
               htmlFor="email"
             >
               Email *

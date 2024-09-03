@@ -639,7 +639,7 @@ const Links = () => {
                 <NavLink to="/" className={(a) => `${whereNavLink(a)} text-small`} >Home</NavLink>
                 <NavLink to="/produtos" className={(a) => `${whereNavLink(a)} text-small`} >Produtos</NavLink>
                 <NavLink to="/categorias" className={(a) => `${whereNavLink(a)} text-small`} >Categorias</NavLink>
-                <NavLink to="/meus-pedidos" className={(a) => `${whereNavLink(a)} text-small`} >Meus Pedidos</NavLink>
+                <NavLink to="/meu-perfil" className={(a) => `${whereNavLink(a)} text-small`} >Meus Pedidos</NavLink>
             </nav>
             <div className="but-link">
                 <Usuario />
@@ -712,7 +712,7 @@ const Carrin = () => {
                     </div>
                     <div className="ab">
                         <Link className="text-small esvaziar" to="/" >Esvaziar</Link>
-                        <Link>
+                        <Link to='/meu-carrinho'>
                             <But className={"text-small bold ver-carrin-maior"} label={"Ver Carrinho"} buttonType="primary-button"></But>
                         </Link>
                     </div>

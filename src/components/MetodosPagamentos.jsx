@@ -156,7 +156,7 @@ const MetodosPagamentos = () => {
           ))}
         </div>
       </section>
-      <Modal visible={openModal}>
+      <Modal visible={openModal} onClose={() => setOpenModal(false)}>
         <div className="bg-white shadow transition-all flex-col justify-center items-center h-[550px] w-[315px] lg:w-[700px] lg:h-[466px] overflow-auto lg:gap-2 lg:px-4 pt-5 pl-5 rounded">
           <div className="flex gap-3">
             <div className="flex-col">
