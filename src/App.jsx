@@ -5,11 +5,13 @@ import RecuperarSenha from './EsqueciASenha';
 import './index.css';
 import 'primeicons/primeicons.css';
 import { Paths } from './routes';
+import Produto from './components/Produto';
 
 const App = () => {
   return (
     <>
       <Paths />
+      <Produto />
     </>
   );
 }

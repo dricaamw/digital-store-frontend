@@ -19,6 +19,7 @@ export const Paths = () => {
                     <Route path="/meu-perfil" element={<ProfileLayout />}>
                         <Route path="/meu-perfil/meus-pedidos" element={<MeusPedidos />} />
                         <Route path="/meu-perfil/minhas-informacoes" element={<MinhasInformacoes />} />
+                        
                     </Route>
                     
                     {/* <Route path="seu-caminho" element={seu componente } /> */}
