@@ -1,18 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import HeaderLogin from './components/HeaderLogin';
-import Login from './components/Login';
-import RecuperarSenha from './EsqueciASenha';
-import './index.css';
-import 'primeicons/primeicons.css';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { Paths } from './routes';
-import Produto from './components/Produto';
+import { queryClient } from './services';
 
-const App = () => {
+function App() {
+
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Paths />
-      <Produto />
-    </>
+    </QueryClientProvider>
   );
 }
 

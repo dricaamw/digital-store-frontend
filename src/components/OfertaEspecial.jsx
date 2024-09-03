@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
 import img from "../assets/oferta-especial.png";
 
-
 const OfertaEspecialContainer = styled.div`
     width: 100%;
     & .oferta-especial{
@@ -111,13 +110,13 @@ const OfertaEspecialContainer = styled.div`
 const OfertaEspecial = () => {
     return (
         <OfertaEspecialContainer>
-            <div class="oferta-especial">
-                <div class="imagem">
-                    <div class="contorno"></div>
+            <div className="oferta-especial">
+                <div className="imagem">
+                    <div className="contorno"></div>
                     <img src={img} alt="" />
                 </div>
 
-                <div class="offer">
+                <div className="offer">
                     <h4>Oferta Especial</h4>
 
                     <h1>Air Jordan edição de colecionador</h1>
@@ -128,7 +127,7 @@ const OfertaEspecial = () => {
                         ipsum porro aspernatur, ducimus ratione fuga necessitatibus eius
                         dolorem et. Atque, quod!
                     </p>
-                    <div class="botao">
+                    <div className="botao">
                         <button>Ver Oferta</button>
                     </div>
                 </div>

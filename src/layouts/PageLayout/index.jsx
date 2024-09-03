@@ -1,15 +1,17 @@
 import { Outlet } from "react-router-dom";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 const PageLayout = () => {
-    return (
+    return (    
         <>
-            {/* Componente Header */}
-            <div className="w-full">
+            <Header />
+            <div className="w-full flex flex-column items-center">
                 <Outlet />
             </div>
-            {/* Componente Footer */}
+            <Footer />
         </>
     );
 }
- 
+
 export default PageLayout;

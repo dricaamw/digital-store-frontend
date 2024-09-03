@@ -1,0 +1,23 @@
+@import "../colors/colors.css";
+
+.p-radiobutton {
+    inline-size: 22px;
+    block-size: 22px;
+}
+
+.p-radiobutton-box {
+    background-color: var(--white);
+    border: 1px solid var(--dark-gray-3);
+    inline-size: 22px;
+    block-size: 22px;
+}
+
+.p-radiobutton-icon {
+    background-color: var(--primary);
+    inline-size: 14px;
+    block-size: 14px;
+}
+
+.p-radiobutton[data-p-checked="true"] .p-radiobutton-box {
+    border-color: var(--primary);
+}

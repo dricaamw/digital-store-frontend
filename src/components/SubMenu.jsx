@@ -35,7 +35,7 @@ const Submenu = () => {
                 <h3 className="text-lg leading-[22px] tracking-[0.75px] font-bold text-dark-gray-2">Meu perfil</h3>
                 <ul>
                     <li>
-                        <NavLink to="/meu-perfil/meus-pedidos">Meus pedidos</NavLink>
+                        <NavLink to="/meu-perfil">Meus pedidos</NavLink>
                     </li>
                     <li>
                         <NavLink to="/meu-perfil/minhas-informacoes">Minhas informações</NavLink>
