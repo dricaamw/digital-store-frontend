@@ -14,6 +14,7 @@
 
 
 
+import PropTypes from "prop-types"
 import { useForm } from "react-hook-form";
 import InputMask from "react-input-mask";
 import styled from "styled-components";
@@ -45,136 +46,214 @@ const FinalizarCompraContainer = styled.div`
     padding: 0;
 }
     
-    color: var(--white);
-    margin-inline: 30px;
-    margin-top: 30px;
 
-    & .finalize-purchase {
-        color: var(--dark-gray);
-        margin-bottom: 10.5px;
-    }
+    & .boxes {
+        color: var(--white);
+        margin-inline: 30px;
+        margin-top: 30px;
 
-    & .payment {
-        padding: 30px;
-        color: var(--dark-gray-2);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        background-color: var(--white);
-
-        & .form-batata {
+        & .finalize-purchase {
+            color: var(--dark-gray);
+            margin-bottom: 10.5px;
+        }
+    
+        & .payment {
+            padding: 30px;
+            color: var(--dark-gray-2);
+            position: relative;
             display: flex;
             flex-direction: column;
+            background-color: var(--white);
+    
+            & .form-batata {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+    
+            & .error-alert {
+                padding-left: 10px;
+                color: red;
+                opacity: 50%;
+            }
+    
+            & .text-info-payment {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                
+                &:after {
+                    content: "";
+                    width: 100%;
+                    height: 1px;
+                    background-color: var(--light-gray-2);
+                    margin-block: 20px;
+                }
+            }
+    
+            & .formaDePagamento {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                gap: 5px;
+    
+                & #paymentMethod {
+                    padding: 16px 12px;
+                    background-color: rgba(var(--dark-gray-2), 4%);
+                    border: 0;
+                    color: var(--dark-gray-3);
+                    outline: none;
+                }
+    
+            }
+    
+            & div[class] {
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                gap: 5px;
+    
+                & input {
+                    padding: 16px 12px;
+                    background-color: rgba(var(--dark-gray-2), 4%);
+                    border: 0;
+                    color: var(--dark-gray-3);
+                    outline: none;
+    
+                    &::placeholder {
+                        color: var(--dark-gray-3);
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    
+        & .resumo {
+            background-color: var(--white);
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
             gap: 20px;
-        }
-
-        & .error-alert {
-            padding-left: 10px;
-            color: red;
-            opacity: 50%;
-        }
-
-        & .text-info-payment {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            
-            &:after {
+    
+            & .divisoria {
                 content: "";
                 width: 100%;
                 height: 1px;
                 background-color: var(--light-gray-2);
-                margin-block: 20px;
             }
-        }
-
-        & .formaDePagamento {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            gap: 5px;
-
-            & #paymentMethod {
-                padding: 16px 12px;
-                background-color: rgba(var(--dark-gray-2), 4%);
-                border: 0;
-                color: var(--dark-gray-3);
-                outline: none;
+    
+            & .resumoTexto {
+                color: var(--dark-gray-2)
             }
-
-        }
-
-        & div[class] {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            gap: 5px;
-
-            & input {
-                padding: 16px 12px;
-                background-color: rgba(var(--dark-gray-2), 4%);
-                border: 0;
-                color: var(--dark-gray-3);
-                outline: none;
-
-                &::placeholder {
-                    color: var(--dark-gray-3);
-                    opacity: 1;
+    
+            & .item {
+                display: flex;
+                flex-direction: row;
+                gap: 20px;
+    
+                & .imagem {
+                    position: relative;
+                    background-color: #E2E3FF;
+                    width: 71px;
+                    height: 58px;
+                    position: relative;
+                    border-radius: 2.5px;
+    
+                    & .sapatao {
+                        width: 65px;
+                    }
+                }
+    
+                & .nome {
+                    color: var(--dark-gray);
+                    height: 58px;
+    
+                    font-family: "Inter";
+                    font-size: 14px;
+                    font-weight: 700;
+                    line-height: 20px;
+                    letter-spacing: 0.75px;
+    
+                    display: flex;
+                    align-items: center;
                 }
             }
+    
+            & .valueInfo {
+                display: flex;
+                flex-direction: column;
+                color: var(--dark-gray);
+                gap: 20px;
+    
+                & .value {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+    
+                    & .tit {
+                        color: var(--light-gray);
+                    }
+                }
+            }
+    
+            & .total {
+                padding: 20px;
+                background-color: #F6AA1C0d;
+                border: 1px solid #F6AA1C26;
+                border-radius: 4px;
+                color: var(--dark-gray);
+                display: flex;
+                flex-direction: column;
+                
+                & .totalValue {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+    
+                & > p {
+                    color: var(--light-gray);
+                    text-align: right;
+                }
+            }
+    
+            & .finalizarCompra {
+                width: 100%;
+                height: 50px;
+            }
         }
+    
     }
-
-    & .divisoria {
-        content: "";
-        width: 100%;
-        height: 1px;
-        background-color: var(--light-gray-2);
-    }
-
-    & .resumo {
-        background-color: var(--white);
-        margin-top: 30px;
+    & .valorFinal {
+        margin-top: 100px;
         display: flex;
         flex-direction: column;
-        padding: 30px;
         gap: 20px;
+        padding: 30px;
+        background-color: var(--white);
 
-        & .resumoTexto {
-            color: var(--dark-gray-2)
-        }
+        & .total {
 
-        & .item {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
+            & .totalValue {
+                color: var(--dark-gray);
+                display: flex;
+                justify-content: space-between;
 
-            & .imagem {
-                position: relative;
-                background-color: #E2E3FF;
-                width: 71px;
-                height: 58px;
-                position: relative;
-                border-radius: 2.5px;
-
-                & .sapatao {
-                    width: 65px;
+                & .quantia {
+                    color: var(--error);
                 }
             }
 
-            & .nome {
-                color: var(--dark-gray);
-                height: 58px;
-
-                font-family: "Inter";
-                font-size: 14px;
-                font-weight: 700;
-                line-height: 20px;
-                letter-spacing: 0.75px;
-
-                display: flex;
-                align-items: center;
+            & > p {
+                color: var(--light-gray);
+                text-align: right;
             }
+        }
+
+        & .finalizarCompra {
+            width: 100%;
+            height: 40px;
         }
     }
 `;
@@ -271,7 +350,90 @@ const Payment = () => {
     )
 }
 
-const Resumo = () => {
+const Resumo = ({ data }) => {
+
+    return (
+        data ? (
+            <div className="resumo">
+                <p className="resumoTexto text-extra-small bold">RESUMO</p>
+
+                <div className="divisoria"></div>
+
+                <div className="item">
+                    <div className="imagem">
+                        <img className="sapatao" src={data.sapato_image} alt={data.sapato_name} />
+                    </div>
+                    <div className="nome">
+                        <p>{data.sapato_name}</p>
+                    </div>
+                </div>
+
+                <div className="divisoria"></div>
+
+                <div className="valueInfo">
+                    <div className="value text-extra-small">
+                        <p className="tit">Subtotal:</p>
+                        <p>R$ {data.sapato_value},00</p>
+                    </div>
+                    <div className="value text-extra-small">
+                        <p className="tit">Frete:</p>
+                        <p>R$ {data.sapato_value},00</p>
+                    </div>
+                    <div className="value text-extra-small">
+                        <p className="tit">Desconto:</p>
+                        <p>R$ {data.sapato_value},00</p>
+                    </div>
+                </div>
+
+                <div className="total">
+                    <div className="totalValue">
+                        <p className="text-medium bold">Total</p>
+                        <p className="text-medium bold">R$ {data.sapato_value},00</p>
+                    </div>
+                    <p className="text-extra-small mobile">ou 10x de R$ {data.sapato_value / 10},00 sem juros</p>
+                </div>
+
+                <Button buttonType="shop-button" label="Realizar Pagamento" className="finalizarCompra text-extra-small bold"></Button>
+            </div>
+        ) : (
+            <p>Loading...</p>
+        )
+    )
+}
+
+Resumo.propTypes = {
+    data: PropTypes.shape({
+        sapato_image: PropTypes.any.isRequired,
+        sapato_name: PropTypes.any.isRequired,
+        sapato_value: PropTypes.number.isRequired
+    })
+}
+
+const ValorFinal = ({ data }) => {
+
+    return (
+        data ? (
+            <div className="valorFinal">
+                <div className="total">
+                    <div className="totalValue">
+                        <p className="text-medium bold">Total</p>
+                        <p className="text-medium bold quantia">R$ {data.sapato_value},00</p>
+                    </div>
+                    <p className="text-extra-small mobile">ou 10x de R$ {data.sapato_value / 10},00 sem juros</p>
+                </div>
+                <Button buttonType="shop-button" label="Realizar Pagamento" className="finalizarCompra text-extra-small bold" />
+            </div>
+        ) : (<p>Loading</p>)
+    )
+}
+
+ValorFinal.propTypes = {
+    data: PropTypes.shape({
+        sapato_value: PropTypes.number
+    })
+}
+
+const FinalizarCompra = () => {
 
     const [data, setData] = useState();
 
@@ -281,70 +443,22 @@ const Resumo = () => {
             const response = await axios.get("http://localhost:3000/sapatos");
             setData(response.data[0]);
             console.log(data);
-            
+
         }
 
         fecthData();
     }, []);
 
     return (
-        data ? (
-        <div className="resumo">
-            <p className="resumoTexto text-extra-small bold">RESUMO</p>
-
-            <div className="divisoria"></div>
-            
-            <div className="item">
-                <div className="imagem">
-                    <img className="sapatao" src={data.sapato_image} alt={data.sapato_name} />
-                </div>
-                <div className="nome">
-                    <p>{data.sapato_name}</p>
-                </div>
-            </div>
-
-            <div className="divisoria"></div>
-
-            <div className="valueInfo">
-                <div className="value text-extra-small">
-                    <p className="tit">Subtotal:</p>
-                    <p>R$ {data.sapato_value}</p>
-                </div>
-                <div className="value text-extra-small">
-                    <p className="tit">Frete:</p>
-                    <p>R$ {data.sapato_value}</p>
-                </div>
-                <div className="value text-extra-small">
-                    <p className="tit">Desconto:</p>
-                    <p>R$ {data.sapato_value}</p>
-                </div>
-
-                <div className="total">
-                    <div className="totalValue">
-                        <p>Total</p>
-                        <p>RS {data.sapato_value}</p>
-                    </div>
-                    <p>ou 10x de {data.sapato_value / 10} sem juros</p>
-                </div>
-
-                <Button></Button>
-            </div>
-        </div>
-        ) : (
-            <p>Loading...</p>
-        )
-    )
-}
-
-const FinalizarCompra = () => {
-
-    return (
         <FinalizarCompraContainer>
-            <h2 className="finalize-purchase text-medium bold">Finalizar Compra</h2>
+            <div className="boxes">
+                <h2 className="finalize-purchase text-medium bold">Finalizar Compra</h2>
 
-            <Payment />
-            <Resumo />
+                <Payment />
+                <Resumo data={data} />
+            </div>
 
+            <ValorFinal data={data} />
         </FinalizarCompraContainer>
     );
 }
