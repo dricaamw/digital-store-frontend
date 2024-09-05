@@ -43,14 +43,17 @@ const MetodosPagamentos = () => {
   ]);
 
   const handleDelete = (id) => {
+    document.body.classList.add("no-scroll");
     confirmDialog({
       message: "Você tem certeza que deseja excluir este cartão?",
       rejectClassName:
-        "px-4 py-1 mt-3 ml-10 lg:ml-36 outline-none rounded text-primary-1 hover:text-tertiary hover:bg-white font-bold",
+        "overflow- px-4 py-1 mt-3 ml-10 lg:ml-28 outline-none rounded text-primary-1 hover:text-tertiary hover:bg-white font-bold",
       acceptClassName:
-        "px-4 py-1 mt-3 ml-4 outline-none rounded text-light-gray-3 bg-primary-1 hover:bg-tertiary font-bold",
-      reject: () => setOpenModal(false),
-      accept: () => setCartoes(cartoes.filter((cartao) => cartao.id !== id)),
+        "px-4 py-1 mt-3 ml-4 lg:ml-0 outline-none rounded text-light-gray-3 bg-primary-1 hover:bg-tertiary font-bold",
+      reject: () => {document.body.classList.remove("no-scroll")
+                    setOpenModal(false)},
+      accept: () => {document.body.classList.remove("no-scroll")
+                    setCartoes(cartoes.filter((cartao) => cartao.id !== id))},
     });
   };
 
@@ -135,7 +138,7 @@ const MetodosPagamentos = () => {
                   onClick={() => handleDelete(cartao.id)}
                 ></i>
                 <ConfirmDialog
-                  className="bg-light-gray-3 drop-shadow-lg text-dark-gray-2 font-bold rounded w-[315px] md:w-[350px] lg:w-[420px] px-4 py-2 lg:py-4 lg:px-4 absolute -translate-y-10 lg:translate-y-12 lg:right-90"
+                  className="bg-light-gray-3 drop-shadow-lg text-dark-gray-2 font-bold rounded w-80 px-4 py-2 lg:py-4 lg:px-4 fixed translate-y-10 md:translate-y-40 lg:translate-y-28 lg:left-64 xl:translate-y-32 xl:left-auto"
                   rejectLabel="Não"
                   acceptLabel="Sim"
                 />
