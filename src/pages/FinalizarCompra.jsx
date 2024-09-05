@@ -45,17 +45,27 @@ const FinalizarCompraContainer = styled.div`
     margin: 0;
     padding: 0;
 }
+
+    margin-top: 30px;
     
+    @media (min-width: 768px) {
+        margin-top: 60px;
+        margin-bottom: 176px;
+    }
+
+    & .finalize-purchase {
+        color: var(--dark-gray);
+        margin-bottom: 10.5px;
+        margin-inline: 30px;
+
+        @media (min-width: 768px) {
+            margin-bottom: 30px;
+        }
+    }
 
     & .boxes {
         color: var(--white);
         margin-inline: 30px;
-        margin-top: 30px;
-
-        & .finalize-purchase {
-            color: var(--dark-gray);
-            margin-bottom: 10.5px;
-        }
     
         & .payment {
             padding: 30px;
@@ -153,15 +163,17 @@ const FinalizarCompraContainer = styled.div`
                 gap: 20px;
     
                 & .imagem {
+                    display: flex;
                     position: relative;
                     background-color: #E2E3FF;
                     width: 71px;
                     height: 58px;
                     position: relative;
-                    border-radius: 2.5px;
+                    border-radius: 5px;
     
                     & .sapatao {
-                        width: 65px;
+                        align-self: center;
+                        width: 60px;
                     }
                 }
     
@@ -351,87 +363,110 @@ const Payment = () => {
 }
 
 const Resumo = ({ data }) => {
+    if (!data || data.length === 0) {
+        return <p>Loading...</p>;
+    }
+
+    const subtotal = data.reduce((acc, item) => acc + item.sapato_value, 0);
+    const discount = data.reduce((acc, item) => acc + (item.sapato_value * (item.sapato_discount / 100)), 0);
+    const freight = 0;
+
+    const total = subtotal - discount + freight;
 
     return (
-        data ? (
-            <div className="resumo">
-                <p className="resumoTexto text-extra-small bold">RESUMO</p>
+        <div className="resumo">
+            <p className="resumoTexto text-extra-small bold">RESUMO</p>
 
-                <div className="divisoria"></div>
+            <div className="divisoria"></div>
 
-                <div className="item">
+            {data.map(e => (
+                <div className="item" key={e.sapato_id}>
                     <div className="imagem">
-                        <img className="sapatao" src={data.sapato_image} alt={data.sapato_name} />
+                        <img className="sapatao" src={e.sapato_image} alt={e.sapato_name} />
                     </div>
                     <div className="nome">
-                        <p>{data.sapato_name}</p>
+                        <p>{e.sapato_name}</p>
                     </div>
                 </div>
+            ))}
 
-                <div className="divisoria"></div>
+            <div className="divisoria"></div>
 
-                <div className="valueInfo">
-                    <div className="value text-extra-small">
-                        <p className="tit">Subtotal:</p>
-                        <p>R$ {data.sapato_value},00</p>
-                    </div>
-                    <div className="value text-extra-small">
-                        <p className="tit">Frete:</p>
-                        <p>R$ {data.sapato_value},00</p>
-                    </div>
-                    <div className="value text-extra-small">
-                        <p className="tit">Desconto:</p>
-                        <p>R$ {data.sapato_value},00</p>
-                    </div>
+            <div className="valueInfo">
+                <div className="value text-extra-small">
+                    <p className="tit">Subtotal:</p>
+                    <p>R$ {subtotal},00</p>
                 </div>
-
-                <div className="total">
-                    <div className="totalValue">
-                        <p className="text-medium bold">Total</p>
-                        <p className="text-medium bold">R$ {data.sapato_value},00</p>
-                    </div>
-                    <p className="text-extra-small mobile">ou 10x de R$ {data.sapato_value / 10},00 sem juros</p>
+                <div className="value text-extra-small">
+                    <p className="tit">Frete:</p>
+                    <p>R$ {freight},00</p>
                 </div>
-
-                <Button buttonType="shop-button" label="Realizar Pagamento" className="finalizarCompra text-extra-small bold"></Button>
+                <div className="value text-extra-small">
+                    <p className="tit">Desconto:</p>
+                    <p>R$ {discount},00</p>
+                </div>
             </div>
-        ) : (
-            <p>Loading...</p>
-        )
-    )
-}
+
+            <div className="total">
+                <div className="totalValue">
+                    <p className="text-medium bold">Total</p>
+                    <p className="text-medium bold">R$ {total},00</p>
+                </div>
+                <p className="text-extra-small mobile">ou 10x de R$ {total / 10},00 sem juros</p>
+            </div>
+
+            <Button buttonType="shop-button" label="Realizar Pagamento" className="finalizarCompra text-extra-small bold"></Button>
+        </div>
+    );
+};
 
 Resumo.propTypes = {
-    data: PropTypes.shape({
-        sapato_image: PropTypes.any.isRequired,
-        sapato_name: PropTypes.any.isRequired,
-        sapato_value: PropTypes.number.isRequired
-    })
-}
+    data: PropTypes.arrayOf(PropTypes.shape({
+        sapato_image: PropTypes.string.isRequired,
+        sapato_name: PropTypes.string.isRequired,
+        sapato_value: PropTypes.number.isRequired,
+        sapato_id: PropTypes.number.isRequired
+    }))
+};
 
 const ValorFinal = ({ data }) => {
+    if (!data || data.length === 0) {
+        return <p>Loading...</p>;
+    }
+
+    const subtotal = data.reduce((acc, item) => acc + item.sapato_value, 0);
+    const discount = data.reduce((acc, item) => acc + (item.sapato_value * (item.sapato_discount / 100)), 0);
+    const freight = 0;
+
+    const total = subtotal - discount + freight;
 
     return (
-        data ? (
-            <div className="valorFinal">
-                <div className="total">
-                    <div className="totalValue">
-                        <p className="text-medium bold">Total</p>
-                        <p className="text-medium bold quantia">R$ {data.sapato_value},00</p>
-                    </div>
-                    <p className="text-extra-small mobile">ou 10x de R$ {data.sapato_value / 10},00 sem juros</p>
+        <div className="valorFinal">
+            <div className="total">
+                <div className="totalValue">
+                    <p className="text-medium bold">Total</p>
+                    <p className="text-medium bold quantia">R$ {total},00</p>
                 </div>
-                <Button buttonType="shop-button" label="Realizar Pagamento" className="finalizarCompra text-extra-small bold" />
+                <p className="text-extra-small mobile">ou 10x de R$ 
+                {((total * ((100 - 2.87) / 100)) / 10)
+                .toFixed(2)
+                .split(".")
+                .join(",")
+                } sem juros</p>
             </div>
-        ) : (<p>Loading</p>)
-    )
-}
+            <Button buttonType="shop-button" label="Realizar Pagamento" className="finalizarCompra text-extra-small bold" />
+        </div>
+    );
+};
 
 ValorFinal.propTypes = {
-    data: PropTypes.shape({
-        sapato_value: PropTypes.number
-    })
-}
+    data: PropTypes.arrayOf(PropTypes.shape({
+        sapato_image: PropTypes.string.isRequired,
+        sapato_name: PropTypes.string.isRequired,
+        sapato_value: PropTypes.number.isRequired,
+        sapato_id: PropTypes.number.isRequired
+    }))
+};
 
 const FinalizarCompra = () => {
 
@@ -441,7 +476,7 @@ const FinalizarCompra = () => {
         const fecthData = async () => {
 
             const response = await axios.get("http://localhost:3000/sapatos");
-            setData(response.data[0]);
+            setData(response.data);
             console.log(data);
 
         }
@@ -451,8 +486,8 @@ const FinalizarCompra = () => {
 
     return (
         <FinalizarCompraContainer>
+            <h2 className={`finalize-purchase ${window.innerWidth <= 768 ? "text-medium" : "title-small"} bold`}>Finalizar Compra</h2>
             <div className="boxes">
-                <h2 className="finalize-purchase text-medium bold">Finalizar Compra</h2>
 
                 <Payment />
                 <Resumo data={data} />
