@@ -35,13 +35,12 @@ const MeuCarrinho = () => {
   };
 
   const handleCalculateShipping = () => {
-    if (cep) {
-      return alert("Aguardando...");
-    } else {
-      return alert("Cep inválido!");
+    if (!cep) {
+      alert('Por favor, insira um CEP válido.');
+      return;
     }
   };
-
+     
   const handleDelete = (id) => {
     setCarrinho((prevCarrinho) =>
       prevCarrinho.filter((item) => item.id !== id)
@@ -243,6 +242,7 @@ const MeuCarrinho = () => {
               <span className="text-light-gray">Subtotal:</span>
               <span className="text-dark-gray"> R$ 249,00</span>
             </div>
+            
             <div className="flex justify-between text-sm leading-[22px] tracking-[0.25px] font-medium  mb-[20px]">
               <span className=" text-light-gray">Frete:</span>
               <span className="text-dark-gray">R$ 0,00</span>
