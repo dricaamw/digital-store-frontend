@@ -11,12 +11,12 @@ const Highlights2WrapperContainer = styled.div`
 
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     @media (min-width: 768px) {
         align-items: center;
         width: fit-content;
     }
-    
 
     & .colecoes {
         color: var(--dark-gray-2);
