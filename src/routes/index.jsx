@@ -17,6 +17,7 @@ import DashboardMarcas from "../pages/DashboardMarcas";
 import Categorias from "../pages/Categorias";
 import FinalizarCompra from "../pages/FinalizarCompra.jsx";
 import MeuCarrinho from "../components/MeuCarrinho.jsx";
+import Produto from "../components/Produto";
 
 export const Paths = () => {
     return (
@@ -34,6 +35,7 @@ export const Paths = () => {
                         <Route path="/meu-perfil/metodos-de-pagamentos" element={<MetodosPagamentos />} />
                     </Route>
                     <Route path="/produtos" element={<Produtos />} />
+                    <Route path="/produto" element={<Produto />}/>
                     <Route path="/categorias" element={<Categorias />} />
                     <Route path="/meus-pedidos" element={<MeusPedidos />} />
                     <Route path="/finalizar-compra" element={<FinalizarCompra />} />
@@ -45,7 +47,6 @@ export const Paths = () => {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
                 <Route path="/recuperar" element={<RecuperarSenha/>}/>
-                <Route path="/produtos" element={<Produtos/>}/>
                 
             </Routes>
         </BrowserRouter>
