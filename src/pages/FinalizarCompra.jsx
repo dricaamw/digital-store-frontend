@@ -23,21 +23,52 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Button from "../components/buttons/Buttons.jsx"
+import "../assets/CSS/texts.css"
 
 const schema = z.object({
-    paymentMethod: z.string().nonempty("Método de pagamento é obrigatório")
-        .refine(value => value !== "metodo", { message: "Por favor, escolha um método de pagamento válido" }),
-    cardNumber: z.string().nonempty("Número do cartão é obrigatório")
-        .refine(value => value.replace(/\s/g, '').length === 16, { message: "Número do cartão incompleto" }),
-    cardHolderName: z.string().nonempty("Nome do titular é obrigatório"),
-    cardExpireDate: z.string().nonempty("Data de validade é obrigatório")
-        .regex(/^\d{2}\/\d{2}$/, "Data inválida")
-        .refine(value => {
+    paymentMethod: z.string({
+        required_error: 'Método de pagamento é obrigatório',
+        invalid_type_error: 'Método de pagamento deve ser uma string',
+    })
+        .nonempty('Método de pagamento é obrigatório')
+        .refine((value) => value !== 'metodo', {
+            message: 'Por favor, escolha um método de pagamento válido',
+        }),
+
+    cardNumber: z.string({
+        required_error: 'Número do cartão é obrigatório',
+        invalid_type_error: 'Número do cartão deve ser uma string',
+    })
+        .nonempty('Número do cartão é obrigatório')
+        .refine((value) => value.replace(/\s/g, '').length === 16, {
+            message: 'Número do cartão incompleto',
+        }),
+
+    cardHolderName: z.string({
+        required_error: 'Nome do titular é obrigatório',
+        invalid_type_error: 'Nome do titular deve ser uma string',
+    })
+        .nonempty('Nome do titular é obrigatório'),
+
+    cardExpireDate: z.string({
+        required_error: 'Data de validade é obrigatório',
+        invalid_type_error: 'Data de validade deve ser uma string',
+    })
+        .nonempty('Data de validade é obrigatório')
+        .regex(/^\d{2}\/\d{2}$/, 'Data inválida')
+        .refine((value) => {
             const month = parseInt(value.split('/')[0], 10);
             return month >= 1 && month <= 12;
-        }, { message: "Mês deve ser entre 01 e 12" }),
-    cardCvv: z.string().nonempty("CVV é obrigatório")
-        .length(3, "CVV deve ter exatamente 3 dígitos")
+        }, {
+            message: 'Mês deve ser entre 01 e 12',
+        }),
+
+    cardCvv: z.string({
+        required_error: 'CVV é obrigatório',
+        invalid_type_error: 'CVV deve ser uma string',
+    })
+        .nonempty('CVV é obrigatório')
+        .length(3, 'CVV deve ter exatamente 3 dígitos'),
 });
 
 const FinalizarCompraContainer = styled.div`
@@ -49,8 +80,11 @@ const FinalizarCompraContainer = styled.div`
     margin-top: 30px;
     
     @media (min-width: 768px) {
-        margin-top: 60px;
-        margin-bottom: 176px;
+        margin-top: 0;
+        padding: 60px 100px 176px;
+        display: flex;
+        flex-direction: column;
+        width: 100dvw;
     }
 
     & .finalize-purchase {
@@ -60,12 +94,20 @@ const FinalizarCompraContainer = styled.div`
 
         @media (min-width: 768px) {
             margin-bottom: 30px;
+            margin-inline: 0;
         }
     }
 
     & .boxes {
         color: var(--white);
         margin-inline: 30px;
+
+        @media (min-width: 768px) {
+            display: grid;
+            margin-inline: 0;
+            grid-template-columns: ${(750 * 100) / 1240}% ${(468 * 100) / 1240}%;
+            grid-gap: 20px;
+        }
     
         & .payment {
             padding: 30px;
@@ -145,6 +187,10 @@ const FinalizarCompraContainer = styled.div`
             flex-direction: column;
             padding: 30px;
             gap: 20px;
+
+            @media (min-width: 768px){
+                margin: 0;
+            }
     
             & .divisoria {
                 content: "";
@@ -244,6 +290,11 @@ const FinalizarCompraContainer = styled.div`
         gap: 20px;
         padding: 30px;
         background-color: var(--white);
+
+        @media (min-width: 768px){
+            margin-top: 10px;
+            width: ${(750 * 100) / 1240}%;
+        }
 
         & .total {
 
@@ -447,12 +498,12 @@ const ValorFinal = ({ data }) => {
                     <p className="text-medium bold">Total</p>
                     <p className="text-medium bold quantia">R$ {total},00</p>
                 </div>
-                <p className="text-extra-small mobile">ou 10x de R$ 
-                {((total * ((100 - 2.87) / 100)) / 10)
-                .toFixed(2)
-                .split(".")
-                .join(",")
-                } sem juros</p>
+                <p className="text-extra-small mobile">ou 10x de R$
+                    {((total * ((100 - 2.87) / 100)) / 10)
+                        .toFixed(2)
+                        .split(".")
+                        .join(",")
+                    } sem juros</p>
             </div>
             <Button buttonType="shop-button" label="Realizar Pagamento" className="finalizarCompra text-extra-small bold" />
         </div>
@@ -482,14 +533,13 @@ const FinalizarCompra = () => {
         }
 
         fecthData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
         <FinalizarCompraContainer>
             <h2 className={`finalize-purchase ${window.innerWidth <= 768 ? "text-medium" : "title-small"} bold`}>Finalizar Compra</h2>
             <div className="boxes">
-
                 <Payment />
                 <Resumo data={data} />
             </div>
