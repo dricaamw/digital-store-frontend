@@ -1,18 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -27,14 +12,13 @@ const Highlights3WrapperContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-inline: 20px;
     margin-top: 80px;
     margin-bottom: 40px;
     overflow-x: hidden;
+    width: calc(100% - 10.66%);
 
     @media (min-width: 768px) {
         width: calc(100% - 13.88%);
-        margin-inline: 0px;
         margin-bottom: 120px;
     }
 
