@@ -1,4 +1,3 @@
-import { modalPropTypes } from "../utils/modalPropTypes";
 
 const Modal = ({ visible, children }) => {
   if (!visible) return null;
@@ -9,7 +8,5 @@ const Modal = ({ visible, children }) => {
     </div>
   );
 };
-
-Modal.propTypes = modalPropTypes;
 
 export default Modal;
