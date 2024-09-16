@@ -18,6 +18,7 @@ import Categorias from "../pages/Categorias";
 import FinalizarCompra from "../pages/FinalizarCompra.jsx";
 import MeuCarrinho from "../components/MeuCarrinho.jsx";
 import Produto from "../components/Produto";
+import NotFound from "../pages/NotFound.jsx";
 
 export const Paths = () => {
     return (
@@ -47,7 +48,7 @@ export const Paths = () => {
                 <Route path="/login" element={<Login/>} />
                 <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
                 <Route path="/recuperar" element={<RecuperarSenha/>}/>
-                
+                <Route path="*" element={<NotFound />} /> 
             </Routes>
         </BrowserRouter>
     );
