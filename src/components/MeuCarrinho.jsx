@@ -6,8 +6,9 @@ import { Link } from "react-router-dom";
 
 const MeuCarrinho = () => {
   const [cep, setCep] = useState("");
-  const [coupon, setCoupon] = useState("");
-  const [quantity, setQuantity] = useState(1);
+  const [frete, setFrete] = useState(null);
+  const [cupom, setCupom] = useState("");
+  const [desconto, setDesconto] = useState(0);
 
   const [carrinho, setCarrinho] = useState([
     {
@@ -19,34 +20,55 @@ const MeuCarrinho = () => {
       quantidade: 1,
       preco: 249.0,
       precoDesconto: 219.0,
+      precoTotal: 219.0,
     },
   ]);
 
-  const handleQuantityChange = (count) => {
-    setQuantity((prev) => Math.max(prev + count, 1));
-  };
+  const alterarQuantidade = (count, id) => {
+    setCarrinho((prevCarrinho) =>
+      prevCarrinho.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              quantidade: Math.max(item.quantidade + count, 1),
+              precoTotal: item.precoDesconto * Math.max(item.quantidade + count, 1),
+            }
+        
+          : item
+      )
+    )
+  }
 
-  const handleApplyCoupon = () => {
-    if (coupon) {
-      return alert("Aguardando...");
+  const aplicarCupom = () => {
+    if (cupom === "DESCONTO10") {
+      setDesconto(calcularSubtotal() * 0.1);
     } else {
       return alert("Cupom inválido!");
     }
   };
 
-  const handleCalculateShipping = () => {
-    if (!cep) {
-      alert('Por favor, insira um CEP válido.');
-      return;
-    }
-  };
-     
-  const handleDelete = (id) => {
+  const deletarItem = (id) => {
     setCarrinho((prevCarrinho) =>
       prevCarrinho.filter((item) => item.id !== id)
     );
   };
 
+  const calcularSubtotal = () => {
+    return carrinho.reduce((acc, item) => acc + item.precoTotal, 0);
+  };
+
+  const calcularTotal = () => {
+    return Math.max(calcularSubtotal() - desconto, 0);
+  };
+
+  const calcularFrete = async () => {
+    if (!cep) {
+      alert('Por favor, insira um CEP válido.');
+      return;
+    }
+  }
+
+    
   const isCarrinhoVazio = carrinho.length === 0;
 
   return (
@@ -62,7 +84,7 @@ const MeuCarrinho = () => {
             <p className="text-lg font-bold text-dark-gray-2 mt-4">
               Seu carrinho de compras está vazio
             </p>
-            <Link to="/">
+            <Link to="/produtos">
               <button className="mt-4 bg-primary-1 text-white py-2 px-4 rounded-lg">
                 Adicionar produtos
               </button>
@@ -119,23 +141,23 @@ const MeuCarrinho = () => {
                       </h2>
                       <div className="flex justify-between lg:space-x-[5px]">
                         <button
-                          onClick={() => handleQuantityChange(-1)}
+                          onClick={() => alterarQuantidade(-1, item.id)}
                           className="w-[80px] md:w-[35px] h-[35px] border border-light-gray-2 rounded-[3px] cursor-pointer text-dark-gray-2 font-bold"
                         >
                           -
                         </button>
                         <span className="font-bold text-[11.67px] leading-[17.5px] tracking-[0.55px] text-dark-gray-2 flex items-center justify-center w-[85px] lg:w-[35px] h-[35px]">
-                          {quantity}
+                          {item.quantidade}
                         </span>
                         <button
-                          onClick={() => handleQuantityChange(1)}
+                          onClick={() => alterarQuantidade(1, item.id)}
                           className="w-[80px] md:w-[35px] h-[35px] border border-light-gray-2 rounded-[3px] cursor-pointer text-dark-gray-2 font-bold"
                         >
                           +
                         </button>
                       </div>
                       <button
-                        onClick={() => handleDelete(item.id)}
+                        onClick={() => deletarItem(item.id)}
                         className="text-xs leading-7 tracking-[0.75px] text-dark-gray-2 underline underline-offset-2 cursor-pointer"
                       >
                         Remover item
@@ -160,10 +182,10 @@ const MeuCarrinho = () => {
                       </h2>
                       <div className="flex lg:flex-col items-center gap-[16px] lg:gap-1">
                         <span className="line-through text-xs lg:text-sm leading-7 tracking-[0.75px] text-light-gray-2 lg:mb-[2px]">
-                          R$ 249,00
+                        {"R$ " + item.preco + ",00"}
                         </span>
                         <span className="font-bold text-base leading-6 tracking-[0.75px] ml-2 text-dark-gray-2">
-                          R$ 219,00
+                        {"R$ " + item.precoTotal + ",00"}
                         </span>
                       </div>
                     </div>
@@ -186,12 +208,12 @@ const MeuCarrinho = () => {
                     id="coupon"
                     type="text"
                     placeholder="Insira seu código"
-                    value={coupon}
-                    onChange={(e) => setCoupon(e.target.value)}
+                    value={cupom}
+                    onChange={(e) => setCupom(e.target.value)}
                   />
                 </div>
                 <button
-                  onClick={handleApplyCoupon}
+                  onClick={aplicarCupom}
                   className="font-bold text-sm leading-[22px] tracking-[0.75px] text-center text-primary-1 h-[60px] w-full xl:min-w-[114px] lg:mt-[30px] bg-light-gray-3 rounded-lg"
                 >
                   OK
@@ -220,7 +242,7 @@ const MeuCarrinho = () => {
                   />
                 </div>
                 <button
-                  onClick={handleCalculateShipping}
+                  onClick={calcularFrete}
                   className="font-bold text-sm leading-[22px] tracking-[0.75px] text-center text-primary-1 h-[60px] w-full xl:min-w-[114px] lg:mt-[30px] bg-light-gray-3 rounded-lg"
                 >
                   OK
@@ -240,23 +262,31 @@ const MeuCarrinho = () => {
             <div className="w-full border-t border-light-gray-2 my-[20px]"></div>
             <div className="flex justify-between text-sm leading-[22px] tracking-[0.25px] font-medium mb-[20px]">
               <span className="text-light-gray">Subtotal:</span>
-              <span className="text-dark-gray"> R$ 249,00</span>
+              <span className="text-dark-gray">
+                {"R$ " + calcularSubtotal().toFixed(2)}
+              </span>
             </div>
             
             <div className="flex justify-between text-sm leading-[22px] tracking-[0.25px] font-medium  mb-[20px]">
               <span className=" text-light-gray">Frete:</span>
-              <span className="text-dark-gray">R$ 0,00</span>
+              <span className="text-dark-gray">
+                {frete ? `R$ ${frete.valor}` : 'R$ 0,00'}
+              </span>
             </div>
             <div className="flex justify-between text-sm leading-[22px] tracking-[0.25px] font-medium mb-[20px]">
               <span className="text-light-gray">Desconto:</span>
-              <span className="text-dark-gray">R$ 30,00</span>
+              <span className="text-dark-gray">
+                {"R$ " + desconto.toFixed(2)}
+              </span>
             </div>
             <div className="flex justify-between text-lg leading-[34px] tracking-[0.75px] font-bold text-dark-gray">
               <span>Total</span>
-              <span className="text-error">R$ 219,00</span>
+              <span className="text-error">
+              {"R$ " + calcularTotal().toFixed(2)}
+              </span>
             </div>
             <div className="text-end text-xs leading-[22px] tracking-[1px] font-medium text-light-gray lg:mb-[20px]">
-              ou 10x de R$ 21,00 sem juros
+              ou 10x de R$ {(calcularTotal() / 10).toFixed(2)} sem juros
             </div>
             <div>
               <Link to="/finalizar-compra">
@@ -271,10 +301,12 @@ const MeuCarrinho = () => {
           <section className="flex flex-col lg:hidden bg-white w-[375px] h-[176px] rounded p-[30px] sticky bottom-0">
             <div className="flex justify-between text-lg leading-[34px] tracking-[0.75px] font-bold text-dark-gray">
               <span>Total</span>
-              <span className="text-error">R$ 219,00</span>
+              <span className="text-error">
+                {"R$ " + calcularTotal().toFixed(2)}
+              </span>
             </div>
             <div className="text-end text-xs leading-[22px] tracking-[1px] font-medium text-light-gray mb-[20px]">
-              ou 10x de R$ 21,00 sem juros
+              ou 10x de R$ {(calcularTotal() / 10).toFixed(2)} sem juros
             </div>
             <Link to="/finalizar-compra">
               <button className="h-10 bg-warning hover:bg-warning-hover rounded-lg w-full font-bold text-light-gray-3 hover:text-white text-sm leading-[22px] tracking-[0.75px] transition transform ease-out duration-300">
