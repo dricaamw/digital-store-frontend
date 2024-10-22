@@ -4,7 +4,6 @@ import Sapatoo from "../assets/Sapato_esquerdo.svg";
 import Gmail from "../assets/gmail.svg";
 import Facebook from "../assets/Face.svg";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import HeaderLogin from "./HeaderLogin";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -22,7 +21,11 @@ const Login = () => {
     try {
       login(data, {
         onSuccess: (usuarioLogado) => {
-          console.log("Deu bom");
+          console.log(usuarioLogado);
+          if(usuarioLogado.status){
+            alert(usuarioLogado.detail);
+            return;
+          }
           setUsuario(usuarioLogado);
           sessionStorage.setItem('usuario', JSON.stringify(usuarioLogado));
           navigate('/');

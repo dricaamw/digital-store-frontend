@@ -22,6 +22,7 @@ import NotFound from "../pages/NotFound.jsx";
 import DashboardBanners from "../pages/DashboardBanners";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import DashboardCategorias from "../pages/DashboardCategorias";
 
 export const Paths = () => {
     return (
@@ -49,6 +50,7 @@ export const Paths = () => {
                     <Route index element={<Dashboard />} />
                     <Route path="/dashboard/marcas" element={<DashboardMarcas />} />
                     <Route path="/dashboard/banners" element={<DashboardBanners />} />
+                    <Route path="/dashboard/categorias" element={<DashboardCategorias />} />
                 </Route>
                 <Route path="/login" element={<Login/>} />
                 <Route path="/cadastro-completo" element={<CadastroCompleto/>} />
