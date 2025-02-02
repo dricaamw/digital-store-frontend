@@ -1,3 +1,12 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Esse foi um projeto de conclusão do curso de Desenvolvedor Full Stack. Ele foi realizado em grupo. 
+
+As Tasks desenvolvidas por mim foram: 
+- Cadastro
+- Metodos de Pagamentos
+- Meus Pedidos
+- Minhas Informações
+- Meu Carrinho
+
+
