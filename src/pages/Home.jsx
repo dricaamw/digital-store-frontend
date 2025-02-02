@@ -8,7 +8,7 @@ import OfertaEspecial from "../components/OfertaEspecial";
 const Home = () => {
     return (
         <>
-            <Banners />
+            {/* <Banners /> */}
             <Destaques1 />
             <Destaques2 />
             <Destaques3 />
